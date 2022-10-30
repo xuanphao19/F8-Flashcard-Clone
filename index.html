@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="./XuanPhao.ico" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="./assets/css/root.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div id="App" class="App">
+      <div class="Home_wrapper">
+        <div class="Home_container">
+          <div class="Home_header">
+            <div class="header_left">
+              <img class="Home_bars" src="./assets/img/menuSvg.svg" alt="menuSvg" />
+              <span class="Home_course-name">Lập Trình Thực Chiến</span>
+            </div>
+            <a class="Home_course_link" href="https://fullstack.edu.vn/">fullstack.edu.vn</a>
+            <div class="header_right">
+              <div class="Home_avatar-wrapper">
+                <img src="./assets/img/Admin_SonDangebgview.png" class="Home_avatar" alt="Team f8" />
+              </div>
+            </div>
+          </div>
+          <section id="calendar">
+            <div class="weeks">
+              <div class="week"></div>
+              <div class="week"></div>
+              <div class="week"></div>
+              <div class="week"></div>
+              <div class="week"></div>
+              <div class="week"></div>
+              <div class="todays">
+                <span class="weekToday">Today</span>
+                <span class="today"></span>
+              </div>
+            </div>
+          </section>
+          <div class="canvasBlock">
+            <canvas id="canvas" width="256" height="256" style="border-radius: 50%"> </canvas>
+            <img style="width: 1px" id="scream" src="./assets/img/Admin_SonDangebgview.png" alt="The Scream" />
+          </div>
+          <div class="Home_content-continue">
+            <div class="Home_continuity">
+              <span class="Home_continuity-title">Số ngày bạn đã hoàn thành liên tục</span>
+              <div class="Home_continuity-main">
+                <div class="Home_continuity-content"><span>365</span></div>
+              </div>
+            </div>
+            <div class="Home_done-flashcard">
+              <div class="Home_done-flashcard-info">
+                <span class="Home_done-flashcard-title">Toàn bộ Flashcard đã được hoàn thành!</span
+                ><span class="Home_done-flashcard-text">Bạn có 122/128 câu trả lời đúng</span>
+              </div>
+              <img src="/static/media/done-flashcard.5a9263f89c9758da93ab6c97267e61d5.svg" alt="" />
+            </div>
+            <div class="Home_practice Home_practice-done">
+              <img
+                class="Home_practice-image__KoEkG"
+                src="/static/media/mask-group-practice.f32be3f395683adc71def415c6e86f87.svg"
+                alt=""
+              />
+              <div class="Home_practice-action">
+                <span>Luyện tập </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="Modal_wrapper Modal_Courses">
+        <div class="wrapper">
+          <div class="Courses_overlay"></div>
+          <div class="Courses_container">
+            <div class="content">
+              <div class="Courses_close">
+                <img src="/assets/img/closeSvg.svg" alt="closeSvg" />
+              </div>
+              <div class="Courses_main">
+                <h4 class="Courses_main-title">Chọn khóa học</h4>
+                <div class="courses">
+                  <div class="Courses_course-item">
+                    <img
+                      class="Courses_course-check"
+                      src="/static/media/check.48ba82cf129cc4032d53c714d8e88a07.svg"
+                      alt="check"
+                    />
+                    <span id="HTML_CSS_Pro" class="Courses_course-name">HTML CSS Pro</span>
+                  </div>
+                  <div class="Courses_course-item">
+                    <img
+                      class="Courses_course-check"
+                      src="/static/media/check.48ba82cf129cc4032d53c714d8e88a07.svg"
+                      alt="check"
+                    />
+                    <span id="JavaScript_Pro" class="Courses_course-name">JavaScript Pro</span>
+                  </div>
+                  <div class="Courses_course-item">
+                    <img
+                      class="Courses_course-check"
+                      src="/static/media/check.48ba82cf129cc4032d53c714d8e88a07.svg"
+                      alt="check"
+                    />
+                    <span id='ReactJS_Pro' class="Courses_course-name">ReactJS Pro</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="Modal_wrapper Modal_Profile">
+        <div class="wrapper">
+          <div class="Profile_overlay"></div>
+          <div class="Profile_container">
+            <div class="Profile_content">
+              <div class="Profile_close">
+                <img src="../assets/img/closeSvg.svg" alt="" />
+              </div>
+              <div class="Profile_main">
+                <div class="Profile_avatar-wrapper">
+                  <div class="Profile_user-avatar">
+                    <img src="./assets/img/Xuan_Phao.png" class="Profile_avatar" alt="" />
+                  </div>
+                </div>
+                <div class="Profile_name-wrapper">
+                  <span class="Profile_user-name">Nguyễn Thanh Hòa</span
+                  ><span class="Profile_evaluate-user">Học viên tích cực</span>
+                </div>
+                <div class="Profile_evaluate">
+                  <div class="Profile_evaluate-item">
+                    <img src="/static/media/stylized-sticker.e1d0c97cd92c9d2467d66def5bcc7106.svg" alt="" />
+                    <div class="Profile_evaluate-info">
+                      <span class="Profile_evaluate-title">1280/1280</span>
+                      <span class="Profile_evaluate-label">Flashcard đã làm</span>
+                    </div>
+                  </div>
+                  <div class="Profile_evaluate-item">
+                    <img src="/static/media/star-sticker.898361f21ec8e5c937760d189abcf8f0.svg" alt="" />
+                    <div class="Profile_evaluate-info">
+                      <span class="Profile_evaluate-title">100%</span
+                      ><span class="Profile_evaluate-label">Flashcard đúng</span>
+                    </div>
+                  </div>
+                  <div class="Profile_evaluate-item">
+                    <img src="/static/media/badge-sticker.6de5b3a091b84f9d9c21e2170a94d531.svg" alt="" />
+                    <div class="Profile_evaluate-info">
+                      <span class="Profile_evaluate-title font-montserrat">365 ngày</span
+                      ><span class="Profile_evaluate-label">Liên tục dài nhất</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="Profile_menu">
+                  <div class="Profile_menu-item backHome">
+                    <div class="Profile_menu-icon">
+                      <img src="/static/media/home.6b657bc1a963e70552968521b2edbc08.svg" alt="" />
+                    </div>
+                    <span>Trang chủ</span>
+                  </div>
+                  <div class="Profile_menu-item">
+                    <div class="Profile_menu-icon">
+                      <img src="/static/media/question.8da287f7bba63db408c4fd89815b41c5.svg" alt="" />
+                    </div>
+                    <span>Câu hỏi thường gặp</span>
+                  </div>
+                  <div class="Profile_menu-item">
+                    <div class="Profile_menu-icon">
+                      <img src="/static/media/dark.b492fe60029ddaf5962c8da1892df153.svg" alt="" />
+                    </div>
+                    <span class="Profile_menu-item-mb">Giao diện tối</span>
+                  </div>
+                </div>
+              </div>
+              <div class="Profile_footer">
+                <div class="Profile_logout">
+                  <img src="/static/media/logout.e00ce895d44ba235e8bdcbafa05eeb48.svg" alt="" /><span>Đăng xuất</span>
+                </div>
+                <div class="Profile_description"><span>F8 - Nền tảng học lập trình hàng đầu Việt Nam</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="Modal_wrapper Modal_TrackList">
+        <div class="TrackList_wrapper">
+          <div class="TrackList_content">
+            <div class="TrackItem_wrapper">
+              <div class="TrackItem_left">
+                <span class="TrackItem_title">1. Làm quen với HTML</span>
+                <div class="TrackItem_completed"><span>39</span></div>
+              </div>
+              <div class="TrackItem_right">
+                <img
+                  class="onChecked"
+                  src="/static/media/check-circle-active.e0bde04629ea3769dc5ec55ff0eb7133.svg"
+                  alt=""
+                />
+              </div>
+            </div>
+            <div class="TrackItem_wrapper">
+              <div class="TrackItem_left">
+                <span class="TrackItem_title">2. Các thẻ tiêu đề</span>
+                <div class="TrackItem_completed"><span>7</span></div>
+              </div>
+              <div class="TrackItem_right">
+                <img
+                  class="unChecked"
+                  src="/static/media/check-none-active.ba7194b16360081a29fdc43cf606f736.svg"
+                  alt=""
+                />
+              </div>
+            </div>
+            <div class="TrackList_make-all"><span>Làm lại toàn bộ flashcard</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="TrackList_header-wrapper">
+        <div class="TrackList_header">
+          <div class="TrackList_close">
+            <img src="./assets/img/closeSvg.svg" alt="" />
+          </div>
+          <span class="font-montserrat">Luyện Tập Theo Chương</span>
+          <div class="TrackList_active-all">
+            <img src="/static/media/circle-minus.c9b2a1277bc0ef89e2441ae6b5c560d1.svg" alt="" />
+          </div>
+        </div>
+      </div>
+
+      <div class="Footer_wrapper">
+        <button class="Button_wrapper font-lato">Bắt đầu</button>
+      </div>
+    </div>
+    <script src="./assets/javaScript/canvas.js"></script>
+    <script src="./assets/javaScript/Unit.js"></script>
+    <script src="./assets/javaScript/calendar.js"></script>
+    <script src="./assets/javaScript/index.js"></script>
+    <script>
+      App("#App");
+    </script>
+  </body>
+</html>
