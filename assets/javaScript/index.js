@@ -54,6 +54,7 @@ function App(selector) {
             CreateCourses(HTML_CSS, TrackListContent, trackItem);
           }
           closeModule(moduleElement);
+          unCheckedAll();
         }
       }
     });
@@ -175,6 +176,7 @@ function App(selector) {
   }
   function unCheckedAll() {
     TrackListActive.classList.remove("TrackList_activeAll");
+    TrackListActive.classList.remove("TrackList_Checked");
     for (const unCheckAlls of trackItemWrapper) {
       let unCheckAll = unCheckAlls.querySelector(".unChecked");
       unCheckAlls.classList.remove("TrackItem_wrapper-active");
@@ -261,6 +263,9 @@ function App(selector) {
     HomeQuestion.style.display = "block";
   }
   stopHere.onclick = function () {
+    if (flipCardInner.matches(".is-flipped")) {
+      flipCardInner.classList.remove("is-flipped");
+    }
     HomeQuestion.style.display = "none";
     homeContentContinue.style.display = "block";
   };
