@@ -19,14 +19,15 @@
               <img class="Home_bars" src="./assets/img/menuSvg.svg" alt="menuSvg" />
               <span class="Home_course-name">Lập Trình Thực Chiến</span>
             </div>
-            <a class="Home_course_link" href="https://fullstack.edu.vn/">fullstack.edu.vn</a>
+            <a class="Home_course_link" href="https://fullstack.edu.vn/"> fullstack.edu.vn</a>
             <div class="header_right">
               <div class="Home_avatar-wrapper">
-                <img src="./assets/img/Admin_SonDangebgview.png" class="Home_avatar" alt="Team f8" />
+                <img src="./assets/img/Admin_SonDang1.png" class="Home_avatar" alt="Team f8" />
               </div>
             </div>
           </div>
-          <section id="calendar">
+
+          <div id="calendar">
             <div class="weeks">
               <div class="week"></div>
               <div class="week"></div>
@@ -39,11 +40,30 @@
                 <span class="today"></span>
               </div>
             </div>
-          </section>
-          <div class="canvasBlock">
-            <canvas id="canvas" width="256" height="256" style="border-radius: 50%"> </canvas>
-            <img style="width: 1px" id="scream" src="./assets/img/Admin_SonDangebgview.png" alt="The Scream" />
           </div>
+          <script src="./assets/javaScript/calendar.js"></script>
+
+          <div class="App_flashcard">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="flipCard">
+                  <div class="canvasBlock">
+                    <canvas id="canvas" width="256" height="256" style="border-radius: 50%"> </canvas>
+                    <img style="width: 1px" id="scream" src="./assets/img/Admin_SonDang1.png" alt="The Scream" />
+                  </div>
+                </div>
+              </div>
+              <div class="flip-card-back">
+                <img src="./assets/img/TuongLai.png" alt="Avatar" />
+                <div id="suggestionsBack">
+                  <span class="suggestionsBack">Lorem ipsum dolor, sit amet consectetur aspernatur!.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <script src="./assets/javaScript/canvas.js"></script>
+
           <div class="Home_content-continue">
             <div class="Home_continuity">
               <span class="Home_continuity-title">Số ngày bạn đã hoàn thành liên tục</span>
@@ -60,13 +80,31 @@
             </div>
             <div class="Home_practice Home_practice-done">
               <img
-                class="Home_practice-image__KoEkG"
+                class="Home_practice-image"
                 src="./assets/img/mask-group-practice.f32be3f395683adc71def415c6e86f87.svg"
                 alt=""
               />
               <div class="Home_practice-action">
                 <span>Luyện tập </span>
               </div>
+            </div>
+          </div>
+
+          <div class="HomeQuestion">
+            <div class="contentQuestion">
+              <p class="Question">Chọn phương án Chọn phương</p>
+            </div>
+            <p class="Question_hint">Chọn phương án đúng:</p>
+            <div class="contentAnswer">
+              <div class="answerPlan"></div>
+              <div class="answerPlan"></div>
+              <div class="answerPlan"></div>
+            </div>
+
+            <button class="answerBtn">Trả Lời</button>
+            <div class="show_btn">
+              <button id="suggestions_btn" class="btn">Xem Giải Đáp ✨</button>
+              <button id="stopHere" class="btn">Dừng Luyện Tập</button>
             </div>
           </div>
         </div>
@@ -76,12 +114,16 @@
         <div class="wrapper">
           <div class="Courses_overlay"></div>
           <div class="Courses_container">
-            <div class="content">
+            <div class="Course_header">
               <div class="Courses_close">
                 <img src="./assets/img/closeSvg.svg" alt="closeSvg" />
               </div>
+              <a class="course_link" href="https://fullstack.edu.vn/"> fullstack.edu.vn</a>
+            </div>
+            <div class="content">
               <div class="Courses_main">
                 <h4 class="Courses_main-title">Chọn khóa học</h4>
+
                 <div class="courses">
                   <div class="Courses_course-item">
                     <img
@@ -190,33 +232,7 @@
       <div class="Modal_wrapper Modal_TrackList">
         <div class="TrackList_wrapper">
           <div class="TrackList_content">
-            <div class="TrackItem_wrapper">
-              <div class="TrackItem_left">
-                <span class="TrackItem_title">1. Làm quen với HTML</span>
-                <div class="TrackItem_completed"><span>39</span></div>
-              </div>
-              <div class="TrackItem_right">
-                <img
-                  class="onChecked"
-                  src="./assets/img/check-circle-active.e0bde04629ea3769dc5ec55ff0eb7133.svg"
-                  alt=""
-                />
-              </div>
-            </div>
-            <div class="TrackItem_wrapper">
-              <div class="TrackItem_left">
-                <span class="TrackItem_title">2. Các thẻ tiêu đề</span>
-                <div class="TrackItem_completed"><span>7</span></div>
-              </div>
-              <div class="TrackItem_right">
-                <img
-                  class="unChecked"
-                  src="./assets/img/check-none-active.ba7194b16360081a29fdc43cf606f736.svg"
-                  alt=""
-                />
-              </div>
-            </div>
-            <div class="TrackList_make-all"><span>Làm lại toàn bộ flashcard</span></div>
+            <p class="TrackItem">Chọn nội dung luyện tập:</p>
           </div>
         </div>
       </div>
@@ -227,19 +243,20 @@
             <img src="./assets/img/closeSvg.svg" alt="" />
           </div>
           <span class="font-montserrat">Luyện Tập Theo Chương</span>
-          <div class="TrackList_active-all">
-            <img src="./assets/img/circle-minus.c9b2a1277bc0ef89e2441ae6b5c560d1.svg" alt="" />
-          </div>
+          <div class="TrackList_active unCheckedAll"></div>
         </div>
       </div>
 
       <div class="Footer_wrapper">
-        <button class="Button_wrapper font-lato">Bắt đầu</button>
+        <button class="TrackList_make-all">Làm lại toàn bộ flashcard</button>
+        <button class="Button_wrapper font-lato">
+          <span class="stars">⭐ Bắt đầu ⭐</span>
+        </button>
       </div>
     </div>
-    <script src="./assets/javaScript/canvas.js"></script>
+
+    <script src="./assets/javaScript/img.js"></script>
     <script src="./assets/javaScript/Unit.js"></script>
-    <script src="./assets/javaScript/calendar.js"></script>
     <script src="./assets/javaScript/index.js"></script>
     <script>
       App("#App");
