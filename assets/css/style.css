@@ -987,10 +987,10 @@ p.TrackItem {
 
 .unCheckedAll,
 .unChecked {
-  background-image: url(/assets/img/check-none-active.ba7194b16360081a29fdc43cf606f736.svg);
+  background-image: url(./assets/img/check-none-active.ba7194b16360081a29fdc43cf606f736.svg);
 }
 .TrackItem_right .onChecked {
-  background-image: url(/assets/img/check-circle-active.e0bde04629ea3769dc5ec55ff0eb7133.svg);
+  background-image: url(./assets/img/check-circle-active.e0bde04629ea3769dc5ec55ff0eb7133.svg);
 }
 
 .TrackList_header-wrapper {
@@ -1033,10 +1033,10 @@ p.TrackItem {
   user-select: none;
 }
 .TrackList_Checked {
-  background-image: url(/assets/img/circle-minus.c9b2a1277bc0ef89e2441ae6b5c560d1.svg);
+  background-image: url(./assets/img/circle-minus.c9b2a1277bc0ef89e2441ae6b5c560d1.svg);
 }
 .TrackList_activeAll {
-  background-image: url(/assets/img/check-active.17895e54ca81231df26fd7778a233d55.svg);
+  background-image: url(./assets/img/check-active.17895e54ca81231df26fd7778a233d55.svg);
 }
 
 .Footer_wrapper {
