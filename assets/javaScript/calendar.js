@@ -72,6 +72,6 @@
   }
 
   // Cú pháp toán tử 3 ngôi
-  let variableName = Unit1 ? "expressionIfTrue" : "expressionIfFalse";
+  // let variableName = Unit1 ? "expressionIfTrue" : "expressionIfFalse";
   // condition ? expressionIfTrue : expressionIfFalse;
 }

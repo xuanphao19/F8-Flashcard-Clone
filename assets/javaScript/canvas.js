@@ -1,4 +1,4 @@
-// Vẽ Canvas:
+// Vẽ Canvas Đồng hồ treo tường:
 {
   var canvas = document.getElementById("canvas");
   var ctx = canvas.getContext("2d");
