@@ -1,3 +1,30 @@
+html {
+  font-size: 62.5%;
+  font-family: Lato, sans-serif;
+  color: white;
+}
+
+*,
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-size: 1.6rem;
+  /* overflow: hidden; */
+}
+
+*::before,
+*::after {
+  position: absolute;
+  box-sizing: border-box;
+}
+
+img {
+  border-style: none;
+}
+.font-lato {
+  font-family: Lato, sans-serif !important;
+}
 :root {
   --font-family: "Montserrat", Arial, "Lato", sans-serif;
   --blue-color: #0093fc;
@@ -26,7 +53,7 @@
   --progress-bar-color: #eaedf2;
   --progress-bar-inline-color: #48bd79;
   --subdue-color: #808b9a;
-  --footer-background: #ffffff;
+  --footer-background: #fff;
   --footer-box-shadow: 0px -8px 16px rgba(35, 115, 159, 0.04);
   --disabled-button-background: #f6f7f9;
   --disabled-button-color: #808b9a;
