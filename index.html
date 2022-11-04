@@ -56,7 +56,7 @@
               <div class="flip-card-back">
                 <img src="./assets/img/TuongLai.png" alt="Avatar" />
                 <div id="suggestionsBack">
-                  <span class="suggestionsBack">Lorem ipsum dolor, sit amet consectetur aspernatur!.</span>
+                  <span class="suggestionsBack">Lorem ipsum dolor, sit amet consectetur asper natur!.</span>
                 </div>
               </div>
             </div>
@@ -66,7 +66,7 @@
 
           <div class="Home_content-continue">
             <div class="Home_continuity">
-              <span class="Home_continuity-title">Số ngày bạn đã hoàn thành liên tục</span>
+              <span class="Home_continuity-title">Số ngày bạn đã hoàn thành liên tục<br /></span>
               <div class="Home_continuity-main">
                 <div class="Home_continuity-content"><span>365</span></div>
               </div>
@@ -86,25 +86,28 @@
               />
               <div class="Home_practice-action">
                 <span>Luyện tập </span>
+                <img
+                  class="practice-image"
+                  src="https://flash.fullstack.edu.vn/static/media/icon-right-done.b76682579f6c71d3531e2fea9d3c20e3.svg"
+                  alt="Home_practice"
+                />
               </div>
             </div>
           </div>
-
-          <div class="HomeQuestion">
-            <div class="contentQuestion">
-              <p class="Question">Chọn phương án Chọn phương</p>
-            </div>
-            <p class="Question_hint">Chọn phương án đúng:</p>
-            <div class="contentAnswer">
-              <div class="answerPlan"></div>
-              <div class="answerPlan"></div>
-              <div class="answerPlan"></div>
-            </div>
-
-            <button class="answerBtn">Trả Lời</button>
-            <div class="show_btn">
-              <button id="suggestions_btn" class="btn">Xem Giải Đáp ✨</button>
-              <button id="stopHere" class="btn">Dừng Luyện Tập</button>
+          <div class="HomeQuestionScroll">
+            <div class="HomeQuestion">
+              <div class="contentQuestion">
+                <p class="QuestionInfo">Chọn phương án Chọn phương</p>
+                <p class="Question_hint">Chọn phương án đúng:</p>
+              </div>
+              <div class="contentAnswer"></div>
+              <div class="show_btn">
+                <button class="answerBtn">Trả Lời</button>
+                <div class="control_btn">
+                  <button id="suggestions_btn" class="btn">Xem Giải Đáp ✨</button>
+                  <button id="stopHere" class="btn">Dừng Luyện Tập</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -250,12 +253,12 @@
       <div class="Footer_wrapper">
         <button class="TrackList_make-all">Làm lại toàn bộ flashcard</button>
         <button class="Button_wrapper font-lato">
-          <span class="stars">⭐ Bắt đầu ⭐</span>
+          <span class="starts"> Bắt đầu </span>
         </button>
       </div>
     </div>
-
     <script src="./assets/javaScript/img.js"></script>
+    <script src="./assets/javaScript/HTML_basic1_12.js"></script>
     <script src="./assets/javaScript/Unit.js"></script>
     <script src="./assets/javaScript/index.js"></script>
     <script>
