@@ -13,6 +13,9 @@ function App(selector) {
       if (displayAfter === "block") {
         homeHeader.style.setProperty("--dpn", "none");
       }
+      if (trackItemWrapper) {
+        stopPracticing();
+      }
     });
   })();
 
@@ -62,12 +65,16 @@ function App(selector) {
   })();
 
   // Click nút luyện tập
+  var HTML_CSS = new FollowCourses("HTML_CSS_Pro", "Khóa HTML CSS Pro", "Courses_item", "", 10, HTML_CSS_InFor);
   let homePractice = $.querySelector(".Home_practice");
   let homeHeader = $.querySelector(".Home_header");
   let TrackListHeaderWrapper = $.querySelector(".TrackList_header-wrapper");
   let FooterWrapper = $.querySelector(".Footer_wrapper");
   homePractice.addEventListener("click", function () {
-    if (CoursesId === "HTML_CSS_Pro") {
+    listQuestion = [];
+    lengthQ = 0;
+    let presentId = HTML_CSS.id;
+    if (CoursesId === presentId) {
       FooterWrapper.style.display = "block";
       modalTrackList.style.display = "block";
       TrackListHeaderWrapper.style.display = "block";
@@ -103,7 +110,6 @@ function App(selector) {
     unCheckedAll();
   });
 
-  var HTML_CSS = new FollowCourses("HTML_CSS_Pro", "HTML CSS Pro", "Courses_item", "", 10, HTML_CSS_InFor);
   let itemsLength = 0;
   const TrackListContent = $.querySelector(".TrackList_content");
   function CreateCourses(Obj, TrackListContent, callback) {
@@ -211,10 +217,14 @@ function App(selector) {
         onCheckId.push(onCheck.id);
       }
     }
-    createQuestionUI(onCheckId, HTML_CSS);
+    if (btnStart.matches(".start")) {
+      createQuestionUI(onCheckId, HTML_CSS);
+    }
   };
+
+  let listQuestion = [];
+  let lengthQ;
   function createQuestionUI(listId, Obj) {
-    let listQuestion = [];
     Obj.info.map((item) => {
       for (let id of listId) {
         if (item.id === id) {
@@ -222,13 +232,15 @@ function App(selector) {
         }
       }
     });
-    let lengthQ = listQuestion.length;
+    lengthQ = listQuestion.length;
     createRandomQuestion(lengthQ, listQuestion);
+    listClose();
+    return lengthQ, listQuestion;
   }
 
   let randomNo = [];
+  let RandomQuestion;
   function createRandomQuestion(length, listQues) {
-    let RandomQuestion;
     if (length > 0) {
       let n = Math.floor(Math.random() * length);
       let check = randomNo.includes(n);
@@ -246,32 +258,106 @@ function App(selector) {
       if (randomNo.length === length) {
         randomNo = [];
       }
-      RandomQuestion = `${listQues[n]}`;
-      console.log(RandomQuestion);
+      RandomQuestion = listQues[n];
     } else {
       return undefined;
     }
-    console.log(listQues);
     renderUiQuestion(RandomQuestion);
+    return RandomQuestion;
   }
+
   let homeContentContinue = $.querySelector(".Home_content-continue");
   let HomeQuestion = $.querySelector(".HomeQuestion");
   let stopHere = $.querySelector("#stopHere");
+  let contentAnswer = $.querySelector(".contentAnswer");
+  let QuestionInfo = $.querySelector(".QuestionInfo");
+  let QuestionHint = $.querySelector(".Question_hint");
+  let suggestionsBack = $.querySelector(".suggestionsBack");
+  let stars = ["⭐"];
   function renderUiQuestion(RandomQ) {
-    listClose();
+    QuestionInfo.innerHTML = RandomQ.Question;
+    QuestionHint.innerHTML = RandomQ.Requirements;
+    suggestionsBack.innerHTML = RandomQ.suggestions;
+    contentAnswer.innerHTML = `<span class="stars">${stars}</span>`;
+    let randomOrder = Math.floor(Math.random() * 23);
+    let OrderFlex = randomOrder % 3;
     homeContentContinue.style.display = "none";
     HomeQuestion.style.display = "block";
+    const answers = RandomQ.answerPlan.map((answer, i) => {
+      let answerEle = document.createElement("div");
+      answerEle.classList = `answerPlan`;
+      answerEle.id = `answerPlan${i}`;
+      answerEle.innerHTML = answer;
+      return answerEle;
+    });
+    contentAnswer.lastChild.after(...answers);
+    let answerPlanId0 = contentAnswer.querySelector("#answerPlan0");
+    if (OrderFlex >= 2) {
+      answerPlanId0.style.order = `${OrderFlex + 1}`;
+    } else {
+      answerPlanId0.style.order = `${OrderFlex}`;
+    }
+    redrawCanvas(randomOrder, pathImg);
   }
-  stopHere.onclick = function () {
+  function redrawCanvas(OrderImg, pathImg) {
+    let scream = $.querySelector("#scream");
+    scream.src = `./assets/img/${pathImg[OrderImg]}`;
+  }
+
+  let answerBtn = $.querySelector(".answerBtn");
+  let suggestionsBtn = $.querySelector("#suggestions_btn");
+  let flipCardInner = $.querySelector(".flip-card-inner");
+
+  function stopPracticing() {
     if (flipCardInner.matches(".is-flipped")) {
       flipCardInner.classList.remove("is-flipped");
     }
+    if (answerBtn.matches(".answerBtn")) {
+      answerBtn.classList.remove("answerCheck");
+    }
     HomeQuestion.style.display = "none";
     homeContentContinue.style.display = "block";
+    unCheckedAll();
+  }
+  let No = 0;
+  let clickError;
+  contentAnswer.addEventListener("click", function (e) {
+    let EleTarget = e.target;
+    if (EleTarget.closest(".answerPlan")) {
+      EleTarget.classList.toggle("answerPlanActive");
+      if (EleTarget.id === "answerPlan0") {
+        clickError = true;
+      } else {
+        clickError = false;
+      }
+      if (EleTarget.matches(".answerPlanActive")) {
+        No++;
+      } else {
+        No--;
+      }
+    }
+    if (No !== 0) {
+      answerBtn.classList.add("answerCheck");
+    } else if (answerBtn.matches(".answerCheck")) {
+      answerBtn.classList.remove("answerCheck");
+    }
+  });
+
+  answerBtn.onclick = function () {
+    stars.push("⭐");
+    if (flipCardInner.matches(".is-flipped")) {
+      flipCardInner.classList.remove("is-flipped");
+    }
+    if (answerBtn.matches(".answerCheck")) {
+      answerBtn.classList.remove("answerCheck");
+    }
+    createRandomQuestion(lengthQ, listQuestion, suggestionsBack);
+    No = 0;
   };
-  let suggestionsBtn = $.querySelector("#suggestions_btn");
-  let flipCardInner = $.querySelector(".flip-card-inner");
   suggestionsBtn.onclick = function () {
     flipCardInner.classList.toggle("is-flipped");
+  };
+  stopHere.onclick = function () {
+    stopPracticing();
   };
 }

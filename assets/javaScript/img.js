@@ -16,7 +16,6 @@ var pathImg = [
   "Xuan_Phao.png",
   "Xuan_Phao19.png",
   "TuongLai.png",
-  "TuongLaiS.png",
   "Team1.png",
   "Team2.png",
   "Team3.png",
