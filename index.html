@@ -58,12 +58,11 @@
                 <div id="suggestionsBack">
                   <span class="suggestionsBack">Lorem ipsum dolor, sit amet consectetur asper natur!.</span>
                 </div>
+                <div class="introVideo"></div>
               </div>
             </div>
           </div>
-
           <script src="./assets/javaScript/canvas.js"></script>
-
           <div class="Home_content-continue">
             <div class="Home_continuity">
               <span class="Home_continuity-title">Số ngày bạn đã hoàn thành liên tục<br /></span>
@@ -99,13 +98,39 @@
               <div class="contentQuestion">
                 <p class="QuestionInfo">Chọn phương án Chọn phương</p>
                 <p class="Question_hint">Chọn phương án đúng:</p>
+                <div id="audioQuestions">
+                  <audio class="audioItem" src=""></audio>
+                  <!-- <img class="speakerSvg" src="./assets/img/speakerWave.svg" alt="speakerWave" /> -->
+                  <svg
+                    class="speakerW w-6 h-6 speakerSvg"
+                    width="38"
+                    height="36"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="#99d409"
+                  >
+                    <path
+                      d="M13.5 4.06c0-1.336-1.616-2.005-2.56-1.06l-4.5 4.5H4.508c-1.141 0-2.318.664-2.66 1.905A9.76 9.76 0 001.5 12c0 .898.121 1.768.35 2.595.341 1.24 1.518 1.905 2.659 1.905h1.93l4.5 4.5c.945.945 2.561.276 2.561-1.06V4.06zM18.584 5.106a.75.75 0 011.06 0c3.808 3.807 3.808 9.98 0 13.788a.75.75 0 11-1.06-1.06 8.25 8.25 0 000-11.668.75.75 0 010-1.06z"
+                    />
+                    <path
+                      d="M15.932 7.757a.75.75 0 011.061 0 6 6 0 010 8.486.75.75 0 01-1.06-1.061 4.5 4.5 0 000-6.364.75.75 0 010-1.06z"
+                    />
+                  </svg>
+                </div>
               </div>
               <div class="contentAnswer"></div>
+
               <div class="show_btn">
-                <button class="answerBtn">Trả Lời</button>
+                <div class="control_btn">
+                  <div id="watchVideo_btn" class="btn">
+                    <img src="./assets/img/videoPlay.png" alt="videoPlay" /> Watch Video
+                  </div>
+                  <button class="btn answerBtn">Trả Lời</button>
+                </div>
                 <div class="control_btn">
                   <button id="suggestions_btn" class="btn">Xem Giải Đáp ✨</button>
-                  <button id="stopHere" class="btn">Dừng Luyện Tập</button>
+                  <!-- <button id="stopHere" class="btn"></button> -->
+                  <a href="" id="stopHere" class="btn"> Dừng Luyện Tập </a>
                 </div>
               </div>
             </div>
@@ -256,10 +281,12 @@
           <span class="starts"> Bắt đầu </span>
         </button>
       </div>
+      <audio id='congratulation' src="./assets/audio/Tieng_voTay0133.mp3"></audio>
     </div>
     <script src="./assets/javaScript/img.js"></script>
     <script src="./assets/javaScript/HTML_basic1_12.js"></script>
     <script src="./assets/javaScript/Unit.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script src="./assets/javaScript/index.js"></script>
     <script>
       App("#App");
