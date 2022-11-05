@@ -32,6 +32,7 @@ var HTML_CSS_Chapter1 = [
     ],
     suggestions: "Cảm ơn sự tin tưởng và đồng hành của bạn!",
     Audio: "",
+    Video: "",
     Image: "",
   },
 ];
@@ -84,6 +85,7 @@ var HTML_CSS_Chapter2 = [
     suggestions:
       "Thuộc tính title dùng để bổ sung tiêu đề cho các thẻ HTML, khi di chuyển con trỏ chuột lên trên nội dung thì giá trị nằm trong thuộc tính này sẽ được hiển thị.",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -93,6 +95,7 @@ var HTML_CSS_Chapter2 = [
     answerPlan: ["charset", "content", "lang"],
     suggestions: "Thuộc tính còn thiếu ở đây là charset.",
     Audio: "",
+    Video: "",
     Image: "",
   },
 ];
@@ -104,6 +107,7 @@ var HTML_CSS_Chapter3 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -113,6 +117,7 @@ var HTML_CSS_Chapter3 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -122,6 +127,7 @@ var HTML_CSS_Chapter3 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -131,6 +137,7 @@ var HTML_CSS_Chapter3 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -140,6 +147,7 @@ var HTML_CSS_Chapter3 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -149,6 +157,7 @@ var HTML_CSS_Chapter3 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
 ];
@@ -160,6 +169,7 @@ var HTML_CSS_Chapter4 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -169,6 +179,7 @@ var HTML_CSS_Chapter4 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -178,6 +189,7 @@ var HTML_CSS_Chapter4 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -187,6 +199,7 @@ var HTML_CSS_Chapter4 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -196,6 +209,7 @@ var HTML_CSS_Chapter4 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -205,6 +219,7 @@ var HTML_CSS_Chapter4 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
 ];
@@ -216,6 +231,7 @@ var HTML_CSS_Chapter5 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -225,6 +241,7 @@ var HTML_CSS_Chapter5 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -234,6 +251,7 @@ var HTML_CSS_Chapter5 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -243,6 +261,7 @@ var HTML_CSS_Chapter5 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -252,6 +271,7 @@ var HTML_CSS_Chapter5 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -261,6 +281,7 @@ var HTML_CSS_Chapter5 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
 ];
@@ -272,6 +293,7 @@ var HTML_CSS_Chapter6 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -281,6 +303,7 @@ var HTML_CSS_Chapter6 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -290,6 +313,7 @@ var HTML_CSS_Chapter6 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -299,6 +323,7 @@ var HTML_CSS_Chapter6 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -308,6 +333,7 @@ var HTML_CSS_Chapter6 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -317,6 +343,7 @@ var HTML_CSS_Chapter6 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
 ];
@@ -328,6 +355,7 @@ var HTML_CSS_Chapter7 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -337,6 +365,7 @@ var HTML_CSS_Chapter7 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -346,6 +375,7 @@ var HTML_CSS_Chapter7 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -355,6 +385,7 @@ var HTML_CSS_Chapter7 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -364,6 +395,7 @@ var HTML_CSS_Chapter7 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -373,6 +405,7 @@ var HTML_CSS_Chapter7 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
 ];
@@ -384,6 +417,7 @@ var HTML_CSS_Chapter8 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -393,6 +427,7 @@ var HTML_CSS_Chapter8 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -402,6 +437,7 @@ var HTML_CSS_Chapter8 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -411,6 +447,7 @@ var HTML_CSS_Chapter8 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -420,6 +457,7 @@ var HTML_CSS_Chapter8 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -429,6 +467,7 @@ var HTML_CSS_Chapter8 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
 ];
@@ -440,6 +479,7 @@ var HTML_CSS_Chapter9 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -449,6 +489,7 @@ var HTML_CSS_Chapter9 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -458,6 +499,7 @@ var HTML_CSS_Chapter9 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -467,6 +509,7 @@ var HTML_CSS_Chapter9 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -476,6 +519,7 @@ var HTML_CSS_Chapter9 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -485,6 +529,7 @@ var HTML_CSS_Chapter9 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
 ];
@@ -496,6 +541,7 @@ var HTML_CSS_Chapter10 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -505,6 +551,7 @@ var HTML_CSS_Chapter10 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -514,6 +561,7 @@ var HTML_CSS_Chapter10 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -523,6 +571,7 @@ var HTML_CSS_Chapter10 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -532,6 +581,7 @@ var HTML_CSS_Chapter10 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -541,6 +591,7 @@ var HTML_CSS_Chapter10 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
 ];
@@ -552,6 +603,7 @@ var HTML_CSS_Chapter11 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -561,6 +613,7 @@ var HTML_CSS_Chapter11 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -570,6 +623,7 @@ var HTML_CSS_Chapter11 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -579,6 +633,7 @@ var HTML_CSS_Chapter11 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -588,6 +643,7 @@ var HTML_CSS_Chapter11 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -597,6 +653,7 @@ var HTML_CSS_Chapter11 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
 ];
@@ -608,6 +665,7 @@ var HTML_CSS_Chapter12 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -617,6 +675,7 @@ var HTML_CSS_Chapter12 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -626,6 +685,7 @@ var HTML_CSS_Chapter12 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -635,6 +695,7 @@ var HTML_CSS_Chapter12 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -644,6 +705,7 @@ var HTML_CSS_Chapter12 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
   {
@@ -653,6 +715,7 @@ var HTML_CSS_Chapter12 = [
     answerPlan: ["", "", ""],
     suggestions: "",
     Audio: "",
+    Video: "",
     Image: "",
   },
 ];

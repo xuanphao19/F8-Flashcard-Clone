@@ -83,6 +83,9 @@ function App(selector) {
       CoursesMenu.style.setProperty("animation", "loading04 0.3s infinite linear");
       homeHeader.style.setProperty("--dpn", "block");
     }
+    if (flipCardInner.matches(".is-flipped")) {
+      flipCardInner.classList.remove("is-flipped");
+    }
   });
 
   let headerRight = $.querySelector(".header_right");
@@ -183,12 +186,16 @@ function App(selector) {
   function unCheckedAll() {
     TrackListActive.classList.remove("TrackList_activeAll");
     TrackListActive.classList.remove("TrackList_Checked");
+    answerBtn.textContent = "Trả lời";
+    answerBtn.classList.remove("failureAnswer");
     for (const unCheckAlls of trackItemWrapper) {
       let unCheckAll = unCheckAlls.querySelector(".unChecked");
       unCheckAlls.classList.remove("TrackItem_wrapper-active");
       unCheckAll.classList.remove("onChecked");
       j = 0;
     }
+    introVideo.style.display = "none";
+    stars = ["⭐"];
   }
   TrackListActive.onclick = () => {
     if (!TrackListActive.matches(".TrackList_activeAll")) {
@@ -267,7 +274,7 @@ function App(selector) {
   }
 
   let homeContentContinue = $.querySelector(".Home_content-continue");
-  let HomeQuestion = $.querySelector(".HomeQuestion");
+  let HomeQuestion = $.querySelector(".HomeQuestionScroll");
   let stopHere = $.querySelector("#stopHere");
   let contentAnswer = $.querySelector(".contentAnswer");
   let QuestionInfo = $.querySelector(".QuestionInfo");
@@ -298,6 +305,7 @@ function App(selector) {
       answerPlanId0.style.order = `${OrderFlex}`;
     }
     redrawCanvas(randomOrder, pathImg);
+    EleTargetAll = [];
   }
   function redrawCanvas(OrderImg, pathImg) {
     let scream = $.querySelector("#scream");
@@ -321,18 +329,33 @@ function App(selector) {
   }
   let No = 0;
   let clickError;
+  let EleTargetAll = [];
   contentAnswer.addEventListener("click", function (e) {
     let EleTarget = e.target;
+    answerBtn.style = "";
+    answerBtn.textContent = "Trả Lời";
+    answerBtn.classList.remove("require");
+    answerBtn.classList.remove("failureAnswer");
+    if (EleTargetAll !== []) {
+      EleTargetAll.map((item) => {
+        if (item.matches(".failureAnswer")) {
+          item.classList.remove("failureAnswer");
+          item.classList.remove("answerPlanActive");
+        }
+      });
+    }
     if (EleTarget.closest(".answerPlan")) {
       EleTarget.classList.toggle("answerPlanActive");
-      if (EleTarget.id === "answerPlan0") {
-        clickError = true;
-      } else {
-        clickError = false;
-      }
       if (EleTarget.matches(".answerPlanActive")) {
+        if (EleTarget.id === "answerPlan0") {
+          clickError = true;
+        } else {
+          clickError = false;
+        }
+        EleTargetAll.push(EleTarget);
         No++;
       } else {
+        EleTargetAll.pop();
         No--;
       }
     }
@@ -341,23 +364,94 @@ function App(selector) {
     } else if (answerBtn.matches(".answerCheck")) {
       answerBtn.classList.remove("answerCheck");
     }
+    return EleTargetAll;
   });
 
   answerBtn.onclick = function () {
-    stars.push("⭐");
     if (flipCardInner.matches(".is-flipped")) {
       flipCardInner.classList.remove("is-flipped");
     }
     if (answerBtn.matches(".answerCheck")) {
       answerBtn.classList.remove("answerCheck");
     }
-    createRandomQuestion(lengthQ, listQuestion, suggestionsBack);
+    if (clickError === true && No === 1) {
+      answerBtn.textContent = "❤️ 🥇 😍";
+      answerBtn.classList.remove("failureAnswer");
+      answerBtn.style.animation = "loading04 1.3s infinite linear";
+      answerBtn.style.background = " #c0feaa";
+      stars.push("⭐");
+      createRandomQuestion(lengthQ, listQuestion, suggestionsBack);
+      let congratulation = $.querySelector("#congratulation");
+      switch (stars.length) {
+        case 10:
+        case 20:
+        case 30:
+        case 40:
+        case 50:
+        case 60:
+        case 70:
+        case 80:
+        case 90:
+        case 100:
+          audioItem.src = "./assets/audio/Tieng-yeah.mp3";
+          audioItem.play();
+          congratulation.play();
+          break;
+        default:
+          audioItem.src = "./assets/audio/yeah.mp3";
+          audioItem.play();
+          break;
+      }
+    } else {
+      let starEle = $.querySelector(".stars");
+      if (No != 0) {
+        EleTargetAll.map((item) => {
+          item.classList.add("failureAnswer");
+        });
+        answerBtn.classList.remove("answerPlanActive");
+        answerBtn.classList.add("failureAnswer");
+        answerBtn.textContent = "💥😡💥";
+        stars.pop();
+        starEle.textContent = `${stars}`;
+        if (audioItem.src !== "./assets/audio/Oh_no.mp3") {
+          audioItem.src = "./assets/audio/Oh_no.mp3";
+          audioItem.play();
+        } else {
+          audioItem.play();
+        }
+      } else {
+        if (answerBtn.matches(".require")) {
+          answerBtn.classList.remove("require");
+        } else {
+          answerBtn.classList.add("require");
+        }
+      }
+    }
     No = 0;
   };
   suggestionsBtn.onclick = function () {
+    introVideo.style.display = "none";
     flipCardInner.classList.toggle("is-flipped");
   };
-  stopHere.onclick = function () {
-    stopPracticing();
+
+  // stopHere.onclick = function () {};
+  let audioItem = $.querySelector(".audioItem");
+  let watchVideo_btn = $.querySelector("#watchVideo_btn");
+  let introVideo = $.querySelector(".introVideo");
+  watchVideo_btn.onclick = function () {
+    introVideo.style.display = "block";
+    introVideo.innerHTML = `<iframe
+    id="introVideo"
+      width="320"
+      height="180"
+      src="https://www.youtube.com/embed/DpvYHLUiZpc?start=01&loop=1&html5=1"
+      title="Phương pháp HỌC LẬP TRÌNH của Sơn Đặng! | Lộ trình học lập trình | Phương pháp học lập trình"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      ></iframe>`;
+    flipCardInner.classList.add("is-flipped");
+    homeContentContinue.style.display = "block";
+    HomeQuestion.style.display = "none";
   };
 }
