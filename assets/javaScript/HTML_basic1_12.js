@@ -3,6 +3,7 @@ var HTML_CSS_Chapter1 = [
     Question: "Lập trình web là gì?",
     Requirements: "Thông tin tham khảo:",
     answerPlan: [
+      "Đây là đáp án cho nội dung tham khảo",
       "Lập trình web là công việc dùng lập trình để tạo ra một website, gồm hai mảng chính là lập trình front-end và lập trình back-end.",
       "Web Developer có nhiệm vụ lập trình để tạo ra các website.",
       "Công việc của Web Developer là đưa ra các chuỗi mã lệnh, bố cục hợp lý, hướng dẫn thực thi.",
@@ -13,6 +14,8 @@ var HTML_CSS_Chapter1 = [
     Question: "Lập trình web bao gồm những mảng nào?",
     Requirements: "Thông tin tham khảo:",
     answerPlan: [
+      "Đây là đáp án cho nội dung tham khảo",
+
       "Dựa theo việc ngôn ngữ lập trình chạy ở môi trường nào, lập trình web được chia thành hai mảng chính là lập trình front-end và lập trình back-end.",
       "Front-end là tất cả những gì hiển thị trước mắt người dùng, gồm cả các thiết kế như hình ảnh, bố cục, text, video... được tạo ra bởi ngôn ngữ hiển thị HTML và CSS.",
       "Back-end lại liên quan đến tất cả những cấu trúc bên trong như database và server.",
@@ -23,6 +26,7 @@ var HTML_CSS_Chapter1 = [
     Question: "Một số ngôn ngữ lập trình web phổ biến:",
     Requirements: "Thông tin tham khảo:",
     answerPlan: [
+      "Đây là đáp án cho nội dung tham khảo",
       "Javascript: Là ngôn ngữ lập trình hướng đối tượng, tiêu biểu trong các ngôn ngữ lập trình web phổ biến hiện nay, với mã lệnh đơn giản, dùng trong website để xác thực hình thức, cải thiện thiết kế web...",
       "Python: Là ngôn ngữ lập trình có khả năng xử lý nhanh, cấu trúc rõ ràng và cú pháp ngắn gọn. Python xuất hiện trên nhiều nền tảng như MS-DOS, UNIX, Linux, Mac OS, Windows…",
       "Java: Là ngôn ngữ hướng đối tượng với đa mục đích, một trong các ngôn ngữ web đứng đầu trong top phổ biến nhất, có thể chạy một phần code trên nhiều nền tảng khác nhau.",

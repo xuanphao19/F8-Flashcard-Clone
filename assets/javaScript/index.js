@@ -121,13 +121,14 @@ function App(selector) {
       let chapter = document.createElement("div");
       chapter.classList = `${item.className}`;
       chapter.id = `${item.id}`;
+
       chapter.innerHTML = ` <div class="TrackItem_left">
                               <span class="TrackItem_title">${i}. ${item.name}</span>
                               <div class="TrackItem_completed">
-                                <span>${item.ArrLength}</span>
+                                <span class="sumQuestion">${item.ArrLength}</span>
                               </div>
                             </div>
-                            <div class="TrackItem_right">
+                            <div class="TrackItem_right"CreateCourses>
                               <div class="unChecked"></div>
                             </div>`;
       return chapter;
@@ -143,40 +144,47 @@ function App(selector) {
   let j = 0;
   function trackItem() {
     trackItemWrapper = $.querySelectorAll(".TrackItem_wrapper");
-    for (const iterator of trackItemWrapper) {
-      iterator.addEventListener("click", () => {
-        const unChecks = $.querySelectorAll(".unChecked");
-        unChecked = iterator.querySelector(".unChecked");
-        if (unChecked.matches(".onChecked")) {
-          unChecked.classList.remove("onChecked");
-          iterator.classList.remove("TrackItem_wrapper-active");
-          j--;
-        } else {
-          iterator.classList.add("TrackItem_wrapper-active");
-          unChecked.classList.add("onChecked");
-          j++;
-        }
-        if (j === itemsLength) {
-          TrackListActive.classList.add("TrackList_activeAll");
-        } else {
-          TrackListActive.classList.remove("TrackList_activeAll");
-        }
-        for (const item of unChecks) {
-          if (item.matches(".onChecked")) {
-            TrackListActive.classList.add("TrackList_Checked");
-            btnStart.classList.add("start");
-            return;
+    trackItemWrapper.forEach((iterator) => {
+      let disableQuest = iterator.querySelector(".sumQuestion").textContent;
+      if (disableQuest == 0) {
+        iterator.classList.add("TrackItem_disable");
+      } else {
+        iterator.addEventListener("click", () => {
+          const unChecks = $.querySelectorAll(".unChecked");
+          unChecked = iterator.querySelector(".unChecked");
+          if (unChecked.matches(".onChecked")) {
+            unChecked.classList.remove("onChecked");
+            iterator.classList.remove("TrackItem_wrapper-active");
+            j--;
           } else {
-            TrackListActive.classList.remove("TrackList_Checked");
+            iterator.classList.add("TrackItem_wrapper-active");
+            unChecked.classList.add("onChecked");
+            j++;
           }
-        }
-        btnStart.classList.remove("start");
-      });
-    }
+          if (j === itemsLength) {
+            TrackListActive.classList.add("TrackList_activeAll");
+          } else {
+            TrackListActive.classList.remove("TrackList_activeAll");
+          }
+          for (const item of unChecks) {
+            if (item.matches(".onChecked")) {
+              TrackListActive.classList.add("TrackList_Checked");
+              btnStart.classList.add("start");
+              return;
+            } else {
+              TrackListActive.classList.remove("TrackList_Checked");
+            }
+          }
+          btnStart.classList.remove("start");
+        });
+      }
+    });
   }
   function onCheckedAll() {
     TrackListActive.classList.add("TrackList_activeAll");
     for (const unCheckAlls of trackItemWrapper) {
+      console.log(unCheckAlls);
+
       let onCheckAll = unCheckAlls.querySelector(".unChecked");
       unCheckAlls.classList.add("TrackItem_wrapper-active");
       onCheckAll.classList.add("onChecked");
@@ -305,7 +313,6 @@ function App(selector) {
       answerPlanId0.style.order = `${OrderFlex}`;
     }
     redrawCanvas(randomOrder, pathImg);
-    EleTargetAll = [];
   }
   function redrawCanvas(OrderImg, pathImg) {
     let scream = $.querySelector("#scream");
@@ -320,61 +327,66 @@ function App(selector) {
     if (flipCardInner.matches(".is-flipped")) {
       flipCardInner.classList.remove("is-flipped");
     }
-    if (answerBtn.matches(".answerBtn")) {
+    if (answerBtn.matches(".answerCheck")) {
       answerBtn.classList.remove("answerCheck");
     }
     HomeQuestion.style.display = "none";
     homeContentContinue.style.display = "block";
     unCheckedAll();
   }
-  let No = 0;
-  let clickError;
-  let EleTargetAll = [];
+  let y = 0;
   contentAnswer.addEventListener("click", function (e) {
+    let AnswerAll = contentAnswer.querySelectorAll(".answerPlan");
     let EleTarget = e.target;
     answerBtn.style = "";
     answerBtn.textContent = "Trả Lời";
     answerBtn.classList.remove("require");
     answerBtn.classList.remove("failureAnswer");
-    if (EleTargetAll !== []) {
-      EleTargetAll.map((item) => {
-        if (item.matches(".failureAnswer")) {
-          item.classList.remove("failureAnswer");
-          item.classList.remove("answerPlanActive");
-        }
-      });
-    }
     if (EleTarget.closest(".answerPlan")) {
-      EleTarget.classList.toggle("answerPlanActive");
-      if (EleTarget.matches(".answerPlanActive")) {
-        if (EleTarget.id === "answerPlan0") {
-          clickError = true;
-        } else {
-          clickError = false;
-        }
-        EleTargetAll.push(EleTarget);
-        No++;
+      if (!EleTarget.matches(".answerPlanActive")) {
+        EleTarget.classList.add("answerPlanActive");
+        y++;
       } else {
-        EleTargetAll.pop();
-        No--;
+        EleTarget.classList.remove("answerPlanActive");
+        y--;
+      }
+      if (y === 0) {
+        answerBtn.classList.remove("answerCheck");
+      } else {
+        answerBtn.classList.add("answerCheck");
       }
     }
-    if (No !== 0) {
-      answerBtn.classList.add("answerCheck");
-    } else if (answerBtn.matches(".answerCheck")) {
-      answerBtn.classList.remove("answerCheck");
-    }
-    return EleTargetAll;
+    AnswerAll.forEach((element) => {
+      element.classList.remove("failureAnswer");
+    });
   });
 
+  let answerTrue = false;
+  let selectorAnswerAll;
+  let answerSelectorLength = 0;
+  function testAnswer(contentAnswer) {
+    selectorAnswerAll = contentAnswer.querySelectorAll(".answerPlanActive");
+    if (selectorAnswerAll) {
+      answerSelectorLength = selectorAnswerAll.length;
+      let answerValue;
+      selectorAnswerAll.forEach((answerSelector) => {
+        if (answerSelector.matches("#answerPlan0")) {
+          answerValue = true;
+        }
+      });
+      if (answerValue === true && answerSelectorLength === 1) {
+        answerTrue = true;
+      } else {
+        answerTrue = false;
+      }
+    }
+  }
   answerBtn.onclick = function () {
+    testAnswer(contentAnswer);
     if (flipCardInner.matches(".is-flipped")) {
       flipCardInner.classList.remove("is-flipped");
     }
-    if (answerBtn.matches(".answerCheck")) {
-      answerBtn.classList.remove("answerCheck");
-    }
-    if (clickError === true && No === 1) {
+    if (answerTrue === true) {
       answerBtn.textContent = "❤️ 🥇 😍";
       answerBtn.classList.remove("failureAnswer");
       answerBtn.style.animation = "loading04 1.3s infinite linear";
@@ -404,11 +416,15 @@ function App(selector) {
       }
     } else {
       let starEle = $.querySelector(".stars");
-      if (No != 0) {
-        EleTargetAll.map((item) => {
-          item.classList.add("failureAnswer");
-        });
-        answerBtn.classList.remove("answerPlanActive");
+      if (y === 0) {
+        if (answerBtn.matches(".require")) {
+          answerBtn.classList.remove("require");
+        } else {
+          answerBtn.classList.add("require");
+          audioItem.src = "./assets/audio/Am-thanh-oh-nooo.mp3";
+          audioItem.play();
+        }
+      } else {
         answerBtn.classList.add("failureAnswer");
         answerBtn.textContent = "💥😡💥";
         stars.pop();
@@ -419,22 +435,19 @@ function App(selector) {
         } else {
           audioItem.play();
         }
-      } else {
-        if (answerBtn.matches(".require")) {
-          answerBtn.classList.remove("require");
-        } else {
-          answerBtn.classList.add("require");
-        }
       }
+      selectorAnswerAll.forEach((element) => {
+        element.classList.add("failureAnswer");
+        element.classList.remove("answerPlanActive");
+      });
+      y = 0;
     }
-    No = 0;
   };
   suggestionsBtn.onclick = function () {
     introVideo.style.display = "none";
     flipCardInner.classList.toggle("is-flipped");
   };
 
-  // stopHere.onclick = function () {};
   let audioItem = $.querySelector(".audioItem");
   let watchVideo_btn = $.querySelector("#watchVideo_btn");
   let introVideo = $.querySelector(".introVideo");
