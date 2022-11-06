@@ -121,7 +121,6 @@ function App(selector) {
       let chapter = document.createElement("div");
       chapter.classList = `${item.className}`;
       chapter.id = `${item.id}`;
-
       chapter.innerHTML = ` <div class="TrackItem_left">
                               <span class="TrackItem_title">${i}. ${item.name}</span>
                               <div class="TrackItem_completed">
@@ -134,11 +133,11 @@ function App(selector) {
       return chapter;
     });
     TrackListContent.lastChild.after(...items);
-    itemsLength = items.length;
     callback();
   }
 
   let unChecked;
+  let unDisableAll;
   let trackItemWrapper;
   let TrackListActive = $.querySelector(".TrackList_active");
   let j = 0;
@@ -149,6 +148,7 @@ function App(selector) {
       if (disableQuest == 0) {
         iterator.classList.add("TrackItem_disable");
       } else {
+        iterator.classList.add("unDisable");
         iterator.addEventListener("click", () => {
           const unChecks = $.querySelectorAll(".unChecked");
           unChecked = iterator.querySelector(".unChecked");
@@ -179,15 +179,16 @@ function App(selector) {
         });
       }
     });
+    unDisableAll = $.querySelectorAll(".unDisable");
+    itemsLength = unDisableAll.length;
   }
+
   function onCheckedAll() {
     TrackListActive.classList.add("TrackList_activeAll");
-    for (const unCheckAlls of trackItemWrapper) {
-      console.log(unCheckAlls);
-
-      let onCheckAll = unCheckAlls.querySelector(".unChecked");
-      unCheckAlls.classList.add("TrackItem_wrapper-active");
-      onCheckAll.classList.add("onChecked");
+    for (const unDisable of unDisableAll) {
+      let onCheck = unDisable.querySelector(".unChecked");
+      unDisable.classList.add("TrackItem_wrapper-active");
+      onCheck.classList.add("onChecked");
       j = itemsLength;
     }
   }
@@ -196,9 +197,9 @@ function App(selector) {
     TrackListActive.classList.remove("TrackList_Checked");
     answerBtn.textContent = "Trả lời";
     answerBtn.classList.remove("failureAnswer");
-    for (const unCheckAlls of trackItemWrapper) {
-      let unCheckAll = unCheckAlls.querySelector(".unChecked");
-      unCheckAlls.classList.remove("TrackItem_wrapper-active");
+    for (const unDisable of unDisableAll) {
+      let unCheckAll = unDisable.querySelector(".unChecked");
+      unDisable.classList.remove("TrackItem_wrapper-active");
       unCheckAll.classList.remove("onChecked");
       j = 0;
     }
