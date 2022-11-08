@@ -226,6 +226,7 @@ function App(selector) {
     }
   };
   let btnStart = $.querySelector(".Button_wrapper");
+  let calendarClose = $.querySelector("#calendar");
   btnStart.onclick = function () {
     let onCheckId = [];
     for (const onCheck of trackItemWrapper) {
@@ -235,6 +236,8 @@ function App(selector) {
     }
     if (btnStart.matches(".start")) {
       createQuestionUI(onCheckId, HTML_CSS);
+      homeHeader.style.display = "none";
+      calendarClose.style.display = "none";
     }
   };
 
@@ -250,6 +253,9 @@ function App(selector) {
     });
     lengthQ = listQuestion.length;
     createRandomQuestion(lengthQ, listQuestion);
+    answerBtn.textContent = "Trả lời";
+    answerBtn.classList.remove("failureAnswer");
+    answerBtn.classList.remove("answerCheck");
     listClose();
     return lengthQ, listQuestion;
   }
@@ -289,6 +295,7 @@ function App(selector) {
   let QuestionInfo = $.querySelector(".QuestionInfo");
   let QuestionHint = $.querySelector(".Question_hint");
   let suggestionsBack = $.querySelector(".suggestionsBack");
+  let correctAnswerLength = 0;
   let stars = ["⭐"];
   function renderUiQuestion(RandomQ) {
     QuestionInfo.innerHTML = RandomQ.Question;
@@ -296,22 +303,36 @@ function App(selector) {
     suggestionsBack.innerHTML = RandomQ.suggestions;
     contentAnswer.innerHTML = `<span class="stars">${stars}</span>`;
     let randomOrder = Math.floor(Math.random() * 23);
-    let OrderFlex = randomOrder % 3;
     homeContentContinue.style.display = "none";
     HomeQuestion.style.display = "block";
-    const answers = RandomQ.answerPlan.map((answer, i) => {
-      let answerEle = document.createElement("div");
-      answerEle.classList = `answerPlan`;
-      answerEle.id = `answerPlan${i}`;
-      answerEle.innerHTML = answer;
-      return answerEle;
-    });
-    contentAnswer.lastChild.after(...answers);
-    let answerPlanId0 = contentAnswer.querySelector("#answerPlan0");
-    if (OrderFlex >= 2) {
-      answerPlanId0.style.order = `${OrderFlex + 1}`;
-    } else {
-      answerPlanId0.style.order = `${OrderFlex}`;
+    let correctAnswerArr = RandomQ.correctAnswer;
+    if (!(correctAnswerArr === [])) {
+      const correctAnswer = correctAnswerArr.map((correctAn, i) => {
+        let answerAns = document.createElement("div");
+        answerAns.classList = `answerPlan correctAnswer`;
+        answerAns.id = `correctAnswer${i}`;
+        answerAns.innerHTML = correctAn;
+        return answerAns;
+      });
+      contentAnswer.lastChild.after(...correctAnswer);
+    }
+    correctAnswerLength = contentAnswer.querySelectorAll(".correctAnswer").length;
+    if (!(RandomQ.answerPlan === [])) {
+      const answerPl = RandomQ.answerPlan.map((answer, i) => {
+        let answerEle = document.createElement("div");
+        answerEle.classList = `answerPlan`;
+        answerEle.id = `answerPlan${i}`;
+        answerEle.innerHTML = answer;
+        return answerEle;
+      });
+      contentAnswer.lastChild.after(...answerPl);
+    }
+    if (!RandomQ.Requirements.includes("MultipleAnswers")) {
+      let randomAnswer = contentAnswer.querySelectorAll(".answerPlan");
+      randomAnswer.forEach((element) => {
+        let OrderFlex = Math.floor(Math.random() * 5);
+        element.style.order = `${OrderFlex}`;
+      });
     }
     redrawCanvas(randomOrder, pathImg);
   }
@@ -367,15 +388,15 @@ function App(selector) {
   let answerSelectorLength = 0;
   function testAnswer(contentAnswer) {
     selectorAnswerAll = contentAnswer.querySelectorAll(".answerPlanActive");
+    answerSelectorLength = selectorAnswerAll.length;
     if (selectorAnswerAll) {
-      answerSelectorLength = selectorAnswerAll.length;
       let answerValue;
       selectorAnswerAll.forEach((answerSelector) => {
-        if (answerSelector.matches("#answerPlan0")) {
+        if (answerSelector.matches(".correctAnswer")) {
           answerValue = true;
         }
       });
-      if (answerValue === true && answerSelectorLength === 1) {
+      if (answerValue === true && answerSelectorLength === correctAnswerLength) {
         answerTrue = true;
       } else {
         answerTrue = false;
@@ -467,5 +488,8 @@ function App(selector) {
     flipCardInner.classList.add("is-flipped");
     homeContentContinue.style.display = "block";
     HomeQuestion.style.display = "none";
+    homeHeader.style.display = "flex";
+    calendarClose.style.display = "block";
+    suggestionsBack.textContent = "";
   };
 }
