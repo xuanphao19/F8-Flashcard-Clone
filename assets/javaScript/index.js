@@ -296,11 +296,13 @@ function App(selector) {
   let QuestionHint = $.querySelector(".Question_hint");
   let suggestionsBack = $.querySelector(".suggestionsBack");
   let correctAnswerLength = 0;
+  let suggestionsBefore = "";
   let stars = ["⭐"];
   function renderUiQuestion(RandomQ) {
     QuestionInfo.innerHTML = RandomQ.Question;
     QuestionHint.innerHTML = RandomQ.Requirements;
-    suggestionsBack.innerHTML = RandomQ.suggestions;
+    suggestionsBefore = RandomQ.suggestions;
+    suggestionsBack.innerHTML = suggestionsBefore;
     contentAnswer.innerHTML = `<span class="stars">${stars}</span>`;
     let randomOrder = Math.floor(Math.random() * 23);
     homeContentContinue.style.display = "none";
@@ -309,9 +311,10 @@ function App(selector) {
     if (!(correctAnswerArr === [])) {
       const correctAnswer = correctAnswerArr.map((correctAn, i) => {
         let answerAns = document.createElement("div");
-        answerAns.classList = `answerPlan correctAnswer`;
-        answerAns.id = `correctAnswer${i}`;
-        answerAns.innerHTML = correctAn;
+        answerAns.classList = `answerPlanInfo`;
+        answerAns.innerHTML = `<div class="answerPlan correctAnswer" id = "correctAnswer${i}">
+                                    ${correctAn}
+                               </div>`;
         return answerAns;
       });
       contentAnswer.lastChild.after(...correctAnswer);
@@ -320,17 +323,18 @@ function App(selector) {
     if (!(RandomQ.answerPlan === [])) {
       const answerPl = RandomQ.answerPlan.map((answer, i) => {
         let answerEle = document.createElement("div");
-        answerEle.classList = `answerPlan`;
-        answerEle.id = `answerPlan${i}`;
-        answerEle.innerHTML = answer;
+        answerEle.classList = `answerPlanInfo`;
+        answerEle.innerHTML = `<div class="answerPlan" id = "answerPlan${i}">
+                                    ${answer}
+                               </div>`;
         return answerEle;
       });
       contentAnswer.lastChild.after(...answerPl);
     }
     if (!RandomQ.Requirements.includes("MultipleAnswers")) {
-      let randomAnswer = contentAnswer.querySelectorAll(".answerPlan");
+      let randomAnswer = contentAnswer.querySelectorAll(".answerPlanInfo");
       randomAnswer.forEach((element) => {
-        let OrderFlex = Math.floor(Math.random() * 5);
+        let OrderFlex = Math.floor(Math.random() * 7);
         element.style.order = `${OrderFlex}`;
       });
     }
@@ -364,13 +368,25 @@ function App(selector) {
     answerBtn.textContent = "Trả Lời";
     answerBtn.classList.remove("require");
     answerBtn.classList.remove("failureAnswer");
+    explain.style.display = "none";
     if (EleTarget.closest(".answerPlan")) {
-      if (!EleTarget.matches(".answerPlanActive")) {
-        EleTarget.classList.add("answerPlanActive");
-        y++;
+      if (EleTarget.nodeName === "CODE") {
+        let targetParentElement = EleTarget.parentElement;
+        if (!targetParentElement.matches(".answerPlanActive")) {
+          targetParentElement.classList.add("answerPlanActive");
+          y++;
+        } else {
+          targetParentElement.classList.remove("answerPlanActive");
+          y--;
+        }
       } else {
-        EleTarget.classList.remove("answerPlanActive");
-        y--;
+        if (!EleTarget.matches(".answerPlanActive")) {
+          EleTarget.classList.add("answerPlanActive");
+          y++;
+        } else {
+          EleTarget.classList.remove("answerPlanActive");
+          y--;
+        }
       }
       if (y === 0) {
         answerBtn.classList.remove("answerCheck");
@@ -403,6 +419,7 @@ function App(selector) {
       }
     }
   }
+  let explain = $.querySelector(".explain");
   answerBtn.onclick = function () {
     testAnswer(contentAnswer);
     if (flipCardInner.matches(".is-flipped")) {
@@ -410,6 +427,8 @@ function App(selector) {
     }
     if (answerTrue === true) {
       answerBtn.textContent = "❤️ 🥇 😍";
+      explain.innerHTML = `Chính xác! ${suggestionsBefore} <br> <span>Close!</span>`;
+      explain.style.display = "block";
       answerBtn.classList.remove("failureAnswer");
       answerBtn.style.animation = "loading04 1.3s infinite linear";
       answerBtn.style.background = " #c0feaa";
@@ -443,12 +462,14 @@ function App(selector) {
           answerBtn.classList.remove("require");
         } else {
           answerBtn.classList.add("require");
+          explain.style.display = "none";
           audioItem.src = "./assets/audio/Am-thanh-oh-nooo.mp3";
           audioItem.play();
         }
       } else {
-        answerBtn.classList.add("failureAnswer");
+        explain.style.display = "none";
         answerBtn.textContent = "💥😡💥";
+        answerBtn.classList.add("failureAnswer");
         stars.pop();
         starEle.textContent = `${stars}`;
         if (audioItem.src !== "./assets/audio/Oh_no.mp3") {
@@ -465,9 +486,16 @@ function App(selector) {
       y = 0;
     }
   };
+  explain.addEventListener("click", function () {
+    explain.style.display = "none";
+    answerBtn.textContent = "Trả lời";
+    answerBtn.classList.remove("failureAnswer", "answerCheck");
+    answerBtn.style = { animation: "", background: "" };
+  });
   suggestionsBtn.onclick = function () {
-    introVideo.style.display = "none";
     flipCardInner.classList.toggle("is-flipped");
+    introVideo.style.display = "none";
+    explain.style.display = "none";
   };
 
   let audioItem = $.querySelector(".audioItem");
@@ -491,5 +519,6 @@ function App(selector) {
     homeHeader.style.display = "flex";
     calendarClose.style.display = "block";
     suggestionsBack.textContent = "";
+    answerBtn.style = "";
   };
 }
