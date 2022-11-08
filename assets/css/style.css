@@ -40,6 +40,7 @@
   border: 1px solid;
   border-radius: 8px;
   font-size: 1.8rem;
+  line-height: 1.6;
   text-align: justify;
   color: var(--disabled-button-color);
   z-index: 99;
@@ -347,6 +348,21 @@ span.suggestionsBack {
   width: 100%;
   height: 100%;
 }
+/* .introVideo {
+  --ratio: 16/9;
+  height: 100%;
+  position: relative;
+  padding-bottom: calc(100% / var(--ratio));
+}
+.introVideo > * {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+} */
+
 .Home_content {
   display: flex;
   justify-content: center;
@@ -515,22 +531,21 @@ img.practice-image {
   border-radius: 8px;
 }
 
-.QuestionInfo,
 .answerPlan {
   width: 100%;
+  display: flex;
   min-height: 48px;
   padding: 6px 24px;
-  line-height: 1.5;
-  margin-bottom: 16px;
-  display: flex;
+  margin-bottom: 8px;
   align-items: center;
   justify-content: center;
   color: var(--text-color-faq);
-  text-align: justify;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   transition: 0.3s;
-  overflow: auto;
+  line-height: 1.5;
+  text-align: left;
   cursor: pointer;
+  overflow: auto;
   border-radius: 8px;
   border: 1px solid transparent;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -539,7 +554,6 @@ img.practice-image {
   user-select: none;
 }
 .answerPlan {
-  text-align: left;
 }
 .answerPlanActive,
 .answerPlan:hover,
@@ -559,8 +573,35 @@ img.practice-image {
   position: relative;
   top: 0;
   left: 0;
+  overflow: hidden;
+  border-radius: 6px;
   align-items: flex-start;
+  border: 1px solid #bdbdbd61;
+  background: var(--question-background);
+  box-shadow: -1px 2px 3px rgb(137 172 192 / 10%);
 }
+.QuestionInfo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  cursor: default;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  text-align: left;
+  min-height: 48px;
+  padding: 6px 18px;
+  color: var(--text-color-faq);
+}
+p.Question_hint {
+  width: 100%;
+  padding: 3px 18px 6px;
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--disabled-button-color);
+  border-top: 1px solid rgb(86 85 85 / 20%);
+}
+
 .speakerSvg {
   position: absolute;
   top: 6px;
@@ -574,48 +615,6 @@ img.practice-image {
   box-shadow: 0px 0 0 2px #e9fabfba;
 }
 
-p.QuestionInfo {
-  cursor: default;
-  margin-bottom: 0px;
-  text-align: left;
-  padding-bottom: 0;
-  color: var(--text-color-faq);
-  border: none;
-  box-shadow: none;
-  background: rgb(205 181 191 / 18%);
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-p.Question_hint {
-  width: 100%;
-  padding: 3px 24px 6px;
-  font-size: 1.3rem;
-  font-weight: 400;
-  color: var(--disabled-button-color);
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
-  background: rgb(205 181 191 / 18%);
-  border-top: 1px solid rgb(86 85 85 / 20%);
-}
-
-#answerPlan1 {
-  order: 0;
-}
-#answerPlan2 {
-  order: 2;
-}
-#answerPlan3 {
-  order: 4;
-}
-#answerPlan4 {
-  order: 5;
-}
-#answerPlan5 {
-  order: 6;
-}
-
 .show_btn {
   position: fixed;
   width: 100vw;
@@ -627,7 +626,7 @@ p.Question_hint {
   bottom: 0;
   background-color: var(--lesson-background-color);
 }
-
+.btn,
 .control_btn {
   display: flex;
   align-items: center;
@@ -638,34 +637,33 @@ p.Question_hint {
   margin-top: 10px;
 }
 .btn {
+  justify-content: center;
+  text-decoration: none;
   width: 48%;
   height: 42px;
   outline: none;
-  border: none;
-  font-size: 1.8rem;
-  color: var(--text-color);
-  border-radius: 4px;
-  cursor: pointer;
-  box-shadow: 0 0 0 1px rgb(101 118 244 / 37%);
-  background-image: linear-gradient(to top, rgb(192, 193, 250), rgb(236 236 252), rgb(192, 193, 250));
-}
-
-button.btn.answerBtn {
-  font-weight: 600;
+  font-size: 1.6rem;
+  font-weight: 500;
   font-style: italic;
-  text-align: center;
-  color: var(--subdue-color);
-  font-size: 2rem;
   letter-spacing: 1.5px;
-  border: transparent;
-  transition: all linear 0.5s;
-  background: var(--home-background-color);
-  cursor: default;
+  color: var(--btn-color);
+  border-radius: 4px;
+  border: 1px solid transparent;
+  box-shadow: 0 0 0 1px rgb(101 118 244 / 25%);
+  background-image: linear-gradient(to top, rgb(230 230 230), rgb(255 255 255 / 88%), rgb(230 230 230));
 }
-button.answerBtn:hover {
+#watchVideo_btn > img {
+  width: 32px;
+  height: 32px;
+}
+.btn:hover {
   opacity: 0.9;
   border: 1px solid #aadd3345;
-  background: #c0feaa;
+  background-image: linear-gradient(to top, #c0feaa, #fbfff0, #c0feaa);
+  cursor: pointer;
+}
+button.btn.answerBtn:hover {
+  cursor: default;
 }
 button.answerBtn.answerCheck {
   color: rgb(0 26 255 / 82%);
@@ -678,37 +676,24 @@ button.btn.answerBtn.failureAnswer {
   border: 1px solid #cc5140;
   color: #cc5140;
 }
+button.btn.require {
+  position: relative;
+}
 .require::before {
-  content: "Vui lòng lựa chọn đáp án trước khi nhấn trả lời!      ▶";
+  content: "Vui lòng chọn đáp án trước khi nhấn trả lời! ...     ▶";
   position: absolute;
-  top: -80px;
-  right: 2.5%;
-  width: 94%;
-  min-height: 77px;
+  top: -88px;
+  right: 4.5%;
+  width: 200%;
   padding: 16px;
-  text-align: justify;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
+  line-height: 1.6;
   border-radius: 6px;
   background: #e8ffed;
   font-family: system-ui;
   border: 1px solid #aadd3345;
   color: chocolate;
   z-index: 9999;
-  /* display: var(--dpn); */
-}
-
-#stopHere,
-#watchVideo_btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  user-select: none;
-}
-#watchVideo_btn > img {
-  width: 32px;
-  height: 32px;
-  margin-right: 6px;
 }
 
 .Modal_wrapper {
@@ -750,6 +735,7 @@ button.btn.answerBtn.failureAnswer {
   overflow-y: overlay;
   position: absolute;
   transition: background-color var(--transition-theme);
+  background: #ffffffba;
   width: 80%;
   z-index: 99;
 }
@@ -978,7 +964,7 @@ a.course_link {
 .Profile_menu-item:hover,
 .Courses_course-item:hover,
 .Profile_evaluate-item:hover,
-.TrackItem_wrapper:hover {
+.unDisable:hover {
   cursor: pointer;
   opacity: 0.6;
   background: var(--success-answer-background);
@@ -1333,7 +1319,8 @@ span.stars {
   left: 0;
   z-index: 9999;
   cursor: default;
-  background: rgb(110 110 110 / 13%);
+  background: #f6f7f96b;
+  backdrop-filter: blur(1px);
   color: var(--text-color-practice-disable) !important;
 }
 .TrackItem_disable {

@@ -9,7 +9,7 @@ body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-size: 1.6rem;
+  font-size: 62.5%;
   /* overflow: hidden; */
 }
 
@@ -87,6 +87,8 @@ img {
   --qr-modal-box-shadow: 8px 0px 16px rgba(35, 115, 159, 0.16);
   --qr-code-modal-border: linear-gradient(rgba(94, 187, 255, 0.4), rgba(161, 116, 255, 0.4));
   --qr-code-modal-background: #fbfdff;
+  --question-background: rgb(205 181 191 / 18%);
+  --btn-color: rgb(23 114 234 / 68%);
   --primary: #5ebbff;
   --dpn: none;
 }
