@@ -25,14 +25,7 @@ function FollowCourses(id, name, className, image, minReq, info) {
   };
 }
 
-var HTML_CSS_Chapter13 = [];
-var HTML_CSS_Chapter14 = [];
-var HTML_CSS_Chapter15 = [];
-var HTML_CSS_Chapter16 = [];
-var HTML_CSS_Chapter17 = [];
-var HTML_CSS_Chapter18 = [];
-var HTML_CSS_Chapter19 = [];
-var HTML_CSS_Chapter20 = [];
+
 var HTML_CSS_Chapter21 = [];
 var HTML_CSS_Chapter22 = [];
 var HTML_CSS_Chapter23 = [];
