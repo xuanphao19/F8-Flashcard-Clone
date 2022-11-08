@@ -1380,7 +1380,8 @@ span.stars {
   left: 0;
   z-index: 9999;
   cursor: default;
-  background: #f6f7f96b;
+  /* background: #f6f7f96b; */
+  background: #c4c6cb5c;
   backdrop-filter: blur(1px);
   color: var(--text-color-practice-disable) !important;
 }
