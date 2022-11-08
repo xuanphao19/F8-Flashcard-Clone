@@ -65,7 +65,7 @@ img {
   --placeholder-border: #212424;
   --transition-theme: 200ms;
   --code-color: #2e3441;
-  --code-background: #c9fffc;
+  --code-background: #c9fffca8;
   --modal-overlay-background: rgba(207, 210, 216, 0.8);
   --dialog-background: #fff;
   --dialog-border: 1px solid #bdc6dc;

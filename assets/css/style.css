@@ -31,21 +31,22 @@
 .Home_header::before {
   content: "Vui lòng chọn khóa học bạn muốn luyện tập. Sau đó Click Luyện tập để lựa chọn theo chương";
   position: absolute;
-  top: 75px;
+  top: 80px;
   left: 2.5%;
   width: 95%;
   min-height: 77px;
-  background: #a7ffbb;
-  padding: 16px;
-  border: 1px solid;
-  border-radius: 8px;
-  font-size: 1.8rem;
-  line-height: 1.6;
-  text-align: justify;
-  color: var(--disabled-button-color);
-  z-index: 99;
+  padding: 16px 32px;
+  font-size: 1.6rem;
+  font-weight: 200;
+  line-height: 2;
+  border-radius: 6px;
+  color: green;
   display: var(--dpn);
-  animation: fadeInLeft linear 0.3s, loading04 3s linear 0s infinite normal none running;
+  background: #e8ffed;
+  border: 1px solid #aadd3345;
+  animation: fadeInLeft linear 0.3s;
+  font-family: Arial, Helvetica, sans-serif;
+  z-index: 99;
 }
 .Home_header::after {
   content: "👆";
@@ -76,7 +77,7 @@
 
 .Home_course-name {
   color: var(--text-color);
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   line-height: 1.6;
   margin-left: 8px;
   margin-top: 2px;
@@ -333,8 +334,9 @@ span.today {
 span.suggestionsBack {
   display: table-cell;
   vertical-align: middle;
-  font-size: 2.2rem;
+  font-size: 1.6rem;
   font-weight: 400;
+  line-height: 1.6;
   font-style: italic;
   color: rgb(0 0 0);
   text-shadow: -1px 1px 0 #ffffff;
@@ -506,7 +508,7 @@ img.practice-image {
 }
 .HomeQuestion {
   min-width: 300px;
-  padding-bottom: 115px;
+  padding-bottom: 175px;
 }
 
 .HomeQuestionScroll {
@@ -531,36 +533,38 @@ img.practice-image {
   border-radius: 8px;
 }
 
-.answerPlan {
-  width: 100%;
+.answerPlanInfo {
   display: flex;
-  min-height: 48px;
-  padding: 6px 24px;
-  margin-bottom: 8px;
   align-items: center;
   justify-content: center;
-  color: var(--text-color-faq);
-  font-size: 1.3rem;
-  transition: 0.3s;
-  line-height: 1.5;
-  text-align: left;
+  width: 100%;
+  min-height: 48px;
+  margin-bottom: 8px;
   cursor: pointer;
-  overflow: auto;
-  border-radius: 8px;
+  transition: 0.2s;
+  border-radius: 6px;
   border: 1px solid transparent;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   background-color: var(--answer-background);
   box-shadow: -1px 2px 3px rgb(137 172 192 / 10%);
   user-select: none;
 }
 .answerPlan {
+  width: 100%;
+  height: 100%;
+  padding: 13px 16px;
+  font-size: 1.3rem;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--text-color-faq);
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
+
 .answerPlanActive,
 .answerPlan:hover,
 .header_left:hover {
   opacity: 0.7;
   background: #f0ffed52;
-  border: 1px solid #aadd3345;
+  /* border: 1px solid #aadd3345; */
   /* color: var(--answer-correct-border); */
 }
 .answerPlanActive {
@@ -580,18 +584,61 @@ img.practice-image {
   background: var(--question-background);
   box-shadow: -1px 2px 3px rgb(137 172 192 / 10%);
 }
-.QuestionInfo {
+
+.QuestionInfoWarp {
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 48px;
   width: 100%;
+}
+
+.QuestionInfo *,
+.QuestionInfo {
   cursor: default;
   font-size: 1.2rem;
   line-height: 1.5;
   text-align: left;
-  min-height: 48px;
-  padding: 6px 18px;
+  letter-spacing: 1px;
   color: var(--text-color-faq);
+  list-style: none;
+}
+.QuestionInfo {
+  padding: 6px 18px;
+}
+.explain code,
+.answerPlan code,
+.QuestionInfo code,
+.suggestionsBack code {
+  margin: 0 3px;
+  padding: 2px 6px;
+  font-size: 1.3rem;
+  border-radius: 3px;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  background: var(--code-background);
+}
+.control_btn .explain code {
+  padding: 0px 6px 1px;
+  font-size: 1.5rem;
+  margin: 0;
+}
+.explain span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 82px;
+  height: 30px;
+  margin-top: 5px;
+  margin-left: 75%;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  cursor: pointer;
+  background: var(--code-background);
+  border: 1px solid #a095954f;
+}
+.suggestionsBack code {
+  font-size: 1.6rem;
 }
 p.Question_hint {
   width: 100%;
@@ -645,7 +692,7 @@ p.Question_hint {
   font-size: 1.6rem;
   font-weight: 500;
   font-style: italic;
-  letter-spacing: 1.5px;
+  letter-spacing: 1.4px;
   color: var(--btn-color);
   border-radius: 4px;
   border: 1px solid transparent;
@@ -674,26 +721,39 @@ button.answerBtn.answerCheck {
 button.btn.answerBtn.failureAnswer {
   background: var(--failure-answer-background) !important;
   border: 1px solid #cc5140;
+  border-radius: 6px;
   color: #cc5140;
 }
 button.btn.require {
+  --contentInfo: "Vui lòng chọn đáp án trước khi nhấn trả lời!    ▶";
   position: relative;
 }
+.explain,
 .require::before {
-  content: "Vui lòng chọn đáp án trước khi nhấn trả lời! ...     ▶";
+  content: var(--contentInfo);
   position: absolute;
-  top: -88px;
+  bottom: 48px;
   right: 4.5%;
   width: 200%;
   padding: 16px;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
+  font-weight: 200;
   line-height: 1.6;
   border-radius: 6px;
+  color: green;
+  white-space: pre-wrap;
   background: #e8ffed;
-  font-family: system-ui;
+  font-family: Arial, Helvetica, sans-serif;
   border: 1px solid #aadd3345;
-  color: chocolate;
   z-index: 9999;
+}
+.explain {
+  bottom: 119px;
+  right: 4%;
+  width: 92%;
+  font-size: 1.3rem;
+  text-align: justify;
+  display: var(--dpn);
 }
 
 .Modal_wrapper {
@@ -1070,6 +1130,7 @@ p.TrackItem {
   color: #326447d4;
   justify-content: center;
   align-items: center;
+  font-size: 1.6rem;
   user-select: none;
   cursor: default;
 }
