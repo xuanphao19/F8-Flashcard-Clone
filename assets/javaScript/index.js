@@ -54,7 +54,7 @@ function App(selector) {
           eleWait.style.setProperty("--dpn", "none");
           homeCourseName.textContent = tgt.textContent;
           if (!$.querySelector(".TrackItem_wrapper")) {
-            CreateCourses(HTML_CSS, TrackListContent, addClassDisable);
+            CreateCourses(HTML_CSS, TrackListContent);
           }
           closeModule(moduleElement);
           unCheckedAll();
@@ -115,7 +115,7 @@ function App(selector) {
 
   let itemsLength = 0;
   const TrackListContent = $.querySelector(".TrackList_content");
-  function CreateCourses(Obj, TrackListContent, callback) {
+  function CreateCourses(Obj, TrackListContent) {
     const items = Obj.info.map((item, i) => {
       i++;
       let chapter = document.createElement("div");
@@ -133,16 +133,6 @@ function App(selector) {
       return chapter;
     });
     TrackListContent.lastChild.after(...items);
-    callback();
-  }
-
-  let j = 0;
-  let unChecked;
-  let unDisableAll;
-  let trackItemWrap;
-  let trackItemWrapper;
-  let TrackListActive = $.querySelector(".TrackList_active");
-  function addClassDisable() {
     trackItemWrapper = $.querySelectorAll(".TrackItem_wrapper");
     trackItemWrapper.forEach((iterator) => {
       let disableQuest = iterator.querySelector(".sumQuestion").textContent;
@@ -155,6 +145,13 @@ function App(selector) {
     unDisableAll = $.querySelectorAll(".unDisable");
     itemsLength = unDisableAll.length;
   }
+
+  let j = 0;
+  let unChecked;
+  let unDisableAll;
+  let trackItemWrap;
+  let trackItemWrapper;
+  let TrackListActive = $.querySelector(".TrackList_active");
   function getParent(element, selector) {
     while (element.parentElement) {
       if (element.parentElement.matches(selector)) {
@@ -170,7 +167,9 @@ function App(selector) {
     } else {
       trackItemWrap = getParent(tag, ".TrackItem_wrapper");
     }
-    changeChecked(trackItemWrap);
+    if (trackItemWrap && trackItemWrap.matches(".unDisable")) {
+      changeChecked(trackItemWrap);
+    }
   });
   function changeChecked(trackItems) {
     unChecked = trackItems.querySelector(".unChecked");
@@ -183,6 +182,7 @@ function App(selector) {
       unChecked.classList.add("onChecked");
       j++;
     }
+
     if (j === itemsLength) {
       TrackListActive.classList.add("TrackList_activeAll");
     } else {
@@ -443,7 +443,7 @@ function App(selector) {
     }
     if (answerTrue === true) {
       answerBtn.textContent = "❤️ 🥇 😍";
-      explain.innerHTML = `Chính xác! ${suggestionsBefore}  <span>Close!</span>`;
+      explain.innerHTML = `Chính xác! ${suggestionsBefore} <span>Close!</span>`;
       explain.style.display = "block";
       answerBtn.classList.remove("failureAnswer");
       answerBtn.style.animation = "loading04 1.3s infinite linear";
