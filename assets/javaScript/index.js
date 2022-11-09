@@ -54,7 +54,7 @@ function App(selector) {
           eleWait.style.setProperty("--dpn", "none");
           homeCourseName.textContent = tgt.textContent;
           if (!$.querySelector(".TrackItem_wrapper")) {
-            CreateCourses(HTML_CSS, TrackListContent, trackItem);
+            CreateCourses(HTML_CSS, TrackListContent, addClassDisable);
           }
           closeModule(moduleElement);
           unCheckedAll();
@@ -136,12 +136,13 @@ function App(selector) {
     callback();
   }
 
+  let j = 0;
   let unChecked;
   let unDisableAll;
+  let trackItemWrap;
   let trackItemWrapper;
   let TrackListActive = $.querySelector(".TrackList_active");
-  let j = 0;
-  function trackItem() {
+  function addClassDisable() {
     trackItemWrapper = $.querySelectorAll(".TrackItem_wrapper");
     trackItemWrapper.forEach((iterator) => {
       let disableQuest = iterator.querySelector(".sumQuestion").textContent;
@@ -149,40 +150,55 @@ function App(selector) {
         iterator.classList.add("TrackItem_disable");
       } else {
         iterator.classList.add("unDisable");
-        iterator.addEventListener("click", () => {
-          const unChecks = $.querySelectorAll(".unChecked");
-          unChecked = iterator.querySelector(".unChecked");
-          if (unChecked.matches(".onChecked")) {
-            unChecked.classList.remove("onChecked");
-            iterator.classList.remove("TrackItem_wrapper-active");
-            j--;
-          } else {
-            iterator.classList.add("TrackItem_wrapper-active");
-            unChecked.classList.add("onChecked");
-            j++;
-          }
-          if (j === itemsLength) {
-            TrackListActive.classList.add("TrackList_activeAll");
-          } else {
-            TrackListActive.classList.remove("TrackList_activeAll");
-          }
-          for (const item of unChecks) {
-            if (item.matches(".onChecked")) {
-              TrackListActive.classList.add("TrackList_Checked");
-              btnStart.classList.add("start");
-              return;
-            } else {
-              TrackListActive.classList.remove("TrackList_Checked");
-            }
-          }
-          btnStart.classList.remove("start");
-        });
       }
     });
     unDisableAll = $.querySelectorAll(".unDisable");
     itemsLength = unDisableAll.length;
   }
-
+  function getParent(element, selector) {
+    while (element.parentElement) {
+      if (element.parentElement.matches(selector)) {
+        return element.parentElement;
+      }
+      element = element.parentElement;
+    }
+  }
+  TrackListContent.addEventListener("click", function (e) {
+    let tag = e.target;
+    if (tag.matches(".TrackItem_wrapper")) {
+      trackItemWrap = tag;
+    } else {
+      trackItemWrap = getParent(tag, ".TrackItem_wrapper");
+    }
+    changeChecked(trackItemWrap);
+  });
+  function changeChecked(trackItems) {
+    unChecked = trackItems.querySelector(".unChecked");
+    if (unChecked.matches(".onChecked")) {
+      unChecked.classList.remove("onChecked");
+      trackItems.classList.remove("TrackItem_wrapper-active");
+      j--;
+    } else {
+      trackItems.classList.add("TrackItem_wrapper-active");
+      unChecked.classList.add("onChecked");
+      j++;
+    }
+    if (j === itemsLength) {
+      TrackListActive.classList.add("TrackList_activeAll");
+    } else {
+      TrackListActive.classList.remove("TrackList_activeAll");
+    }
+    for (const item of unDisableAll) {
+      if (item.querySelector(".unChecked").matches(".onChecked")) {
+        TrackListActive.classList.add("TrackList_Checked");
+        btnStart.classList.add("start");
+        return;
+      } else {
+        TrackListActive.classList.remove("TrackList_Checked");
+      }
+    }
+    btnStart.classList.remove("start");
+  }
   function onCheckedAll() {
     TrackListActive.classList.add("TrackList_activeAll");
     for (const unDisable of unDisableAll) {
@@ -427,7 +443,7 @@ function App(selector) {
     }
     if (answerTrue === true) {
       answerBtn.textContent = "❤️ 🥇 😍";
-      explain.innerHTML = `Chính xác! ${suggestionsBefore} <br> <span>Close!</span>`;
+      explain.innerHTML = `Chính xác! ${suggestionsBefore}  <span>Close!</span>`;
       explain.style.display = "block";
       answerBtn.classList.remove("failureAnswer");
       answerBtn.style.animation = "loading04 1.3s infinite linear";
