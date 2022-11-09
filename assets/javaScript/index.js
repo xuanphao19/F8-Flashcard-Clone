@@ -536,5 +536,8 @@ function App(selector) {
     calendarClose.style.display = "block";
     suggestionsBack.textContent = "";
     answerBtn.style = "";
+    stars = ["⭐"];
+    explain.style.display = "none";
+    contentAnswer.innerHTML = `<span class="stars">${stars}</span>`;
   };
 }
