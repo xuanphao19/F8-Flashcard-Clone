@@ -37,10 +37,10 @@
   min-height: 77px;
   padding: 16px 32px;
   font-size: 1.6rem;
-  font-weight: 200;
+  font-weight: 400;
   line-height: 2;
   border-radius: 6px;
-  color: green;
+  color: #006e00;
   display: var(--dpn);
   background: #e8ffed;
   border: 1px solid #aadd3345;
@@ -342,6 +342,9 @@ span.suggestionsBack {
   text-shadow: -1px 1px 0 #ffffff;
   z-index: 9;
 }
+.suggestionsBack a {
+  font-size: 1.6rem;
+}
 .flip-card-back .introVideo {
   display: none;
 }
@@ -637,6 +640,9 @@ img.practice-image {
   background: var(--code-background);
   border: 1px solid #a095954f;
 }
+.explain a {
+  font-size: 1.2rem;
+}
 .suggestionsBack code {
   font-size: 1.6rem;
 }
@@ -737,10 +743,10 @@ button.btn.require {
   width: 200%;
   padding: 16px;
   font-size: 1.4rem;
-  font-weight: 200;
+  font-weight: 400;
   line-height: 1.6;
   border-radius: 6px;
-  color: green;
+  color: #006e00;
   white-space: pre-wrap;
   background: #e8ffed;
   font-family: Arial, Helvetica, sans-serif;
