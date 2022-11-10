@@ -2,7 +2,6 @@ function App(selector) {
   var $ = document.querySelector(selector);
   let moduleElement = $.querySelector(".Modal_Courses");
   let CoursesMenu = $.querySelector(".header_left");
-
   (() => {
     CoursesMenu.addEventListener("click", () => {
       moduleElement.removeEventListener("animationend", listenerClose);
@@ -24,7 +23,6 @@ function App(selector) {
     eleWait.style.setProperty("--dpn", "none");
     closeModule(moduleElement);
   });
-
   function listenerClose() {
     this.style.animation = "";
     this.style.display = "none";
@@ -37,7 +35,6 @@ function App(selector) {
   let homeCourseName = $.querySelector(".Home_course-name");
   let eleWait = $.querySelector("#JavaScript_Pro");
   let modalTrackList = $.querySelector(".Modal_TrackList");
-
   let CoursesId;
   (function coursesItem() {
     coursesCourseItem.addEventListener("click", function (e) {
@@ -64,7 +61,6 @@ function App(selector) {
     moduleElement.removeEventListener("animationend", listenerClose);
   })();
 
-  // Click nút luyện tập
   var HTML_CSS = new FollowCourses("HTML_CSS_Pro", "Khóa HTML CSS Pro", "Courses_item", "", 10, HTML_CSS_InFor);
   let homePractice = $.querySelector(".Home_practice");
   let homeHeader = $.querySelector(".Home_header");
@@ -87,7 +83,6 @@ function App(selector) {
       flipCardInner.classList.remove("is-flipped");
     }
   });
-
   let headerRight = $.querySelector(".header_right");
   let profileClose = $.querySelector(".Profile_close");
   let modalProfile = $.querySelector(".Modal_Profile");
@@ -112,7 +107,6 @@ function App(selector) {
     listClose();
     unCheckedAll();
   });
-
   let itemsLength = 0;
   const TrackListContent = $.querySelector(".TrackList_content");
   function CreateCourses(Obj, TrackListContent) {
@@ -127,7 +121,7 @@ function App(selector) {
                                 <span class="sumQuestion">${item.ArrLength}</span>
                               </div>
                             </div>
-                            <div class="TrackItem_right"CreateCourses>
+                            <div class="TrackItem_right">
                               <div class="unChecked"></div>
                             </div>`;
       return chapter;
@@ -145,7 +139,6 @@ function App(selector) {
     unDisableAll = $.querySelectorAll(".unDisable");
     itemsLength = unDisableAll.length;
   }
-
   let j = 0;
   let unChecked;
   let unDisableAll;
@@ -182,7 +175,6 @@ function App(selector) {
       unChecked.classList.add("onChecked");
       j++;
     }
-
     if (j === itemsLength) {
       TrackListActive.classList.add("TrackList_activeAll");
     } else {
@@ -256,13 +248,12 @@ function App(selector) {
       calendarClose.style.display = "none";
     }
   };
-
   let listQuestion = [];
   let lengthQ;
   function createQuestionUI(listId, Obj) {
     Obj.info.map((item) => {
       for (let id of listId) {
-        if (item.id === id) {
+        if (item.id === id && !(item.info === [])) {
           listQuestion = [...listQuestion, ...item.info];
         }
       }
@@ -275,26 +266,25 @@ function App(selector) {
     listClose();
     return lengthQ, listQuestion;
   }
-
-  let randomNo = [];
+  let randomNum = [];
   let RandomQuestion;
   function createRandomQuestion(length, listQues) {
     if (length > 0) {
       let n = Math.floor(Math.random() * length);
-      let check = randomNo.includes(n);
+      let check = randomNum.includes(n);
       if (!check) {
-        randomNo.push(n);
+        randomNum.push(n);
       } else {
         while (check) {
           n = Math.floor(Math.random() * length);
-          check = randomNo.includes(n);
+          check = randomNum.includes(n);
           if (!check) {
-            randomNo.push(n);
+            randomNum.push(n);
           }
         }
       }
-      if (randomNo.length === length) {
-        randomNo = [];
+      if (randomNum.length === length) {
+        randomNum = [];
       }
       RandomQuestion = listQues[n];
     } else {
@@ -303,7 +293,6 @@ function App(selector) {
     renderUiQuestion(RandomQuestion);
     return RandomQuestion;
   }
-
   let homeContentContinue = $.querySelector(".Home_content-continue");
   let HomeQuestion = $.querySelector(".HomeQuestionScroll");
   let stopHere = $.querySelector("#stopHere");
@@ -315,7 +304,6 @@ function App(selector) {
   let suggestionsBefore = "";
   let stars = ["⭐"];
   function renderUiQuestion(RandomQ) {
-    QuestionInfo.innerHTML = RandomQ.Question;
     QuestionHint.innerHTML = RandomQ.Requirements;
     suggestionsBefore = RandomQ.suggestions;
     suggestionsBack.innerHTML = suggestionsBefore;
@@ -324,26 +312,37 @@ function App(selector) {
     homeContentContinue.style.display = "none";
     HomeQuestion.style.display = "block";
     let correctAnswerArr = RandomQ.correctAnswer;
+    if (RandomQ.Question === "") {
+      QuestionInfo.innerHTML = "Hệ thống câu hỏi đang được cập nhật.<br>\
+    Cảm ơn sự tin tưởng và đồng hành của bạn!";
+      QuestionHint.innerHTML = "Click Dừng luyện tập để về trang chủ!";
+    } else {
+      QuestionInfo.innerHTML = RandomQ.Question;
+    }
     if (!(correctAnswerArr === [])) {
       const correctAnswer = correctAnswerArr.map((correctAn, i) => {
-        let answerAns = document.createElement("div");
-        answerAns.classList = `answerPlanInfo`;
-        answerAns.innerHTML = `<div class="answerPlan correctAnswer" id = "correctAnswer${i}">
+        if (!(correctAn === "")) {
+          let answerAns = document.createElement("div");
+          answerAns.classList = `answerPlanInfo`;
+          answerAns.innerHTML = `<div class="answerPlan correctAnswer" id = "correctAnswer${i}">
                                     ${correctAn}
-                               </div>`;
-        return answerAns;
+                                    </div>`;
+          return answerAns;
+        }
       });
       contentAnswer.lastChild.after(...correctAnswer);
     }
     correctAnswerLength = contentAnswer.querySelectorAll(".correctAnswer").length;
     if (!(RandomQ.answerPlan === [])) {
       const answerPl = RandomQ.answerPlan.map((answer, i) => {
-        let answerEle = document.createElement("div");
-        answerEle.classList = `answerPlanInfo`;
-        answerEle.innerHTML = `<div class="answerPlan" id = "answerPlan${i}">
+        if (!(answer === "")) {
+          let answerEle = document.createElement("div");
+          answerEle.classList = `answerPlanInfo`;
+          answerEle.innerHTML = `<div class="answerPlan" id = "answerPlan${i}">
                                     ${answer}
                                </div>`;
-        return answerEle;
+          return answerEle;
+        }
       });
       contentAnswer.lastChild.after(...answerPl);
     }
@@ -360,11 +359,9 @@ function App(selector) {
     let scream = $.querySelector("#scream");
     scream.src = `./assets/img/${pathImg[OrderImg]}`;
   }
-
   let answerBtn = $.querySelector(".answerBtn");
   let suggestionsBtn = $.querySelector("#suggestions_btn");
   let flipCardInner = $.querySelector(".flip-card-inner");
-
   function stopPracticing() {
     if (flipCardInner.matches(".is-flipped")) {
       flipCardInner.classList.remove("is-flipped");
@@ -378,43 +375,40 @@ function App(selector) {
   }
   let y = 0;
   contentAnswer.addEventListener("click", function (e) {
-    let AnswerAll = contentAnswer.querySelectorAll(".answerPlan");
+    let AnswerAll = contentAnswer.querySelectorAll(".answerPlanInfo");
     let EleTarget = e.target;
     answerBtn.style = "";
     answerBtn.textContent = "Trả Lời";
     answerBtn.classList.remove("require");
     answerBtn.classList.remove("failureAnswer");
     explain.style.display = "none";
-    if (EleTarget.closest(".answerPlan")) {
-      if (EleTarget.nodeName === "CODE") {
-        let targetParentElement = EleTarget.parentElement;
-        if (!targetParentElement.matches(".answerPlanActive")) {
-          targetParentElement.classList.add("answerPlanActive");
-          y++;
-        } else {
-          targetParentElement.classList.remove("answerPlanActive");
-          y--;
-        }
+    if (EleTarget.matches(".answerPlanInfo")) {
+      if (!EleTarget.matches(".answerPlanActive")) {
+        EleTarget.classList.add("answerPlanActive");
+        y++;
       } else {
-        if (!EleTarget.matches(".answerPlanActive")) {
-          EleTarget.classList.add("answerPlanActive");
-          y++;
-        } else {
-          EleTarget.classList.remove("answerPlanActive");
-          y--;
-        }
+        EleTarget.classList.remove("answerPlanActive");
+        y--;
       }
-      if (y === 0) {
-        answerBtn.classList.remove("answerCheck");
+    } else {
+      let targetParentElement = getParent(EleTarget, ".answerPlanInfo");
+      if (!targetParentElement.matches(".answerPlanActive")) {
+        targetParentElement.classList.add("answerPlanActive");
+        y++;
       } else {
-        answerBtn.classList.add("answerCheck");
+        targetParentElement.classList.remove("answerPlanActive");
+        y--;
       }
+    }
+    if (y === 0) {
+      answerBtn.classList.remove("answerCheck");
+    } else {
+      answerBtn.classList.add("answerCheck");
     }
     AnswerAll.forEach((element) => {
       element.classList.remove("failureAnswer");
     });
   });
-
   let answerTrue = false;
   let selectorAnswerAll;
   let answerSelectorLength = 0;
@@ -424,7 +418,7 @@ function App(selector) {
     if (selectorAnswerAll) {
       let answerValue;
       selectorAnswerAll.forEach((answerSelector) => {
-        if (answerSelector.matches(".correctAnswer")) {
+        if (answerSelector.querySelector(".answerPlan").matches(".correctAnswer")) {
           answerValue = true;
         }
       });
