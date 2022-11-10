@@ -88,7 +88,7 @@ img {
   --qr-code-modal-border: linear-gradient(rgba(94, 187, 255, 0.4), rgba(161, 116, 255, 0.4));
   --qr-code-modal-background: #fbfdff;
   --question-background: rgb(205 181 191 / 18%);
-  --btn-color: rgb(23 114 234 / 68%);
+  --btn-color: #1772ea;
   --primary: #5ebbff;
   --dpn: none;
 }
