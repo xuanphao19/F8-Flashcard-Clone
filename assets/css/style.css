@@ -339,9 +339,9 @@ span.today {
 span.suggestionsBack {
   display: table-cell;
   vertical-align: middle;
-  font-size: 1.6rem;
+  font-size: 1.3rem;
   font-weight: 400;
-  line-height: 1.6;
+  line-height: 1.4;
   font-style: italic;
   color: rgb(0 0 0);
   text-shadow: -1px 1px 0 #ffffff;
@@ -613,7 +613,6 @@ img.practice-image {
 }
 .QuestionInfo {
   padding: 6px 18px;
-  text-align: center;
 }
 .QuestionInfo * {
   padding-left: 5px;
@@ -643,6 +642,14 @@ img.practice-image {
   text-align: left;
   white-space: pre-wrap;
   -webkit-white-space: pre-wrap;
+}
+.answerPlan tr td code {
+  padding: 2px 0;
+  margin: 0 2px;
+  margin-left: 10px;
+}
+.answerPlan td {
+  text-align: left;
 }
 .answerPlan pre,
 .QuestionInfo pre {
