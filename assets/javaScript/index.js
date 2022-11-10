@@ -348,8 +348,9 @@ function App(selector) {
     }
     if (!RandomQ.Requirements.includes("MultipleAnswers")) {
       let randomAnswer = contentAnswer.querySelectorAll(".answerPlanInfo");
+      console.log(randomAnswer);
       randomAnswer.forEach((element) => {
-        let OrderFlex = Math.floor(Math.random() * 7);
+        let OrderFlex = Math.floor(Math.random() * 22);
         element.style.order = `${OrderFlex}`;
       });
     }
