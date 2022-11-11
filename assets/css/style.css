@@ -859,11 +859,12 @@ a.course_link {
 }
 
 .Courses_main-title {
-  color: var(--text-color-heading-courses);
   font-weight: 600;
   line-height: 1.6;
+  font-size: 1.4rem;
   text-align: center;
-  margin: 0 0 18px;
+  margin: 0 0 8px;
+  color: var(--answer-correct-border);
   font-family: Montserrat, sans-serif !important;
 }
 
@@ -1283,7 +1284,7 @@ p.TrackItem {
   z-index: 999;
 }
 
-.Button_wrapper,
+.btnStart,
 .TrackList_make-all {
   width: 100%;
   height: 48px;
@@ -1314,7 +1315,7 @@ p.TrackItem {
   background: var(--success-answer-background);
 }
 
-.Button_wrapper:hover,
+.btnStart:hover,
 .TrackList_make-all:hover {
   transform: scale(1.01);
   opacity: 0.8;
@@ -1324,7 +1325,7 @@ p.TrackItem {
   background: var(--success-answer-background);
 }
 
-button.Button_wrapper.font-lato.start {
+button.btnStart.font-lato.start {
   background-color: var(--blue-color);
   transition: background-color 0.3s;
   color: rgb(255, 255, 255);
