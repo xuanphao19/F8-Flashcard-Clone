@@ -2,6 +2,7 @@ function App(selector) {
   var $ = document.querySelector(selector);
   let moduleElement = $.querySelector(".Modal_Courses");
   let CoursesMenu = $.querySelector(".header_left");
+  let HomeWrapper = $.querySelector(".Home_wrapper");
   (() => {
     CoursesMenu.addEventListener("click", () => {
       moduleElement.removeEventListener("animationend", listenerClose);
@@ -51,7 +52,7 @@ function App(selector) {
           eleWait.style.setProperty("--dpn", "none");
           homeCourseName.textContent = tgt.textContent;
           if (!$.querySelector(".TrackItem_wrapper")) {
-            CreateCourses(HTML_CSS, TrackListContent);
+            CreateCourses(HTML_CSS, TrackListContent, setDisableQuest);
           }
           closeModule(moduleElement);
           unCheckedAll();
@@ -61,7 +62,7 @@ function App(selector) {
     moduleElement.removeEventListener("animationend", listenerClose);
   })();
 
-  var HTML_CSS = new FollowCourses("HTML_CSS_Pro", "Khóa HTML CSS Pro", "Courses_item", "", 10, HTML_CSS_InFor);
+  // var HTML_CSS = new FollowCourses("HTML_CSS_Pro", "Khóa HTML CSS Pro", "Courses_item", "", 10, HTML_CSS_InFor);
   let homePractice = $.querySelector(".Home_practice");
   let homeHeader = $.querySelector(".Home_header");
   let TrackListHeaderWrapper = $.querySelector(".TrackList_header-wrapper");
@@ -74,6 +75,7 @@ function App(selector) {
       FooterWrapper.style.display = "block";
       modalTrackList.style.display = "block";
       TrackListHeaderWrapper.style.display = "block";
+      HomeWrapper.style.display = "none";
     } else {
       // CoursesMenu.style.animation = "loading04 0.3s infinite linear";
       CoursesMenu.style.setProperty("animation", "loading04 0.3s infinite linear");
@@ -104,12 +106,13 @@ function App(selector) {
   }
   let TrackListClose = $.querySelector(".TrackList_close");
   TrackListClose.addEventListener("click", () => {
+    HomeWrapper.style.display = "flex";
     listClose();
     unCheckedAll();
   });
   let itemsLength = 0;
   const TrackListContent = $.querySelector(".TrackList_content");
-  function CreateCourses(Obj, TrackListContent) {
+  function CreateCourses(Obj, TrackListContent, setDisableQuest) {
     const items = Obj.info.map((item, i) => {
       i++;
       let chapter = document.createElement("div");
@@ -118,7 +121,7 @@ function App(selector) {
       chapter.innerHTML = ` <div class="TrackItem_left">
                               <span class="TrackItem_title">${i}. ${item.name}</span>
                               <div class="TrackItem_completed">
-                                <span class="sumQuestion">${item.ArrLength}</span>
+                                <span class="sumQuestion">${item.info.length}</span>
                               </div>
                             </div>
                             <div class="TrackItem_right">
@@ -128,6 +131,13 @@ function App(selector) {
     });
     TrackListContent.lastChild.after(...items);
     trackItemWrapper = $.querySelectorAll(".TrackItem_wrapper");
+    if (trackItemWrapper) {
+      setDisableQuest(trackItemWrapper);
+    }
+    unDisableAll = $.querySelectorAll(".unDisable");
+    itemsLength = unDisableAll.length;
+  }
+  function setDisableQuest(trackItemWrapper) {
     trackItemWrapper.forEach((iterator) => {
       let disableQuest = iterator.querySelector(".sumQuestion").textContent;
       if (disableQuest == 0) {
@@ -135,9 +145,18 @@ function App(selector) {
       } else {
         iterator.classList.add("unDisable");
       }
+      iterator.addEventListener("click", function (e) {
+        let tag = e.target;
+        if (tag.matches(".TrackItem_wrapper")) {
+          trackItemWrap = tag;
+        } else {
+          trackItemWrap = getParent(tag, ".TrackItem_wrapper");
+        }
+        if (trackItemWrap && trackItemWrap.matches(".unDisable")) {
+          changeChecked(trackItemWrap);
+        }
+      });
     });
-    unDisableAll = $.querySelectorAll(".unDisable");
-    itemsLength = unDisableAll.length;
   }
   let j = 0;
   let unChecked;
@@ -153,17 +172,6 @@ function App(selector) {
       element = element.parentElement;
     }
   }
-  TrackListContent.addEventListener("click", function (e) {
-    let tag = e.target;
-    if (tag.matches(".TrackItem_wrapper")) {
-      trackItemWrap = tag;
-    } else {
-      trackItemWrap = getParent(tag, ".TrackItem_wrapper");
-    }
-    if (trackItemWrap && trackItemWrap.matches(".unDisable")) {
-      changeChecked(trackItemWrap);
-    }
-  });
   function changeChecked(trackItems) {
     unChecked = trackItems.querySelector(".unChecked");
     if (unChecked.matches(".onChecked")) {
@@ -233,7 +241,7 @@ function App(selector) {
       unCheckedAll();
     }
   };
-  let btnStart = $.querySelector(".Button_wrapper");
+  let btnStart = $.querySelector(".btnStart");
   let calendarClose = $.querySelector("#calendar");
   btnStart.onclick = function () {
     let onCheckId = [];
@@ -246,6 +254,7 @@ function App(selector) {
       createQuestionUI(onCheckId, HTML_CSS);
       homeHeader.style.display = "none";
       calendarClose.style.display = "none";
+      HomeWrapper.style.display = "flex";
     }
   };
   let listQuestion = [];
@@ -259,8 +268,8 @@ function App(selector) {
       }
     });
     lengthQ = listQuestion.length;
-    createRandomQuestion(lengthQ, listQuestion);
     answerBtn.textContent = "Trả lời";
+    createRandomQuestion(lengthQ, listQuestion);
     answerBtn.classList.remove("failureAnswer");
     answerBtn.classList.remove("answerCheck");
     listClose();
@@ -313,10 +322,18 @@ function App(selector) {
     HomeQuestion.style.display = "block";
     let correctAnswerArr = RandomQ.correctAnswer;
     if (RandomQ.Question === "") {
-      QuestionInfo.innerHTML = "Hệ thống câu hỏi đang được cập nhật.<br>\
-    Cảm ơn sự tin tưởng và đồng hành của bạn!";
-      QuestionHint.innerHTML = "Click Dừng luyện tập để về trang chủ!";
+      QuestionInfo.innerHTML =
+        "Hệ thống câu hỏi đang được cập nhật.<br>\
+        Click Quay lại để về danh mục câu hỏi!<br>\
+        Cảm ơn sự tin tưởng và đồng hành của bạn!";
+      answerBtn.textContent = "Quay lại ↩";
+      QuestionInfo.style.textAlign = "center";
+      QuestionInfo.style.fontSize = "1.8rem";
+      QuestionHint.innerHTML = "Click Quay lại để về danh mục câu hỏi!";
     } else {
+      QuestionInfo.style.fontSize = "1.2rem";
+      QuestionInfo.style.textAlign = "left";
+      answerBtn.textContent = "Trả lời";
       QuestionInfo.innerHTML = RandomQ.Question;
     }
     if (!(correctAnswerArr === [])) {
@@ -348,7 +365,7 @@ function App(selector) {
     }
     if (!RandomQ.Requirements.includes("MultipleAnswers")) {
       let randomAnswer = contentAnswer.querySelectorAll(".answerPlanInfo");
-      console.log(randomAnswer);
+      // console.log(randomAnswer);
       randomAnswer.forEach((element) => {
         let OrderFlex = Math.floor(Math.random() * 22);
         element.style.order = `${OrderFlex}`;
@@ -393,12 +410,14 @@ function App(selector) {
       }
     } else {
       let targetParentElement = getParent(EleTarget, ".answerPlanInfo");
-      if (!targetParentElement.matches(".answerPlanActive")) {
-        targetParentElement.classList.add("answerPlanActive");
-        y++;
-      } else {
-        targetParentElement.classList.remove("answerPlanActive");
-        y--;
+      if (targetParentElement) {
+        if (!targetParentElement.matches(".answerPlanActive")) {
+          targetParentElement.classList.add("answerPlanActive");
+          y++;
+        } else {
+          targetParentElement.classList.remove("answerPlanActive");
+          y--;
+        }
       }
     }
     if (y === 0) {
@@ -469,6 +488,13 @@ function App(selector) {
     } else {
       let starEle = $.querySelector(".stars");
       if (y === 0) {
+        if (answerBtn.textContent === "Quay lại ↩") {
+          FooterWrapper.style.display = "block";
+          modalTrackList.style.display = "block";
+          TrackListHeaderWrapper.style.display = "block";
+          HomeWrapper.style.display = "none";
+          return;
+        }
         if (answerBtn.matches(".require")) {
           answerBtn.classList.remove("require");
         } else {
