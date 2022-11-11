@@ -106,7 +106,6 @@ function App(selector) {
   }
   let TrackListClose = $.querySelector(".TrackList_close");
   TrackListClose.addEventListener("click", () => {
-    HomeWrapper.style.display = "flex";
     listClose();
     unCheckedAll();
   });
@@ -268,8 +267,8 @@ function App(selector) {
       }
     });
     lengthQ = listQuestion.length;
-    answerBtn.textContent = "Trả lời";
     createRandomQuestion(lengthQ, listQuestion);
+    answerBtn.textContent = "Trả lời";
     answerBtn.classList.remove("failureAnswer");
     answerBtn.classList.remove("answerCheck");
     listClose();
@@ -322,18 +321,14 @@ function App(selector) {
     HomeQuestion.style.display = "block";
     let correctAnswerArr = RandomQ.correctAnswer;
     if (RandomQ.Question === "") {
-      QuestionInfo.innerHTML =
-        "Hệ thống câu hỏi đang được cập nhật.<br>\
-        Click Quay lại để về danh mục câu hỏi!<br>\
-        Cảm ơn sự tin tưởng và đồng hành của bạn!";
-      answerBtn.textContent = "Quay lại ↩";
+      QuestionInfo.innerHTML = "Hệ thống câu hỏi đang được cập nhật.<br>\
+    Cảm ơn sự tin tưởng và đồng hành của bạn!";
       QuestionInfo.style.textAlign = "center";
       QuestionInfo.style.fontSize = "1.8rem";
       QuestionHint.innerHTML = "Click Quay lại để về danh mục câu hỏi!";
     } else {
       QuestionInfo.style.fontSize = "1.2rem";
       QuestionInfo.style.textAlign = "left";
-      answerBtn.textContent = "Trả lời";
       QuestionInfo.innerHTML = RandomQ.Question;
     }
     if (!(correctAnswerArr === [])) {
@@ -488,13 +483,6 @@ function App(selector) {
     } else {
       let starEle = $.querySelector(".stars");
       if (y === 0) {
-        if (answerBtn.textContent === "Quay lại ↩") {
-          FooterWrapper.style.display = "block";
-          modalTrackList.style.display = "block";
-          TrackListHeaderWrapper.style.display = "block";
-          HomeWrapper.style.display = "none";
-          return;
-        }
         if (answerBtn.matches(".require")) {
           answerBtn.classList.remove("require");
         } else {
