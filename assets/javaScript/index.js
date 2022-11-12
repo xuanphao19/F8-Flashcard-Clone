@@ -135,6 +135,7 @@ function App(selector) {
     }
     unDisableAll = $.querySelectorAll(".unDisable");
     itemsLength = unDisableAll.length;
+    addChecked();
   }
   function setDisableQuest(trackItemWrapper) {
     trackItemWrapper.forEach((iterator) => {
@@ -144,17 +145,6 @@ function App(selector) {
       } else {
         iterator.classList.add("unDisable");
       }
-      iterator.addEventListener("click", function (e) {
-        let tag = e.target;
-        if (tag.matches(".TrackItem_wrapper")) {
-          trackItemWrap = tag;
-        } else {
-          trackItemWrap = getParent(tag, ".TrackItem_wrapper");
-        }
-        if (trackItemWrap && trackItemWrap.matches(".unDisable")) {
-          changeChecked(trackItemWrap);
-        }
-      });
     });
   }
   let j = 0;
@@ -169,6 +159,21 @@ function App(selector) {
         return element.parentElement;
       }
       element = element.parentElement;
+    }
+  }
+  function addChecked() {
+    for (var trackItemEle of unDisableAll) {
+      trackItemEle.addEventListener("click", function (e) {
+        let tag = e.target;
+        if (tag.matches(".TrackItem_wrapper")) {
+          trackItemWrap = tag;
+        } else {
+          trackItemWrap = getParent(tag, ".TrackItem_wrapper");
+        }
+        if (trackItemWrap && trackItemWrap.matches(".unDisable")) {
+          changeChecked(trackItemWrap);
+        }
+      });
     }
   }
   function changeChecked(trackItems) {
@@ -251,9 +256,9 @@ function App(selector) {
     }
     if (btnStart.matches(".start")) {
       createQuestionUI(onCheckId, HTML_CSS);
+      HomeWrapper.style.display = "flex";
       homeHeader.style.display = "none";
       calendarClose.style.display = "none";
-      HomeWrapper.style.display = "flex";
     }
   };
   let listQuestion = [];
@@ -303,7 +308,6 @@ function App(selector) {
   }
   let homeContentContinue = $.querySelector(".Home_content-continue");
   let HomeQuestion = $.querySelector(".HomeQuestionScroll");
-  let stopHere = $.querySelector("#stopHere");
   let contentAnswer = $.querySelector(".contentAnswer");
   let QuestionInfo = $.querySelector(".QuestionInfo");
   let QuestionHint = $.querySelector(".Question_hint");
@@ -320,6 +324,7 @@ function App(selector) {
     homeContentContinue.style.display = "none";
     HomeQuestion.style.display = "block";
     let correctAnswerArr = RandomQ.correctAnswer;
+    redrawCanvas(randomOrder, pathImg);
     if (RandomQ.Question === "") {
       QuestionInfo.innerHTML = "Hệ thống câu hỏi đang được cập nhật.<br>\
     Cảm ơn sự tin tưởng và đồng hành của bạn!";
@@ -344,7 +349,6 @@ function App(selector) {
       });
       contentAnswer.lastChild.after(...correctAnswer);
     }
-    correctAnswerLength = contentAnswer.querySelectorAll(".correctAnswer").length;
     if (!(RandomQ.answerPlan === [])) {
       const answerPl = RandomQ.answerPlan.map((answer, i) => {
         if (!(answer === "")) {
@@ -358,15 +362,14 @@ function App(selector) {
       });
       contentAnswer.lastChild.after(...answerPl);
     }
+    correctAnswerLength = contentAnswer.querySelectorAll(".correctAnswer").length;
     if (!RandomQ.Requirements.includes("MultipleAnswers")) {
       let randomAnswer = contentAnswer.querySelectorAll(".answerPlanInfo");
-      // console.log(randomAnswer);
       randomAnswer.forEach((element) => {
         let OrderFlex = Math.floor(Math.random() * 22);
         element.style.order = `${OrderFlex}`;
       });
     }
-    redrawCanvas(randomOrder, pathImg);
   }
   function redrawCanvas(OrderImg, pathImg) {
     let scream = $.querySelector("#scream");
