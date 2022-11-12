@@ -1383,7 +1383,8 @@ span.starts {
 span.stars {
   margin: 10px;
   cursor: default;
-  max-width: 100%;
+  width: 100%;
+  color: #a174ff;
   font-size: 1.2rem;
   user-select: none;
   text-align: center;
