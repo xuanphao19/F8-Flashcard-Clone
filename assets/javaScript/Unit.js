@@ -680,12 +680,8 @@ let HTML_CSS = {
         {
           Question: "Khi làm phần mục lục, dàn ý nên sử dụng cách nào?",
           Requirements: "Chọn 1 đáp án đúng:",
-          correctAnswer: [],
-          answerPlan: [
-            "Thẻ danh sách, danh sách lồng nhau",
-            "Dùng các thẻ tiêu đề, h1 - h6",
-            "Dùng thẻ p, thẻ p lồng nhau",
-          ],
+          correctAnswer: ["Thẻ danh sách, danh sách lồng nhau"],
+          answerPlan: ["Dùng các thẻ tiêu đề, h1 - h6", "Dùng thẻ p, thẻ p lồng nhau"],
           suggestions:
             "Vì các thẻ danh sách như <code>&lt;ul&gt;, &lt;ol&gt;</code> được thiết kế ra để sử dụng cho tình huống này mà.",
           Audio: "",
@@ -792,10 +788,10 @@ let HTML_CSS = {
           Question:
             "Dùng thuộc tính <code>alt</code> như nào cho tình huống hình ảnh chỉ mang tính chất trang trí, không mang ý nghĩa nội dung?",
           Requirements: "Chọn 1 đáp án đúng:",
-          correctAnswer: ['<code>alt=""</code>'],
-          answerPlan: ['<code>alt=</code>"giá trị tùy ý"', "Không dùng <code>alt</code>"],
+          correctAnswer: ['<code>alt = "" </code>'],
+          answerPlan: ['<code>alt = </code>"giá trị tùy ý"', "Không dùng <code>alt</code>"],
           suggestions:
-            ' Hình ảnh chỉ mang tính trang trí thì để <code>alt=""</code>. Không bỏ thuộc tính <code>alt</code> vì đây là thuộc tính bắt buộc theo tiêu chuẩn, một số trình phân tích có thể coi rằng thuộc tính <code>alt</code> đã bị quên sử dụng.',
+            ' Hình ảnh chỉ mang tính trang trí thì để <code>alt = ""</code>. Không bỏ thuộc tính <code>alt</code> vì đây là thuộc tính bắt buộc theo tiêu chuẩn, một số trình phân tích có thể coi rằng thuộc tính <code>alt</code> đã bị quên sử dụng.',
           Audio: "",
           Video: "",
           Image: "",
@@ -822,7 +818,7 @@ let HTML_CSS = {
       minReq: 10,
       info: [
         {
-          Question: "Thẻ <code>&lt;h3&gt;</code> thuộc loại thẻ nào?",
+          Question: "Thẻ <code>&lt;h3&gt;</code> thuộc nhóm thẻ nào?",
           Requirements: "Chọn 1 đáp án đúng:",
           correctAnswer: ["Block"],
           answerPlan: ["Meta", "Inline"],
@@ -832,7 +828,7 @@ let HTML_CSS = {
           Image: "",
         },
         {
-          Question: "Thẻ <code>&lt;p&gt;</code> thuộc loại thẻ gì?",
+          Question: "Thẻ <code>&lt;p&gt;</code> thuộc nhóm thẻ gì?",
           Requirements: "Chọn 1 đáp án đúng:",
           correctAnswer: ["Block"],
           answerPlan: ["Inline", "Self-closing"],
@@ -1033,7 +1029,7 @@ let HTML_CSS = {
             "Khả năng tiếp cận",
             "Nội dung tách biệt với phần trình bày",
           ],
-          answerPlan: [],
+          answerPlan: ["Không có nội dung nào chính xác"],
           suggestions: "Chọn những nội dung mà bạn cho là đúng!",
           Audio: "",
           Video: "",
@@ -1074,7 +1070,7 @@ let HTML_CSS = {
             "Phương pháp CSS Internal & CSS External có cùng mức độ ưu tiên",
             "CSS Internal & CSS External Hai phương pháp này có cùng một mức độ ưu tiên Nên phương pháp nào được gọi sau thì phương pháp đó được ưu tiên",
           ],
-          answerPlan: [],
+          answerPlan: ["Cả ba đáp án trên sai"],
           suggestions: "Chọn những nội dung mà bạn cho là đúng!",
           Audio: "",
           Video: "",
@@ -1388,9 +1384,8 @@ let HTML_CSS = {
         {
           Question: "Giá trị <code>(Computed value)</code> là gì?",
           Requirements: "Chọn 1 đáp án đúng:",
-          correctAnswer: [],
+          correctAnswer: ["Là các giá trị CSS cuối cùng (sau khi được tính toán) tác động trên các phần tử HTML."],
           answerPlan: [
-            "Là các giá trị CSS cuối cùng (sau khi được tính toán) tác động trên các phần tử HTML.",
             "Là các giá trị CSS bạn viết trong <code>file CSS</code>.",
             "Là các giá trị CSS bạn viết trong cặp thẻ <code>&lt;style&gt;</code>.",
           ],
@@ -1402,9 +1397,10 @@ let HTML_CSS = {
         {
           Question: "<code>Reset CSS</code> là gì?",
           Requirements: "Chọn 1 đáp án đúng:",
-          correctAnswer: [],
-          answerPlan: [
+          correctAnswer: [
             "Là công việc đặt lại các thuộc tính CSS giúp trang web hiển thị giống nhau trên các trình duyệt khác nhau.",
+          ],
+          answerPlan: [
             "Không cần <code>Reset CSS</code> trang web cũng hiển thị giống nhau trên các trình duyệt khác nhau.",
             "",
           ],
@@ -2304,7 +2300,19 @@ let HTML_CSS = {
       className: "TrackItem_wrapper",
       image: "",
       minReq: 10,
-      info: [],
+      info: [
+        // {
+        //   Question: "Thẻ <code>&lt;h1&gt;</code> dùng khi nào?",
+        //   Requirements: "Chọn 1 đáp án đúng:",
+        //   correctAnswer: ["Thể hiện tiêu đề chính của trang web"],
+        //   answerPlan: ["Thể hiện một hình ảnh", "Thể hiện tiêu đề trên tab trình duyệt"],
+        //   suggestions:
+        //     "Thẻ <code>&lt;h1&gt;</code> là thẻ tiêu đề có sự ưu tiên cao nhất, được sử dụng làm tiêu đề chính cho trang web.",
+        //   Audio: "",
+        //   Video: "",
+        //   Image: "",
+        // },
+      ],
     },
   ],
 };

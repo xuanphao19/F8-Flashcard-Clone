@@ -319,17 +319,30 @@ function App(selector) {
     homeContentContinue.style.display = "none";
     HomeQuestion.style.display = "block";
     let correctAnswerArr = RandomQ.correctAnswer;
+    let starsEle = contentAnswer.querySelector(".stars");
     redrawCanvas(randomOrder, pathImg);
-    if (RandomQ.Question === "") {
+    if (RandomQ.Question !== "") {
+      QuestionInfo.style.fontSize = "1.2rem";
+      QuestionInfo.style.textAlign = "left";
+      QuestionInfo.innerHTML = RandomQ.Question;
+    } else {
       QuestionInfo.innerHTML = "Hệ thống câu hỏi đang được cập nhật.<br>\
     Cảm ơn sự tin tưởng và đồng hành của bạn!";
       QuestionInfo.style.textAlign = "center";
       QuestionInfo.style.fontSize = "1.8rem";
-      QuestionHint.innerHTML = "Click Quay lại để về danh mục câu hỏi!";
-    } else {
-      QuestionInfo.style.fontSize = "1.2rem";
-      QuestionInfo.style.textAlign = "left";
-      QuestionInfo.innerHTML = RandomQ.Question;
+      QuestionHint.innerHTML = "Click Quay lại danh mục câu hỏi!";
+      stars = "Quay lại danh mục câu hỏi";
+      starsEle.textContent = `${stars}`;
+      starsEle.style.fontSize = "1.8rem";
+      starsEle.style.cursor = "pointer";
+      starsEle.onclick = function () {
+        FooterWrapper.style.display = "block";
+        modalTrackList.style.display = "block";
+        TrackListHeaderWrapper.style.display = "block";
+        HomeWrapper.style.display = "none";
+        stars = ["⭐"];
+      };
+      return;
     }
     if (!(correctAnswerArr === [])) {
       const correctAnswer = correctAnswerArr.map((correctAn, i) => {
