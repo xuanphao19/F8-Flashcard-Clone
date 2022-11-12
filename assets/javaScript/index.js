@@ -167,6 +167,7 @@ function App(selector) {
         let tag = e.target;
         if (tag.matches(".TrackItem_wrapper")) {
           trackItemWrap = tag;
+          console.log(trackItemWrap, unDisableAll);
         } else {
           trackItemWrap = getParent(tag, ".TrackItem_wrapper");
         }
@@ -192,14 +193,12 @@ function App(selector) {
     } else {
       TrackListActive.classList.remove("TrackList_activeAll");
     }
-    for (const item of unDisableAll) {
-      if (item.querySelector(".unChecked").matches(".onChecked")) {
-        TrackListActive.classList.add("TrackList_Checked");
-        btnStart.classList.add("start");
-        return;
-      } else {
-        TrackListActive.classList.remove("TrackList_Checked");
-      }
+    if (j > 0) {
+      TrackListActive.classList.add("TrackList_Checked");
+      btnStart.classList.add("start");
+      return;
+    } else {
+      TrackListActive.classList.remove("TrackList_Checked");
     }
     btnStart.classList.remove("start");
   }
