@@ -615,8 +615,9 @@ img.practice-image {
 .QuestionInfo {
   padding: 6px 18px;
 }
-.QuestionInfo * {
+.QuestionInfoWarp .QuestionInfo * {
   padding-left: 5px;
+  margin: 2px 0;
 }
 .QuestionInfo ul {
   margin-top: 3px;
@@ -1223,7 +1224,7 @@ p.TrackItem {
   height: 21px;
 }
 
-.unCheckedAll,
+/* .unCheckedAll, */
 .unChecked {
   background-image: url(https://flash.fullstack.edu.vn/static/media/check-none-active.ba7194b16360081a29fdc43cf606f736.svg);
 }
@@ -1266,9 +1267,15 @@ p.TrackItem {
 }
 
 .TrackList_active {
+  position: relative;
   margin-right: 6px;
   cursor: pointer;
   user-select: none;
+}
+.TrackList_active > img {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
 }
 .TrackList_Checked {
   background-image: url(https://flash.fullstack.edu.vn/static/media/circle-minus.c9b2a1277bc0ef89e2441ae6b5c560d1.svg);
