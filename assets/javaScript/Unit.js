@@ -337,7 +337,7 @@ let HTML_CSS = {
         },
         {
           Question:
-            "<p>Theo các bạn tiêu đề <code>'Đặc điểm nổi bật'</code> nên dùng thẻ <code>h</code> nào?</p> <br> <p><code>&lt;h1&gt;DELL XPS 9710x&lt;/h1&gt;</code></p><p><code>&lt;h3&gt;Đặc điểm nổi bật&lt;/h3&gt;</code></p><p><code>&lt;h3&gt;Đánh giá chi tiết&lt;/h3&gt;</code></p>",
+            "<p>Theo các bạn tiêu đề <code>'Đặc điểm nổi bật'</code> nên dùng thẻ <code>h</code> nào?</p ><br><ul><li><code>&lt;h1&gt;DELL XPS 9710x&lt;/h1&gt;</code><ul><li><code>&lt;h3&gt;Đặc điểm nổi bật&lt;/h3&gt;</code><ul><li><code>&lt;h3&gt;Đánh giá chi tiết&lt;/h3&gt;</code></li></ul></li></ul></li></ul>",
           Requirements: "Chọn 1 đáp án đúng:",
           correctAnswer: ["<code>&lt;h2&gt;</code>"],
           answerPlan: ["<code>&lt;h4&gt;</code>", "<code>&lt;h1&gt;</code>"],
@@ -659,7 +659,7 @@ let HTML_CSS = {
           Question:
             "Đâu là cú pháp Emmet tạo ra đoạn code sau? <br> <ul><li><code>&lt;ol&gt;</code><ul><li><code>&lt;li&gt;&lt;/li&gt;</code></li></ul></li><li><code>&lt;/ol&gt;</li></code></ul>",
           Requirements: "Chọn 1 đáp án đúng:",
-          correctAnswer: [],
+          correctAnswer: ["<code>ol&gt;li</code>"],
           answerPlan: ["<code>ol&gt;li</code>", "<code>ol&lt;li</code>", "<code>li&gt;ol</code>"],
           suggestions: "Ý nghĩa cú pháp ol&gt;li là: ol thẻ cha &gt; sau đó là thẻ con li thẻ con",
           Audio: "",

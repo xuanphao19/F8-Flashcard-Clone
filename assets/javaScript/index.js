@@ -137,16 +137,7 @@ function App(selector) {
     itemsLength = unDisableAll.length;
     addChecked();
   }
-  function setDisableQuest(trackItemWrapper) {
-    trackItemWrapper.forEach((iterator) => {
-      let disableQuest = iterator.querySelector(".sumQuestion").textContent;
-      if (disableQuest == 0) {
-        iterator.classList.add("TrackItem_disable");
-      } else {
-        iterator.classList.add("unDisable");
-      }
-    });
-  }
+
   let j = 0;
   let unChecked;
   let unDisableAll;
@@ -167,13 +158,13 @@ function App(selector) {
         let tag = e.target;
         if (tag.matches(".TrackItem_wrapper")) {
           trackItemWrap = tag;
-          console.log(trackItemWrap, unDisableAll);
         } else {
           trackItemWrap = getParent(tag, ".TrackItem_wrapper");
         }
         if (trackItemWrap && trackItemWrap.matches(".unDisable")) {
           changeChecked(trackItemWrap);
         }
+        console.log(trackItemWrap, trackItemEle);
       });
     }
   }
@@ -248,7 +239,7 @@ function App(selector) {
   let calendarClose = $.querySelector("#calendar");
   btnStart.onclick = function () {
     let onCheckId = [];
-    for (const onCheck of trackItemWrapper) {
+    for (const onCheck of unDisableAll) {
       if (onCheck.matches(".TrackItem_wrapper-active")) {
         onCheckId.push(onCheck.id);
       }
@@ -460,7 +451,7 @@ function App(selector) {
       answerBtn.style.animation = "loading04 1.3s infinite linear";
       answerBtn.style.background = " #c0feaa";
       stars.push("⭐");
-      createRandomQuestion(lengthQ, listQuestion, suggestionsBack);
+      createRandomQuestion(lengthQ, listQuestion);
       let congratulation = $.querySelector("#congratulation");
       switch (stars.length) {
         case 10:
@@ -551,4 +542,14 @@ function App(selector) {
     explain.style.display = "none";
     contentAnswer.innerHTML = `<span class="stars">${stars}</span>`;
   };
+}
+function setDisableQuest(trackItemWrapper) {
+  trackItemWrapper.forEach((iterator) => {
+    let disableQuest = iterator.querySelector(".sumQuestion").textContent;
+    if (disableQuest == 0) {
+      iterator.classList.add("TrackItem_disable");
+    } else {
+      iterator.classList.add("unDisable");
+    }
+  });
 }
