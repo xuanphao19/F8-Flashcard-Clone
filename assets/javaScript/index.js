@@ -3,22 +3,20 @@ function App(selector) {
   let moduleElement = $.querySelector(".Modal_Courses");
   let CoursesMenu = $.querySelector(".header_left");
   let HomeWrapper = $.querySelector(".Home_wrapper");
-  (() => {
-    CoursesMenu.addEventListener("click", () => {
-      moduleElement.removeEventListener("animationend", listenerClose);
-      if (moduleElement) {
-        moduleElement.style.display = "block";
-      }
-      var displayAfter = window.getComputedStyle(homeHeader, ":after").getPropertyValue("display");
-      if (displayAfter === "block") {
-        homeHeader.style.setProperty("--dpn", "none");
-      }
-      if (trackItemWrapper) {
-        stopPracticing();
-      }
-    });
-  })();
 
+  CoursesMenu.addEventListener("click", () => {
+    moduleElement.removeEventListener("animationend", listenerClose);
+    if (moduleElement) {
+      moduleElement.style.display = "block";
+    }
+    var displayAfter = window.getComputedStyle(homeHeader, ":after").getPropertyValue("display");
+    if (displayAfter === "block") {
+      homeHeader.style.setProperty("--dpn", "none");
+    }
+    if (trackItemWrapper) {
+      stopPracticing();
+    }
+  });
   let CoursesClose = moduleElement.querySelector(".Courses_close");
   CoursesClose.addEventListener("click", () => {
     eleWait.style.setProperty("--dpn", "none");
@@ -37,30 +35,29 @@ function App(selector) {
   let eleWait = $.querySelector("#JavaScript_Pro");
   let modalTrackList = $.querySelector(".Modal_TrackList");
   let CoursesId;
-  (function coursesItem() {
-    coursesCourseItem.addEventListener("click", function (e) {
-      const tgt = e.target;
-      if (tgt.closest(".Courses_course-name")) {
-        CoursesId = tgt.closest(".Courses_course-name").id;
-        let displayBefore;
-        if (CoursesId === "JavaScript_Pro" || CoursesId === "ReactJS_Pro") {
-          displayBefore = getComputedStyle(eleWait, ":before").getPropertyValue("display");
-          if (displayBefore === "none") {
-            eleWait.style.setProperty("--dpn", "block");
-          }
-        } else {
-          eleWait.style.setProperty("--dpn", "none");
-          homeCourseName.textContent = tgt.textContent;
-          if (!$.querySelector(".TrackItem_wrapper")) {
-            CreateCourses(HTML_CSS, TrackListContent, setDisableQuest);
-          }
-          closeModule(moduleElement);
-          unCheckedAll();
+
+  coursesCourseItem.addEventListener("click", function (e) {
+    const tgt = e.target;
+    if (tgt.closest(".Courses_course-name")) {
+      CoursesId = tgt.closest(".Courses_course-name").id;
+      let displayBefore;
+      if (CoursesId === "JavaScript_Pro" || CoursesId === "ReactJS_Pro") {
+        displayBefore = getComputedStyle(eleWait, ":before").getPropertyValue("display");
+        if (displayBefore === "none") {
+          eleWait.style.setProperty("--dpn", "block");
         }
+      } else {
+        eleWait.style.setProperty("--dpn", "none");
+        homeCourseName.textContent = tgt.textContent;
+        if (!$.querySelector(".TrackItem_wrapper")) {
+          CreateCourses(HTML_CSS, TrackListContent, setDisableQuest);
+        }
+        closeModule(moduleElement);
+        unCheckedAll();
       }
-    });
-    moduleElement.removeEventListener("animationend", listenerClose);
-  })();
+    }
+  });
+  moduleElement.removeEventListener("animationend", listenerClose);
 
   // var HTML_CSS = new FollowCourses("HTML_CSS_Pro", "Khóa HTML CSS Pro", "Courses_item", "", 10, HTML_CSS_InFor);
   let homePractice = $.querySelector(".Home_practice");
@@ -135,9 +132,18 @@ function App(selector) {
     }
     unDisableAll = $.querySelectorAll(".unDisable");
     itemsLength = unDisableAll.length;
-    addChecked();
+    addChecked(unDisableAll);
   }
-
+  function setDisableQuest(trackItemWrapper) {
+    Array.from(trackItemWrapper).forEach((iterator) => {
+      let disableQuest = iterator.querySelector(".sumQuestion").textContent;
+      if (disableQuest == 0) {
+        iterator.classList.add("TrackItem_disable");
+      } else {
+        iterator.classList.add("unDisable");
+      }
+    });
+  }
   let j = 0;
   let unChecked;
   let unDisableAll;
@@ -152,7 +158,7 @@ function App(selector) {
       element = element.parentElement;
     }
   }
-  function addChecked() {
+  function addChecked(unDisableAll) {
     for (var trackItemEle of unDisableAll) {
       trackItemEle.addEventListener("click", function (e) {
         let tag = e.target;
@@ -164,7 +170,6 @@ function App(selector) {
         if (trackItemWrap && trackItemWrap.matches(".unDisable")) {
           changeChecked(trackItemWrap);
         }
-        console.log(trackItemWrap, trackItemEle);
       });
     }
   }
@@ -355,7 +360,7 @@ function App(selector) {
     correctAnswerLength = contentAnswer.querySelectorAll(".correctAnswer").length;
     if (!RandomQ.Requirements.includes("MultipleAnswers")) {
       let randomAnswer = contentAnswer.querySelectorAll(".answerPlanInfo");
-      randomAnswer.forEach((element) => {
+      Array.from(randomAnswer).forEach((element) => {
         let OrderFlex = Math.floor(Math.random() * 22);
         element.style.order = `${OrderFlex}`;
       });
@@ -413,7 +418,7 @@ function App(selector) {
     } else {
       answerBtn.classList.add("answerCheck");
     }
-    AnswerAll.forEach((element) => {
+    Array.from(AnswerAll).forEach((element) => {
       element.classList.remove("failureAnswer");
     });
   });
@@ -425,7 +430,7 @@ function App(selector) {
     answerSelectorLength = selectorAnswerAll.length;
     if (selectorAnswerAll) {
       let answerValue;
-      selectorAnswerAll.forEach((answerSelector) => {
+      Array.from(selectorAnswerAll).forEach((answerSelector) => {
         if (answerSelector.querySelector(".answerPlan").matches(".correctAnswer")) {
           answerValue = true;
         }
@@ -497,7 +502,7 @@ function App(selector) {
           audioItem.play();
         }
       }
-      selectorAnswerAll.forEach((element) => {
+      Array.from(selectorAnswerAll).forEach((element) => {
         element.classList.add("failureAnswer");
         element.classList.remove("answerPlanActive");
       });
@@ -542,14 +547,4 @@ function App(selector) {
     explain.style.display = "none";
     contentAnswer.innerHTML = `<span class="stars">${stars}</span>`;
   };
-}
-function setDisableQuest(trackItemWrapper) {
-  trackItemWrapper.forEach((iterator) => {
-    let disableQuest = iterator.querySelector(".sumQuestion").textContent;
-    if (disableQuest == 0) {
-      iterator.classList.add("TrackItem_disable");
-    } else {
-      iterator.classList.add("unDisable");
-    }
-  });
 }
