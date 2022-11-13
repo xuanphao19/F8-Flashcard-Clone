@@ -2,6 +2,7 @@ var $ = document.querySelector(".App");
 let moduleElement = $.querySelector(".Modal_Courses");
 let CoursesMenu = $.querySelector(".header_left");
 let HomeWrapper = $.querySelector(".Home_wrapper");
+let flipCardInner = $.querySelector(".flip-card-inner");
 CoursesMenu.addEventListener("click", () => {
   moduleElement.removeEventListener("animationend", listenerClose);
   if (moduleElement) {
@@ -10,9 +11,6 @@ CoursesMenu.addEventListener("click", () => {
   var displayAfter = window.getComputedStyle(homeHeader, ":after").getPropertyValue("display");
   if (displayAfter === "block") {
     homeHeader.style.setProperty("--dpn", "none");
-  }
-  if (trackItemWrapper) {
-    stopPracticing();
   }
 });
 let CoursesClose = moduleElement.querySelector(".Courses_close");
@@ -47,10 +45,9 @@ coursesCourseItem.addEventListener("click", function (e) {
       eleWait.style.setProperty("--dpn", "none");
       homeCourseName.textContent = tgt.textContent;
       if (!$.querySelector(".TrackItem_wrapper")) {
-        CreateCourses(HTML_CSS, TrackListContent, setDisableQuest);
+        CreateCourses(HTML_CSS, TrackListContent);
       }
       closeModule(moduleElement);
-      unCheckedAll();
     }
   }
 });
@@ -80,8 +77,8 @@ homePractice.addEventListener("click", function () {
 let headerRight = $.querySelector(".header_right");
 let profileClose = $.querySelector(".Profile_close");
 let modalProfile = $.querySelector(".Modal_Profile");
+let TrackListClose = $.querySelector(".TrackList_close");
 let backHome = $.querySelector(".backHome");
-let unDisableAll = [];
 headerRight.addEventListener("click", () => {
   modalProfile.removeEventListener("animationend", listenerClose);
   modalProfile.style.display = "block";
@@ -97,74 +94,56 @@ function listClose() {
   modalTrackList.style.display = "none";
   TrackListHeaderWrapper.style.display = "none";
 }
-let TrackListClose = $.querySelector(".TrackList_close");
 TrackListClose.addEventListener("click", () => {
   listClose();
   unCheckedAll();
 });
 let itemsLength = 0;
+let unDisableAll = [];
+let trackItemWrapper;
 const TrackListContent = $.querySelector(".TrackList_content");
-function CreateCourses(Obj, TrackListContent, setDisableQuest) {
+function CreateCourses(Obj, TrackListContent) {
   const items = Obj.info.map((item, i) => {
     i++;
     let chapter = document.createElement("div");
-    chapter.classList = `${item.className}`;
+    if (item.info.length === 0) {
+      chapter.classList = `${item.className} TrackItem_disable`;
+    } else {
+      chapter.classList = `${item.className} unDisable`;
+      unDisableAll.push(chapter);
+    }
     chapter.id = `${item.id}`;
     chapter.innerHTML = ` <div class="TrackItem_left">
-                              <span class="TrackItem_title">${i}. ${item.name}</span>
-                              <div class="TrackItem_completed">
-                                <span class="sumQuestion">${item.info.length}</span>
-                              </div>
-                            </div>
-                            <div class="TrackItem_right">
-                              <div class="unChecked"></div>
-                            </div>`;
+    <span class="TrackItem_title">${i}. ${item.name}</span>
+    <div class="TrackItem_completed">
+    <span class="sumQuestion">${item.info.length}</span>
+    </div>
+    </div>
+    <div class="TrackItem_right">
+    <div class="unChecked"></div>
+    </div>`;
     return chapter;
   });
   TrackListContent.lastChild.after(...items);
   trackItemWrapper = $.querySelectorAll(".TrackItem_wrapper");
-  if (trackItemWrapper) {
-    setDisableQuest(trackItemWrapper);
-  }
   itemsLength = unDisableAll.length;
 }
-function setDisableQuest(trackItemWrapper) {
-  Array.from(trackItemWrapper).forEach((iterator) => {
-    let disableQuest = iterator.querySelector(".sumQuestion").textContent;
-    if (disableQuest == 0) {
-      iterator.classList.add("TrackItem_disable");
-    } else {
-      iterator.classList.add("unDisable");
-      unDisableAll.push(iterator);
-    }
-  });
-  Array.from(unDisableAll).forEach((trackItemEle) => {
-    trackItemEle.addEventListener("click", function (e) {
-      let tag = e.target;
-      if (tag.matches(".TrackItem_wrapper")) {
-        trackItemWrap = tag;
-      } else {
-        trackItemWrap = getParent(tag, ".TrackItem_wrapper");
-      }
-      if (trackItemWrap && trackItemWrap.matches(".unDisable")) {
-        changeChecked(trackItemWrap);
-      }
-    });
-  });
-}
 let j = 0;
-let unChecked;
 let trackItemWrap;
-let trackItemWrapper;
+let unChecked;
+let btnStart = $.querySelector(".btnStart");
 let TrackListActive = $.querySelector(".TrackList_active");
-function getParent(element, selector) {
-  while (element.parentElement) {
-    if (element.parentElement.matches(selector)) {
-      return element.parentElement;
-    }
-    element = element.parentElement;
+TrackListContent.onclick = function (e) {
+  let tag = e.target;
+  if (tag.matches(".TrackItem_wrapper")) {
+    trackItemWrap = tag;
+  } else {
+    trackItemWrap = getParent(tag, ".TrackItem_wrapper");
   }
-}
+  if (trackItemWrap && trackItemWrap.matches(".unDisable")) {
+    changeChecked(trackItemWrap);
+  }
+};
 function changeChecked(trackItems) {
   unChecked = trackItems.querySelector(".unChecked");
   if (unChecked.matches(".onChecked")) {
@@ -189,6 +168,14 @@ function changeChecked(trackItems) {
     TrackListActive.classList.remove("TrackList_Checked");
   }
   btnStart.classList.remove("start");
+}
+function getParent(element, selector) {
+  while (element.parentElement) {
+    if (element.parentElement.matches(selector)) {
+      return element.parentElement;
+    }
+    element = element.parentElement;
+  }
 }
 function onCheckedAll() {
   TrackListActive.classList.add("TrackList_activeAll");
@@ -232,7 +219,6 @@ TrackListMakeAll.onclick = function () {
     unCheckedAll();
   }
 };
-let btnStart = $.querySelector(".btnStart");
 let calendarClose = $.querySelector("#calendar");
 btnStart.onclick = function () {
   let onCheckId = [];
@@ -352,26 +338,12 @@ function renderUiQuestion(RandomQ) {
       element.style.order = `${OrderFlex}`;
     });
   }
-  let starsEle = contentAnswer.querySelector(".stars");
   if (QuestionInfo.textContent === "") {
-    console.log(QuestionInfo.textContent, QuestionInfo);
     QuestionInfo.innerHTML = "Hệ thống câu hỏi đang được cập nhật.<br>\
     Cảm ơn sự tin tưởng và đồng hành của bạn!";
     QuestionInfo.style.textAlign = "center";
-    QuestionInfo.style.fontSize = "1.8rem";
+    QuestionInfo.style.fontSize = "1.4rem";
     QuestionHint.innerHTML = "Click Quay lại danh mục câu hỏi!";
-    stars = "Quay lại danh mục câu hỏi";
-    starsEle.textContent = `${stars}`;
-    starsEle.style.fontSize = "1.8rem";
-    starsEle.style.cursor = "pointer";
-    starsEle.onclick = function () {
-      FooterWrapper.style.display = "block";
-      modalTrackList.style.display = "block";
-      TrackListHeaderWrapper.style.display = "block";
-      HomeWrapper.style.display = "none";
-      stars = ["⭐"];
-    };
-    return;
   }
 }
 function redrawCanvas(OrderImg, pathImg) {
@@ -380,7 +352,6 @@ function redrawCanvas(OrderImg, pathImg) {
 }
 let answerBtn = $.querySelector(".answerBtn");
 let suggestionsBtn = $.querySelector("#suggestions_btn");
-let flipCardInner = $.querySelector(".flip-card-inner");
 function stopPracticing() {
   if (flipCardInner.matches(".is-flipped")) {
     flipCardInner.classList.remove("is-flipped");
