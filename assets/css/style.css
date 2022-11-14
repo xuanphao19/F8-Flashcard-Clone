@@ -321,6 +321,7 @@ span.today {
   margin: 0 auto;
   width: 99%;
   height: 275px;
+  font-size: 1.6rem;
   border-radius: 3px;
   box-shadow: 0 0 3px #0093fca6;
   -webkit-touch-callout: none;
@@ -339,7 +340,7 @@ span.suggestionsBack {
   width: 100%;
   /* display: table-cell;
   vertical-align: middle; */
-  font-size: 1.3rem;
+  font-size: 1.6rem;
   font-weight: 400;
   line-height: 1.4;
   font-style: italic;
@@ -638,20 +639,15 @@ img.practice-image {
   word-break: break-word;
   overflow-wrap: break-word;
   background: var(--code-background);
+  display: inline-block;
+  text-align: left;
+  white-space: pre-wrap;
+  -webkit-white-space: pre-wrap;
 }
 .control_btn .explain code {
   padding: 0px 6px 1px;
   font-size: 1.5rem;
   margin: 0;
-}
-.explain code,
-.answerPlan code,
-.QuestionInfo code,
-.suggestionsBack code {
-  display: inline-block;
-  text-align: left;
-  white-space: pre-wrap;
-  -webkit-white-space: pre-wrap;
 }
 .answerPlan tr td code {
   padding: 2px 0;
@@ -686,6 +682,9 @@ img.practice-image {
 }
 .suggestionsBack code {
   font-size: 1.6rem;
+  line-height: 1;
+  padding-top: 0;
+  padding-bottom: 3px;
 }
 p.Question_hint {
   width: 100%;
@@ -1156,7 +1155,7 @@ a.course_link {
   overflow: auto;
   overflow: overlay;
   padding-bottom: 190px;
-  padding-top: 30px;
+  padding-top: 54px;
   animation: fadeInBottom linear 0.8s;
 }
 
@@ -1173,6 +1172,7 @@ a.course_link {
   width: 100%;
   user-select: none;
   position: relative;
+  box-shadow: 0 0 0 1px #eaedf236;
 }
 
 p.TrackItem {
@@ -1182,6 +1182,7 @@ p.TrackItem {
   font-size: 1.6rem;
   user-select: none;
   cursor: default;
+  border-bottom: 1px solid #eee;
 }
 
 .TrackItem_left {
@@ -1224,18 +1225,12 @@ p.TrackItem {
 .onChecked,
 .unChecked {
   margin-right: 6px;
-  padding: 12px;
-  width: 10px;
-  height: 21px;
+  width: 24px;
 }
 
-/* .unCheckedAll, */
-.unChecked {
-  background-image: url(https://flash.fullstack.edu.vn/static/media/check-none-active.ba7194b16360081a29fdc43cf606f736.svg);
-}
-.TrackItem_right .onChecked {
+/* .TrackItem_right .onChecked {
   background-image: url(https://flash.fullstack.edu.vn/static/media/check-circle-active.e0bde04629ea3769dc5ec55ff0eb7133.svg);
-}
+} */
 
 .TrackList_header-wrapper {
   position: fixed;
@@ -1252,8 +1247,8 @@ p.TrackItem {
   align-items: center;
   justify-content: space-between;
   background-color: var(--home-background-color);
-  padding: 18px 16px 6px 0;
-  height: 46px;
+  padding: 16px 16px 16px 0;
+  height: 50px;
   z-index: 1000;
 }
 
@@ -1272,22 +1267,23 @@ p.TrackItem {
 }
 
 .TrackList_active {
-  position: relative;
+  /* position: relative; */
   margin-right: 6px;
   cursor: pointer;
   user-select: none;
 }
-.TrackList_active > img {
+
+/* .TrackList_active > img {
   position: absolute;
   bottom: 0px;
   right: 0px;
-}
-.TrackList_Checked {
+} */
+/* .TrackList_Checked {
   background-image: url(https://flash.fullstack.edu.vn/static/media/circle-minus.c9b2a1277bc0ef89e2441ae6b5c560d1.svg);
 }
 .TrackList_activeAll {
   background-image: url(https://flash.fullstack.edu.vn/static/media/check-active.17895e54ca81231df26fd7778a233d55.svg);
-}
+} */
 
 .Footer_wrapper {
   position: fixed;
