@@ -101,7 +101,6 @@ TrackListClose.addEventListener("click", () => {
 let imagePathNoCheck;
 let itemsLength = 0;
 let unDisableAll = [];
-let trackItemWrapper;
 const TrackListContent = $.querySelector(".TrackList_content");
 function CreateCourses(Obj, TrackListContent) {
   imagePathNoCheck = Obj.image;
@@ -127,9 +126,37 @@ function CreateCourses(Obj, TrackListContent) {
     return chapter;
   });
   TrackListContent.lastChild.after(...items);
-  trackItemWrapper = $.querySelectorAll(".TrackItem_wrapper");
   itemsLength = unDisableAll.length;
+  for (let index = 0; index < unDisableAll.length; index++) {
+    const element = unDisableAll[index];
+    element.onclick = function () {
+      trackItemRight = element.querySelector(".TrackItem_right");
+      trackItemRightImg = trackItemRight.querySelector(".unChecked");
+      if (trackItemRightImg) {
+        element.classList.add("TrackItem_wrapper-active");
+        trackItemRight.innerHTML = `<img class="onChecked" src="${imagePathOnCheck}" alt="">`;
+        j++;
+      } else {
+        element.classList.remove("TrackItem_wrapper-active");
+        trackItemRight.innerHTML = `<img class="unChecked" src="${imagePathNoCheck}" alt="">`;
+        j--;
+      }
+      if (j === itemsLength) {
+        trackListActiveImg.src = `${ActiveImgCheckAll}`;
+        return;
+      }
+      if (j > 0) {
+        trackListActiveImg.src = `${ActiveImgChecked}`;
+        btnStart.classList.add("start");
+        return;
+      } else {
+        trackListActiveImg.src = `${ActiveImgNoCheck}`;
+        btnStart.classList.remove("start");
+      }
+    };
+  }
 }
+
 let j = 0;
 let trackItemWrap;
 let unChecked;
@@ -139,48 +166,12 @@ let btnStart = $.querySelector(".btnStart");
 let TrackListActive = $.querySelector(".TrackList_active");
 let imagePathOnCheck =
   "https://flash.fullstack.edu.vn/static/media/check-circle-active.e0bde04629ea3769dc5ec55ff0eb7133.svg";
-
-TrackListContent.onclick = function (e) {
-  let tag = e.target;
-  if (tag.matches(".TrackItem_wrapper")) {
-    trackItemWrap = tag;
-  } else {
-    trackItemWrap = getParent(tag, ".TrackItem_wrapper");
-  }
-  if (trackItemWrap) {
-    trackItemRight = trackItemWrap.querySelector(".TrackItem_right");
-    trackItemRightImg = trackItemRight.querySelector(".unChecked");
-    if (trackItemRightImg) {
-      trackItemWrap.classList.add("TrackItem_wrapper-active");
-      trackItemRight.innerHTML = `<img class="onChecked" src="${imagePathOnCheck}" alt="">`;
-      j++;
-    } else {
-      trackItemWrap.classList.remove("TrackItem_wrapper-active");
-      trackItemRight.innerHTML = `<img class="unChecked" src="${imagePathNoCheck}" alt="">`;
-      j--;
-    }
-  }
-  if (trackItemWrap && trackItemWrap.matches(".unDisable")) {
-    changeChecked();
-  }
-};
 let trackListActiveImg = $.querySelector(".TrackList_active_img");
 let ActiveImgCheckAll = "https://flash.fullstack.edu.vn/static/media/check-active.17895e54ca81231df26fd7778a233d55.svg";
 let ActiveImgChecked = "https://flash.fullstack.edu.vn/static/media/circle-minus.c9b2a1277bc0ef89e2441ae6b5c560d1.svg";
 let ActiveImgNoCheck =
   "https://flash.fullstack.edu.vn/static/media/circle-inactive.4e02a026ecf660280d2f73ca098900f6.svg";
-function changeChecked() {
-  if (j === itemsLength) {
-    trackListActiveImg.src = `${ActiveImgCheckAll}`;
-    return;
-  }
-  if (j > 0) {
-    trackListActiveImg.src = `${ActiveImgChecked}`;
-    return;
-  } else {
-    trackListActiveImg.src = `${ActiveImgNoCheck}`;
-  }
-}
+
 function getParent(element, selector) {
   while (element.parentElement) {
     if (element.parentElement.matches(selector)) {
@@ -189,28 +180,28 @@ function getParent(element, selector) {
     element = element.parentElement;
   }
 }
-function onCheckedAll() {
-  trackListActiveImg.src = `${ActiveImgCheckAll}`;
-  Array.from(unDisableAll).forEach((unDisable) => {
-    unDisable.classList.add("TrackItem_wrapper-active");
-    let onCheck = unDisable.querySelector(".TrackItem_right");
-    onCheck.innerHTML = `<img class="unChecked" src="${imagePathOnCheck}" alt="">`;
-    j = itemsLength;
-  });
-}
-function unCheckedAll() {
-  trackListActiveImg.src = `${ActiveImgNoCheck}`;
-  answerBtn.textContent = "Trả lời";
-  answerBtn.classList.remove("failureAnswer");
-  Array.from(unDisableAll).forEach((unDisable) => {
-    unDisable.classList.remove("TrackItem_wrapper-active");
-    let unCheckAll = unDisable.querySelector(".TrackItem_right");
-    unCheckAll.innerHTML = `<img class="unChecked" src="${imagePathNoCheck}" alt="">`;
-    j = 0;
-  });
-  introVideo.style.display = "none";
-  stars = ["⭐"];
-}
+// function onCheckedAll() {
+//   trackListActiveImg.src = `${ActiveImgCheckAll}`;
+//   Array.from(unDisableAll).forEach((unDisable) => {
+//     unDisable.classList.add("TrackItem_wrapper-active");
+//     let onCheck = unDisable.querySelector(".TrackItem_right");
+//     onCheck.innerHTML = `<img class="unChecked" src="${imagePathOnCheck}" alt="">`;
+//     j = itemsLength;
+//   });
+// }
+// function unCheckedAll() {
+//   trackListActiveImg.src = `${ActiveImgNoCheck}`;
+//   answerBtn.textContent = "Trả lời";
+//   answerBtn.classList.remove("failureAnswer");
+//   Array.from(unDisableAll).forEach((unDisable) => {
+//     unDisable.classList.remove("TrackItem_wrapper-active");
+//     let unCheckAll = unDisable.querySelector(".TrackItem_right");
+//     unCheckAll.innerHTML = `<img class="unChecked" src="${imagePathNoCheck}" alt="">`;
+//     j = 0;
+//   });
+//   introVideo.style.display = "none";
+//   stars = ["⭐"];
+// }
 TrackListActive.onclick = () => {
   if (!(j === itemsLength)) {
     btnStart.classList.add("start");
