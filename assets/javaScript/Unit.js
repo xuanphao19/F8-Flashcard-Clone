@@ -2,7 +2,7 @@ let HTML_CSS = {
   id: "HTML_CSS_Pro",
   name: "Khóa HTML CSS Pro",
   className: "Courses_item",
-  image: "",
+  image: "https://flash.fullstack.edu.vn/static/media/check-none-active.ba7194b16360081a29fdc43cf606f736.svg",
   minReq: 10,
   info: [
     {
