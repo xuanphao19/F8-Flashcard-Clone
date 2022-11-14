@@ -1228,10 +1228,6 @@ p.TrackItem {
   width: 24px;
 }
 
-/* .TrackItem_right .onChecked {
-  background-image: url(https://flash.fullstack.edu.vn/static/media/check-circle-active.e0bde04629ea3769dc5ec55ff0eb7133.svg);
-} */
-
 .TrackList_header-wrapper {
   position: fixed;
   top: 0;
@@ -1267,23 +1263,10 @@ p.TrackItem {
 }
 
 .TrackList_active {
-  /* position: relative; */
   margin-right: 6px;
   cursor: pointer;
   user-select: none;
 }
-
-/* .TrackList_active > img {
-  position: absolute;
-  bottom: 0px;
-  right: 0px;
-} */
-/* .TrackList_Checked {
-  background-image: url(https://flash.fullstack.edu.vn/static/media/circle-minus.c9b2a1277bc0ef89e2441ae6b5c560d1.svg);
-}
-.TrackList_activeAll {
-  background-image: url(https://flash.fullstack.edu.vn/static/media/check-active.17895e54ca81231df26fd7778a233d55.svg);
-} */
 
 .Footer_wrapper {
   position: fixed;
