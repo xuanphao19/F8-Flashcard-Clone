@@ -1159,7 +1159,6 @@ a.course_link {
   animation: fadeInBottom linear 0.8s;
 }
 
-.TrackItem,
 .TrackItem_wrapper {
   align-items: center;
   background-color: var(--practice-background-color);
@@ -1167,7 +1166,7 @@ a.course_link {
   display: flex;
   height: 56px;
   justify-content: space-between;
-  margin-bottom: 1px;
+  margin-bottom: -5px;
   padding: 0 16px;
   width: 100%;
   user-select: none;
