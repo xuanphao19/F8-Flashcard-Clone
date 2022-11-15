@@ -32,9 +32,9 @@ let eleWait = $.querySelector("#JavaScript_Pro");
 let modalTrackList = $.querySelector(".Modal_TrackList");
 let CoursesId;
 coursesCourseItem.addEventListener("click", function (e) {
-  const tgt = e.target;
-  if (tgt.closest(".Courses_course-name")) {
-    CoursesId = tgt.closest(".Courses_course-name").id;
+  const tag = e.target;
+  if (tag.closest(".Courses_course-name")) {
+    CoursesId = tag.closest(".Courses_course-name").id;
     let displayBefore;
     if (CoursesId === "JavaScript_Pro" || CoursesId === "ReactJS_Pro") {
       displayBefore = getComputedStyle(eleWait, ":before").getPropertyValue("display");
@@ -43,9 +43,10 @@ coursesCourseItem.addEventListener("click", function (e) {
       }
     } else {
       eleWait.style.setProperty("--dpn", "none");
-      homeCourseName.textContent = tgt.textContent;
+      homeCourseName.textContent = tag.textContent;
       if (!$.querySelector(".TrackItem_wrapper")) {
-        CreateCourses(HTML_CSS, TrackListContent);
+        renderUnit(HTML_CSS, TrackListContent);
+        // CreateCourses(HTML_CSS, TrackListContent);
       }
       closeModule(moduleElement);
     }
@@ -75,15 +76,15 @@ homePractice.addEventListener("click", function () {
   }
 });
 let headerRight = $.querySelector(".header_right");
-let profileClose = $.querySelector(".Profile_close");
+let profileCloseBtn = $.querySelector(".Profile_close");
 let modalProfile = $.querySelector(".Modal_Profile");
-let TrackListClose = $.querySelector(".TrackList_close");
+let TrackListCloseBtn = $.querySelector(".TrackList_close");
 let backHome = $.querySelector(".backHome");
 headerRight.addEventListener("click", () => {
   modalProfile.removeEventListener("animationend", listenerClose);
   modalProfile.style.display = "block";
 });
-profileClose.addEventListener("click", () => {
+profileCloseBtn.addEventListener("click", () => {
   closeModule(modalProfile);
 });
 backHome.addEventListener("click", () => {
@@ -94,70 +95,111 @@ function listClose() {
   modalTrackList.style.display = "none";
   TrackListHeaderWrapper.style.display = "none";
 }
-TrackListClose.addEventListener("click", () => {
+TrackListCloseBtn.addEventListener("click", () => {
   listClose();
   unCheckedAll();
 });
 let imagePathNoCheck;
-let itemsLength = 0;
 let unDisableAll = [];
-const TrackListContent = $.querySelector(".TrackList_content");
-function CreateCourses(Obj, TrackListContent) {
+function renderUnit(Obj, TrackListContent) {
   imagePathNoCheck = Obj.image;
-  const items = Obj.info.map((item, i) => {
+  const htmls = Obj.info.map((unitItem, i) => {
     i++;
-    let chapter = document.createElement("div");
-    if (item.info.length === 0) {
-      chapter.classList = `${item.className} TrackItem_disable`;
+    let classTrackItem = "";
+    if (unitItem.info.length == 0) {
+      classTrackItem = `${unitItem.className} TrackItem_disable`;
     } else {
-      chapter.classList = `${item.className} unDisable`;
-      unDisableAll.push(chapter);
+      classTrackItem = "";
+      classTrackItem = `${unitItem.className} unDisable`;
+      // unDisableAll.push(unitItem);
     }
-    chapter.id = `${item.id}`;
-    chapter.innerHTML = ` <div class="TrackItem_left">
-    <span class="TrackItem_title">${i}. ${item.name}</span>
-    <div class="TrackItem_completed">
-    <span class="sumQuestion">${item.info.length}</span>
-    </div>
-    </div>
-    <div class="TrackItem_right">
-    <img class="unChecked" src="${imagePathNoCheck}" alt="">
-    </div>`;
-    return chapter;
+    return `
+  <div id="${unitItem.id}" class="${classTrackItem}">
+      <div class="TrackItem_left">
+          <span class="TrackItem_title">${i}. ${unitItem.name}</span>
+          <div class="TrackItem_completed">
+          <span class="sumQuestion">${unitItem.info.length}</span>
+          </div>
+      </div>
+      <div class="TrackItem_right">
+          <img class="unChecked" src="${imagePathNoCheck}" alt="">
+      </div>
+  </div>;
+      `;
   });
-  TrackListContent.lastChild.after(...items);
+  TrackListContent.innerHTML = htmls.join("");
+  trackItemWrapper = TrackListContent.querySelectorAll(".TrackItem_wrapper");
+  unDisableAll = TrackListContent.querySelectorAll(".unDisable");
   itemsLength = unDisableAll.length;
-  for (let index = 0; index < unDisableAll.length; index++) {
-    const element = unDisableAll[index];
-    element.onclick = function () {
-      trackItemRight = element.querySelector(".TrackItem_right");
-      trackItemRightImg = trackItemRight.querySelector(".unChecked");
-      if (trackItemRightImg) {
-        element.classList.add("TrackItem_wrapper-active");
-        trackItemRight.innerHTML = `<img class="onChecked" src="${imagePathOnCheck}" alt="">`;
-        j++;
-      } else {
-        element.classList.remove("TrackItem_wrapper-active");
-        trackItemRight.innerHTML = `<img class="unChecked" src="${imagePathNoCheck}" alt="">`;
-        j--;
-      }
-      if (j === itemsLength) {
-        trackListActiveImg.src = `${ActiveImgCheckAll}`;
-        return;
-      }
-      if (j > 0) {
-        trackListActiveImg.src = `${ActiveImgChecked}`;
-        btnStart.classList.add("start");
-        return;
-      } else {
-        trackListActiveImg.src = `${ActiveImgNoCheck}`;
-        btnStart.classList.remove("start");
-      }
-    };
-  }
+  // for (let index = 0; index < unDisableAll.length; index++) {
+  //   const element = unDisableAll[index];
+  //   element.onclick = function () {
+  //     trackItemRight = element.querySelector(".TrackItem_right");
+  //     trackItemRightImg = trackItemRight.querySelector(".unChecked");
+  //     if (trackItemRightImg) {
+  //       element.classList.add("TrackItem_wrapper-active");
+  //       trackItemRight.innerHTML = `<img class="onChecked" src="${imagePathOnCheck}" alt="">`;
+  //       j++;
+  //     } else {
+  //       element.classList.remove("TrackItem_wrapper-active");
+  //       trackItemRight.innerHTML = `<img class="unChecked" src="${imagePathNoCheck}" alt="">`;
+  //       j--;
+  //     }
+  //     if (j === itemsLength) {
+  //       trackListActiveImg.src = `${ActiveImgCheckAll}`;
+  //       return;
+  //     }
+  //     if (j > 0) {
+  //       trackListActiveImg.src = `${ActiveImgChecked}`;
+  //       btnStart.classList.add("start");
+  //       return;
+  //     } else {
+  //       trackListActiveImg.src = `${ActiveImgNoCheck}`;
+  //       btnStart.classList.remove("start");
+  //     }
+  //   };
+  // }
 }
 
+var TrackListContent = $.querySelector(".TrackList_content");
+var trackItemWrapper = [];
+let itemsLength = 0;
 let j = 0;
+//  for (let index = 0; index < unDisableAll.length; index++) {
+TrackListContent.onclick = function (e) {
+  let tag = e.target;
+  let element;
+  if (tag.matches(".unDisable")) {
+    element = tag;
+  } else {
+    element = getParent(tag, ".unDisable");
+  }
+  if (element && element.matches(".unDisable")) {
+    trackItemRight = element.querySelector(".TrackItem_right");
+    trackItemRightImg = trackItemRight.querySelector(".unChecked");
+    if (trackItemRightImg) {
+      element.classList.add("TrackItem_wrapper-active");
+      trackItemRight.innerHTML = `<img class="onChecked" src="${imagePathOnCheck}" alt="">`;
+      j++;
+    } else {
+      element.classList.remove("TrackItem_wrapper-active");
+      trackItemRight.innerHTML = `<img class="unChecked" src="${imagePathNoCheck}" alt="">`;
+      j--;
+    }
+    if (j === itemsLength) {
+      trackListActiveImg.src = `${ActiveImgCheckAll}`;
+      return;
+    }
+    if (j > 0) {
+      trackListActiveImg.src = `${ActiveImgChecked}`;
+      btnStart.classList.add("start");
+      return;
+    } else {
+      trackListActiveImg.src = `${ActiveImgNoCheck}`;
+      btnStart.classList.remove("start");
+    }
+  }
+};
 let trackItemWrap;
 let unChecked;
 let trackItemRight;
@@ -180,28 +222,28 @@ function getParent(element, selector) {
     element = element.parentElement;
   }
 }
-// function onCheckedAll() {
-//   trackListActiveImg.src = `${ActiveImgCheckAll}`;
-//   Array.from(unDisableAll).forEach((unDisable) => {
-//     unDisable.classList.add("TrackItem_wrapper-active");
-//     let onCheck = unDisable.querySelector(".TrackItem_right");
-//     onCheck.innerHTML = `<img class="unChecked" src="${imagePathOnCheck}" alt="">`;
-//     j = itemsLength;
-//   });
-// }
-// function unCheckedAll() {
-//   trackListActiveImg.src = `${ActiveImgNoCheck}`;
-//   answerBtn.textContent = "Trả lời";
-//   answerBtn.classList.remove("failureAnswer");
-//   Array.from(unDisableAll).forEach((unDisable) => {
-//     unDisable.classList.remove("TrackItem_wrapper-active");
-//     let unCheckAll = unDisable.querySelector(".TrackItem_right");
-//     unCheckAll.innerHTML = `<img class="unChecked" src="${imagePathNoCheck}" alt="">`;
-//     j = 0;
-//   });
-//   introVideo.style.display = "none";
-//   stars = ["⭐"];
-// }
+function onCheckedAll() {
+  trackListActiveImg.src = `${ActiveImgCheckAll}`;
+  Array.from(unDisableAll).forEach((unDisable) => {
+    unDisable.classList.add("TrackItem_wrapper-active");
+    let onCheck = unDisable.querySelector(".TrackItem_right");
+    onCheck.innerHTML = `<img class="unChecked" src="${imagePathOnCheck}" alt="">`;
+    j = itemsLength;
+  });
+}
+function unCheckedAll() {
+  trackListActiveImg.src = `${ActiveImgNoCheck}`;
+  answerBtn.textContent = "Trả lời";
+  answerBtn.classList.remove("failureAnswer");
+  Array.from(unDisableAll).forEach((unDisable) => {
+    unDisable.classList.remove("TrackItem_wrapper-active");
+    let unCheckAll = unDisable.querySelector(".TrackItem_right");
+    unCheckAll.innerHTML = `<img class="unChecked" src="${imagePathNoCheck}" alt="">`;
+    j = 0;
+  });
+  introVideo.style.display = "none";
+  stars = ["⭐"];
+}
 TrackListActive.onclick = () => {
   if (!(j === itemsLength)) {
     btnStart.classList.add("start");
@@ -213,6 +255,7 @@ TrackListActive.onclick = () => {
 };
 let TrackListMakeAll = $.querySelector(".TrackList_make-all");
 TrackListMakeAll.onclick = function () {
+  console.log(TrackListContent, itemsLength);
   if (!(j === itemsLength)) {
     btnStart.classList.add("start");
     onCheckedAll();
