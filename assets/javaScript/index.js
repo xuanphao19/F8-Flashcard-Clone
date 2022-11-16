@@ -213,7 +213,6 @@ btnStart.onclick = function () {
   });
   if (btnStart.matches(".start")) {
     setListQuestion(onCheckId, HTML_CSS);
-    createQuestionUI();
     HomeWrapper.style.display = "flex";
     homeHeader.style.display = "none";
     calendarClose.style.display = "none";
@@ -229,10 +228,11 @@ function setListQuestion(listId, Obj) {
       }
     }
   });
-  lengthQ = listQuestion.length;
+  createQuestionUI(listQuestion);
 }
 
-function createQuestionUI() {
+function createQuestionUI(listQuestion) {
+  lengthQ = listQuestion.length;
   createRandomQuestion(lengthQ, listQuestion);
   answerBtn.textContent = "Trả lời";
   answerBtn.classList.remove("failureAnswer");
@@ -265,22 +265,25 @@ function createRandomQuestion(length, listQues) {
     return undefined;
   }
   if (RandomQuestion) {
-    renderUiQuestion(RandomQuestion);
+    RandomQuestionInfo = RandomQuestion.Question;
+    renderUiQuestion(RandomQuestion, RandomQuestionInfo);
   }
   return RandomQuestion;
 }
+
 let homeContentContinue = $.querySelector(".Home_content-continue");
 let HomeQuestion = $.querySelector(".HomeQuestionScroll");
 let contentAnswer = $.querySelector(".contentAnswer");
 let QuestionInfo = $.querySelector(".QuestionInfo");
+let RandomQuestionInfo;
 let QuestionHint = $.querySelector(".Question_hint");
 let suggestionsBack = $.querySelector(".suggestionsBack");
 let correctAnswerLength = 0;
 let suggestionsBefore = "";
 let stars = ["⭐"];
-function renderUiQuestion(RandomQ) {
+function renderUiQuestion(RandomQ, RandomQuestionInfo) {
   suggestionsBefore = RandomQ.suggestions;
-  if (RandomQ.Question !== "") {
+  if (RandomQuestionInfo !== "") {
     contentAnswer.innerHTML = `<span class="stars">${stars}</span>`;
     QuestionInfo.innerHTML = RandomQ.Question;
     QuestionHint.innerHTML = RandomQ.Requirements;
@@ -288,13 +291,14 @@ function renderUiQuestion(RandomQ) {
     QuestionInfo.style.fontSize = "1.2rem";
   } else {
     QuestionInfo.innerHTML = "Hệ thống câu hỏi đang được cập nhật.<br>\
-    Cảm ơn sự tin tưởng và đồng hành của bạn!";
+    Cảm ơn sự đồng hành của bạn!";
     QuestionInfo.style.textAlign = "center";
     QuestionInfo.style.fontSize = "1.4rem";
     QuestionHint.innerHTML = "Click Quay lại danh mục câu hỏi!";
-    contentAnswer.innerHTML = `<span class="noQuestStar stars">Click Quay lại danh mục câu hỏi!</span>`;
+    contentAnswer.innerHTML = `<span class="noQuestStar">Click Quay lại danh mục câu hỏi!</span>`;
     let noQuestStar = $.querySelector(".noQuestStar");
     noQuestStar.onclick = () => {
+      listQuestion = [];
       FooterWrapper.style.display = "block";
       modalTrackList.style.display = "block";
       TrackListHeaderWrapper.style.display = "block";
