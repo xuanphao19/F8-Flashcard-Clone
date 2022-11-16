@@ -1212,7 +1212,9 @@ p.TrackItem {
   font-size: 1.4rem;
   border-radius: 50%;
 }
-
+.TrackItem_disable .TrackItem_completed {
+  box-shadow: 0 0 3px  #6c2d2da8;
+}
 .TrackItem_right {
   display: flex;
   padding: 10px 0 10px 16px;
