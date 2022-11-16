@@ -222,6 +222,9 @@ btnStart.onclick = function () {
     homeHeader.style.display = "none";
     calendarClose.style.display = "none";
   }
+  stars = [];
+  let starsEle = $.querySelector(".stars");
+  starsEle.innerHTML = `⭐⭐⭐`;
 };
 let listQuestion = [];
 let lengthQ;
@@ -285,7 +288,7 @@ let QuestionHint = $.querySelector(".Question_hint");
 let suggestionsBack = $.querySelector(".suggestionsBack");
 let correctAnswerLength = 0;
 let suggestionsBefore = "";
-let stars = ["⭐"];
+let stars = [];
 function renderUiQuestion(RandomQ, RandomQuestionInfo) {
   suggestionsBefore = RandomQ.suggestions;
   if (RandomQuestionInfo !== "") {
@@ -427,64 +430,68 @@ function testAnswer(contentAnswer) {
 }
 let explain = $.querySelector(".explain");
 answerBtn.onclick = function () {
-  testAnswer(contentAnswer);
-  if (flipCardInner.matches(".is-flipped")) {
-    flipCardInner.classList.remove("is-flipped");
-  }
-  if (answerTrue === true) {
-    answerBtn.textContent = "❤️ 🥇 😍";
-    explain.innerHTML = `Chính xác! ${suggestionsBefore} <span>Tiếp tục!</span>`;
-    explain.style.display = "block";
-    answerBtn.classList.remove("failureAnswer");
-    answerBtn.style.animation = "loading04 1.3s infinite linear";
-    answerBtn.style.background = " #c0feaa";
-    stars.push("⭐");
-    let congratulation = $.querySelector("#congratulation");
-    switch (stars.length) {
-      case 10:
-      case 20:
-      case 30:
-      case 40:
-      case 50:
-      case 60:
-      case 70:
-      case 80:
-      case 90:
-      case 100:
-        audioItem.src = "./assets/audio/Tieng-yeah.mp3";
-        audioItem.play();
-        congratulation.play();
-        break;
-      default:
-        audioItem.src = "./assets/audio/yeah.mp3";
-        audioItem.play();
-        break;
+  if (answerBtn.matches(".answerCheck")) {
+    testAnswer(contentAnswer);
+    if (flipCardInner.matches(".is-flipped")) {
+      flipCardInner.classList.remove("is-flipped");
     }
-  } else {
     let starEle = $.querySelector(".stars");
-    if (y === 0) {
-      if (answerBtn.matches(".require")) {
-        answerBtn.classList.remove("require");
-      } else {
-        answerBtn.classList.add("require");
-        explain.style.display = "none";
-        audioItem.src = "./assets/audio/Am-thanh-oh-nooo.mp3";
-        audioItem.play();
+    if (answerTrue === true) {
+      answerBtn.classList.remove("answerCheck");
+      answerBtn.textContent = "❤️ 🥇 😍";
+      stars.push("⭐");
+      explain.innerHTML = `Chính xác! ${suggestionsBefore} <span>Tiếp tục!</span>`;
+      explain.style.display = "block";
+      answerBtn.classList.remove("failureAnswer");
+      answerBtn.style.animation = "loading04 1.3s infinite linear";
+      answerBtn.style.background = " #c0feaa";
+      starEle.textContent = `${stars.join("")}`;
+      let congratulation = $.querySelector("#congratulation");
+      switch (stars.length) {
+        case 10:
+        case 20:
+        case 30:
+        case 40:
+        case 50:
+        case 60:
+        case 70:
+        case 80:
+        case 90:
+        case 100:
+          audioItem.src = "./assets/audio/Tieng-yeah.mp3";
+          audioItem.play();
+          congratulation.play();
+          break;
+        default:
+          audioItem.src = "./assets/audio/yeah.mp3";
+          audioItem.play();
+          break;
       }
     } else {
-      explain.style.display = "none";
-      answerBtn.textContent = "💥 😡 💥";
-      answerBtn.classList.add("failureAnswer");
-      stars.pop();
-      starEle.textContent = `${stars}`;
-      audioItem.src = "./assets/audio/Oh_no.mp3";
-      audioItem.play();
+      if (y === 0) {
+        if (answerBtn.matches(".require")) {
+          answerBtn.classList.remove("require");
+        } else {
+          answerBtn.classList.add("require");
+          explain.style.display = "none";
+          audioItem.src = "./assets/audio/Am-thanh-oh-nooo.mp3";
+          audioItem.play();
+        }
+      } else {
+        explain.style.display = "none";
+        answerBtn.textContent = "💥 😡 💥";
+        answerBtn.classList.add("failureAnswer");
+        stars.pop();
+        starEle.textContent = `${stars}`;
+        audioItem.src = "./assets/audio/Oh_no.mp3";
+        audioItem.play();
+      }
+      Array.from(selectorAnswerAll).forEach((element) => {
+        element.classList.add("failureAnswer");
+        element.classList.remove("answerPlanActive");
+      });
+      y = 0;
     }
-    Array.from(selectorAnswerAll).forEach((element) => {
-      element.classList.add("failureAnswer");
-      element.classList.remove("answerPlanActive");
-    });
-    y = 0;
   }
 };
 explain.addEventListener("click", function () {
