@@ -233,12 +233,13 @@ a.Home_course_link {
   justify-content: center;
   align-items: center;
   width: 80%;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   line-height: 1.6;
+  font-family: ui-monospace;
   color: #51b4fc;
-  font-weight: 400;
+  font-weight: 200;
   border-top: 1px solid rgb(86 85 85 / 10%);
-  text-shadow: 0 0 1px #a174ff;
+  text-shadow: 0 0 0.3px #a174ff;
 }
 
 span.today {
@@ -815,6 +816,7 @@ button.btn.require {
   z-index: 9;
 }
 .Modal_wrapper.Modal_TrackList {
+  overflow-x: hidden;
   bottom: 192px;
 }
 .Modal_Courses {
@@ -1353,8 +1355,9 @@ button.btnStart.font-lato.start {
   box-shadow: 0 0 0 1px #eaedf294;
   background: #f0ffeda1 !important;
 }
-.TrackItem_wrapper:hover {
-  background: rgb(255 170 250 / 18%) !important;
+.unDisable:hover {
+  transform: scale(1.01);
+  background: rgb(255 235 253 / 34%) !important;
 }
 
 .Modal_Courses,
@@ -1427,10 +1430,10 @@ span.noQuestStar {
   height: 56px;
   opacity: 0.6;
   cursor: default;
-  background: #c4c6cb33;
+  background: #e8e8e863;
 }
 .TrackItem_disable:hover {
-  background: #c4c6cb33 !important;
+  background: #e8e8e863 !important;
 }
 /* #answerPlan0 {
   background-color: #9ea1aa8a;
