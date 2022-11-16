@@ -2301,17 +2301,16 @@ let HTML_CSS = {
       image: "",
       minReq: 10,
       info: [
-        // {
-        //   Question: "Thẻ <code>&lt;h1&gt;</code> dùng khi nào?",
-        //   Requirements: "Chọn 1 đáp án đúng:",
-        //   correctAnswer: ["Thể hiện tiêu đề chính của trang web"],
-        //   answerPlan: ["Thể hiện một hình ảnh", "Thể hiện tiêu đề trên tab trình duyệt"],
-        //   suggestions:
-        //     "Thẻ <code>&lt;h1&gt;</code> là thẻ tiêu đề có sự ưu tiên cao nhất, được sử dụng làm tiêu đề chính cho trang web.",
-        //   Audio: "",
-        //   Video: "",
-        //   Image: "",
-        // },
+        {
+          Question: "Mong chờ khóa JavaScrip_Pro!",
+          Requirements: "Chọn 1 đáp án đúng:",
+          correctAnswer: ["Chân thành cảm ơn Admin Sơn Đặng và toàn thể anh chị em trong đội ngũ F8!"],
+          answerPlan: [""],
+          suggestions: "",
+          Audio: "",
+          Video: "",
+          Image: "",
+        },
       ],
     },
   ],
