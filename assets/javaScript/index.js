@@ -45,7 +45,7 @@ coursesCourseItem.addEventListener("click", function (e) {
       eleWait.style.setProperty("--dpn", "none");
       homeCourseName.textContent = tag.textContent;
       if (!$.querySelector(".TrackItem_wrapper")) {
-        renderUnit(HTML_CSS, TrackListContent);
+        HTML_CSS.Start();
         // CreateCourses(HTML_CSS, TrackListContent);
       }
       closeModule(moduleElement);
@@ -100,72 +100,12 @@ TrackListCloseBtn.addEventListener("click", () => {
   unCheckedAll();
 });
 let imagePathNoCheck;
-let unDisableAll = [];
-function renderUnit(Obj, TrackListContent) {
-  imagePathNoCheck = Obj.image;
-  const htmls = Obj.info.map((unitItem, i) => {
-    i++;
-    let classTrackItem = "";
-    if (unitItem.info.length == 0) {
-      classTrackItem = `${unitItem.className} TrackItem_disable`;
-    } else {
-      classTrackItem = "";
-      classTrackItem = `${unitItem.className} unDisable`;
-      // unDisableAll.push(unitItem);
-    }
-    return `
-  <div id="${unitItem.id}" class="${classTrackItem}">
-      <div class="TrackItem_left">
-          <span class="TrackItem_title">${i}. ${unitItem.name}</span>
-          <div class="TrackItem_completed">
-          <span class="sumQuestion">${unitItem.info.length}</span>
-          </div>
-      </div>
-      <div class="TrackItem_right">
-          <img class="unChecked" src="${imagePathNoCheck}" alt="">
-      </div>
-  </div>;
-      `;
-  });
-  TrackListContent.innerHTML = htmls.join("");
-  trackItemWrapper = TrackListContent.querySelectorAll(".TrackItem_wrapper");
-  unDisableAll = TrackListContent.querySelectorAll(".unDisable");
-  itemsLength = unDisableAll.length;
-  // for (let index = 0; index < unDisableAll.length; index++) {
-  //   const element = unDisableAll[index];
-  //   element.onclick = function () {
-  //     trackItemRight = element.querySelector(".TrackItem_right");
-  //     trackItemRightImg = trackItemRight.querySelector(".unChecked");
-  //     if (trackItemRightImg) {
-  //       element.classList.add("TrackItem_wrapper-active");
-  //       trackItemRight.innerHTML = `<img class="onChecked" src="${imagePathOnCheck}" alt="">`;
-  //       j++;
-  //     } else {
-  //       element.classList.remove("TrackItem_wrapper-active");
-  //       trackItemRight.innerHTML = `<img class="unChecked" src="${imagePathNoCheck}" alt="">`;
-  //       j--;
-  //     }
-  //     if (j === itemsLength) {
-  //       trackListActiveImg.src = `${ActiveImgCheckAll}`;
-  //       return;
-  //     }
-  //     if (j > 0) {
-  //       trackListActiveImg.src = `${ActiveImgChecked}`;
-  //       btnStart.classList.add("start");
-  //       return;
-  //     } else {
-  //       trackListActiveImg.src = `${ActiveImgNoCheck}`;
-  //       btnStart.classList.remove("start");
-  //     }
-  //   };
-  // }
-}
-
+let QuestionList = [];
 var TrackListContent = $.querySelector(".TrackList_content");
 var trackItemWrapper = [];
 let itemsLength = 0;
 let j = 0;
-//  for (let index = 0; index < unDisableAll.length; index++) {
+//  for (let index = 0; index < QuestionList.length; index++) {
 TrackListContent.onclick = function (e) {
   let tag = e.target;
   let element;
@@ -224,7 +164,7 @@ function getParent(element, selector) {
 }
 function onCheckedAll() {
   trackListActiveImg.src = `${ActiveImgCheckAll}`;
-  Array.from(unDisableAll).forEach((unDisable) => {
+  Array.from(QuestionList).forEach((unDisable) => {
     unDisable.classList.add("TrackItem_wrapper-active");
     let onCheck = unDisable.querySelector(".TrackItem_right");
     onCheck.innerHTML = `<img class="unChecked" src="${imagePathOnCheck}" alt="">`;
@@ -235,7 +175,7 @@ function unCheckedAll() {
   trackListActiveImg.src = `${ActiveImgNoCheck}`;
   answerBtn.textContent = "Trả lời";
   answerBtn.classList.remove("failureAnswer");
-  Array.from(unDisableAll).forEach((unDisable) => {
+  Array.from(QuestionList).forEach((unDisable) => {
     unDisable.classList.remove("TrackItem_wrapper-active");
     let unCheckAll = unDisable.querySelector(".TrackItem_right");
     unCheckAll.innerHTML = `<img class="unChecked" src="${imagePathNoCheck}" alt="">`;
@@ -255,7 +195,6 @@ TrackListActive.onclick = () => {
 };
 let TrackListMakeAll = $.querySelector(".TrackList_make-all");
 TrackListMakeAll.onclick = function () {
-  console.log(TrackListContent, itemsLength);
   if (!(j === itemsLength)) {
     btnStart.classList.add("start");
     onCheckedAll();
@@ -267,7 +206,7 @@ TrackListMakeAll.onclick = function () {
 let calendarClose = $.querySelector("#calendar");
 btnStart.onclick = function () {
   let onCheckId = [];
-  Array.from(unDisableAll).forEach((onCheck) => {
+  Array.from(QuestionList).forEach((onCheck) => {
     if (onCheck.matches(".TrackItem_wrapper-active")) {
       onCheckId.push(onCheck.id);
     }
@@ -292,6 +231,7 @@ function setListQuestion(listId, Obj) {
   });
   lengthQ = listQuestion.length;
 }
+
 function createQuestionUI() {
   createRandomQuestion(lengthQ, listQuestion);
   answerBtn.textContent = "Trả lời";
@@ -339,11 +279,29 @@ let correctAnswerLength = 0;
 let suggestionsBefore = "";
 let stars = ["⭐"];
 function renderUiQuestion(RandomQ) {
-  QuestionHint.innerHTML = RandomQ.Requirements;
   suggestionsBefore = RandomQ.suggestions;
-  QuestionInfo.innerHTML = RandomQ.Question;
+  if (RandomQ.Question !== "") {
+    contentAnswer.innerHTML = `<span class="stars">${stars}</span>`;
+    QuestionInfo.innerHTML = RandomQ.Question;
+    QuestionHint.innerHTML = RandomQ.Requirements;
+    QuestionInfo.style.textAlign = "left";
+    QuestionInfo.style.fontSize = "1.2rem";
+  } else {
+    QuestionInfo.innerHTML = "Hệ thống câu hỏi đang được cập nhật.<br>\
+    Cảm ơn sự tin tưởng và đồng hành của bạn!";
+    QuestionInfo.style.textAlign = "center";
+    QuestionInfo.style.fontSize = "1.4rem";
+    QuestionHint.innerHTML = "Click Quay lại danh mục câu hỏi!";
+    contentAnswer.innerHTML = `<span class="noQuestStar stars">Click Quay lại danh mục câu hỏi!</span>`;
+    let noQuestStar = $.querySelector(".noQuestStar");
+    noQuestStar.onclick = () => {
+      FooterWrapper.style.display = "block";
+      modalTrackList.style.display = "block";
+      TrackListHeaderWrapper.style.display = "block";
+      HomeWrapper.style.display = "none";
+    };
+  }
   suggestionsBack.innerHTML = suggestionsBefore;
-  contentAnswer.innerHTML = `<span class="stars">${stars}</span>`;
   let randomOrder = Math.floor(Math.random() * 23);
   redrawCanvas(randomOrder, pathImg);
   homeContentContinue.style.display = "none";
@@ -382,13 +340,6 @@ function renderUiQuestion(RandomQ) {
       let OrderFlex = Math.floor(Math.random() * 22);
       element.style.order = `${OrderFlex}`;
     });
-  }
-  if (QuestionInfo.textContent === "") {
-    QuestionInfo.innerHTML = "Hệ thống câu hỏi đang được cập nhật.<br>\
-    Cảm ơn sự tin tưởng và đồng hành của bạn!";
-    QuestionInfo.style.textAlign = "center";
-    QuestionInfo.style.fontSize = "1.4rem";
-    QuestionHint.innerHTML = "Click Quay lại danh mục câu hỏi!";
   }
 }
 function redrawCanvas(OrderImg, pathImg) {

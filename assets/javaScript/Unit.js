@@ -2315,4 +2315,38 @@ let HTML_CSS = {
       ],
     },
   ],
+  renderUnit: function () {
+    imagePathNoCheck = this.image;
+    const htmls = this.info.map((unitItem, i) => {
+      i++;
+      let classTrackItem = "";
+      if (unitItem.info.length == 0) {
+        classTrackItem = `${unitItem.className} TrackItem_disable`;
+      } else {
+        classTrackItem = "";
+        classTrackItem = `${unitItem.className} unDisable`;
+        // infoQuestionList.push(unitItem);
+      }
+      return `
+  <div id="${unitItem.id}" class="${classTrackItem}">
+      <div class="TrackItem_left">
+          <span class="TrackItem_title">${i}. ${unitItem.name}</span>
+          <div class="TrackItem_completed">
+          <span class="sumQuestion">${unitItem.info.length}</span>
+          </div>
+      </div>
+      <div class="TrackItem_right">
+          <img class="unChecked" src="${imagePathNoCheck}" alt="">
+      </div>
+  </div>;
+      `;
+    });
+    TrackListContent.innerHTML = htmls.join("");
+    trackItemWrapper = TrackListContent.querySelectorAll(".TrackItem_wrapper");
+    QuestionList = TrackListContent.querySelectorAll(".unDisable");
+    itemsLength = QuestionList.length;
+  },
+  Start: function () {
+    this.renderUnit();
+  },
 };
