@@ -814,7 +814,9 @@ button.btn.require {
   border-radius: 12px;
   z-index: 9;
 }
-
+.Modal_wrapper.Modal_TrackList {
+  bottom: 192px;
+}
 .Modal_Courses {
   animation: fadeInLeft linear 0.3s;
   transition: all linear 0.4s;
