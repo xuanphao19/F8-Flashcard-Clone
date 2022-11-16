@@ -105,7 +105,6 @@ var TrackListContent = $.querySelector(".TrackList_content");
 var trackItemWrapper = [];
 let itemsLength = 0;
 let j = 0;
-//  for (let index = 0; index < QuestionList.length; index++) {
 TrackListContent.onclick = function (e) {
   let tag = e.target;
   let element;
@@ -117,14 +116,20 @@ TrackListContent.onclick = function (e) {
   if (element && element.matches(".unDisable")) {
     trackItemRight = element.querySelector(".TrackItem_right");
     trackItemRightImg = trackItemRight.querySelector(".unChecked");
-    if (trackItemRightImg) {
-      element.classList.add("TrackItem_wrapper-active");
-      trackItemRight.innerHTML = `<img class="onChecked" src="${imagePathOnCheck}" alt="">`;
-      j++;
-    } else {
+    if (element.matches(".TrackItem_wrapper-active")) {
       element.classList.remove("TrackItem_wrapper-active");
       trackItemRight.innerHTML = `<img class="unChecked" src="${imagePathNoCheck}" alt="">`;
       j--;
+    } else {
+      if (trackItemRightImg) {
+        element.classList.add("TrackItem_wrapper-active");
+        trackItemRight.innerHTML = `<img class="onChecked" src="${imagePathOnCheck}" alt="">`;
+        j++;
+      } else {
+        element.classList.remove("TrackItem_wrapper-active");
+        trackItemRight.innerHTML = `<img class="unChecked" src="${imagePathNoCheck}" alt="">`;
+        j--;
+      }
     }
     if (j === itemsLength) {
       trackListActiveImg.src = `${ActiveImgCheckAll}`;
@@ -284,7 +289,7 @@ let stars = ["⭐"];
 function renderUiQuestion(RandomQ, RandomQuestionInfo) {
   suggestionsBefore = RandomQ.suggestions;
   if (RandomQuestionInfo !== "") {
-    contentAnswer.innerHTML = `<span class="stars">${stars}</span>`;
+    contentAnswer.innerHTML = `<span class="stars">${stars.join("")}</span>`;
     QuestionInfo.innerHTML = RandomQ.Question;
     QuestionHint.innerHTML = RandomQ.Requirements;
     QuestionInfo.style.textAlign = "left";
@@ -371,7 +376,6 @@ contentAnswer.addEventListener("click", function (e) {
   answerBtn.textContent = "Trả Lời";
   answerBtn.classList.remove("require");
   answerBtn.classList.remove("failureAnswer");
-  explain.style.display = "none";
   if (EleTarget.matches(".answerPlanInfo")) {
     if (!EleTarget.matches(".answerPlanActive")) {
       EleTarget.classList.add("answerPlanActive");
@@ -429,13 +433,12 @@ answerBtn.onclick = function () {
   }
   if (answerTrue === true) {
     answerBtn.textContent = "❤️ 🥇 😍";
-    explain.innerHTML = `Chính xác! ${suggestionsBefore} <span>Close!</span>`;
+    explain.innerHTML = `Chính xác! ${suggestionsBefore} <span>Tiếp tục!</span>`;
     explain.style.display = "block";
     answerBtn.classList.remove("failureAnswer");
     answerBtn.style.animation = "loading04 1.3s infinite linear";
     answerBtn.style.background = " #c0feaa";
     stars.push("⭐");
-    createRandomQuestion(lengthQ, listQuestion);
     let congratulation = $.querySelector("#congratulation");
     switch (stars.length) {
       case 10:
@@ -470,7 +473,7 @@ answerBtn.onclick = function () {
       }
     } else {
       explain.style.display = "none";
-      answerBtn.textContent = "💥😡💥";
+      answerBtn.textContent = "💥 😡 💥";
       answerBtn.classList.add("failureAnswer");
       stars.pop();
       starEle.textContent = `${stars}`;
@@ -489,6 +492,7 @@ explain.addEventListener("click", function () {
   answerBtn.textContent = "Trả lời";
   answerBtn.classList.remove("failureAnswer", "answerCheck");
   answerBtn.style = { animation: "", background: "" };
+  createRandomQuestion(lengthQ, listQuestion);
 });
 suggestionsBtn.onclick = function () {
   flipCardInner.classList.toggle("is-flipped");
@@ -520,5 +524,5 @@ watchVideo_btn.onclick = function () {
   answerBtn.style = "";
   stars = ["⭐"];
   explain.style.display = "none";
-  contentAnswer.innerHTML = `<span class="stars">${stars}</span>`;
+  contentAnswer.innerHTML = `<span class="stars">${stars.join("")}</span>`;
 };

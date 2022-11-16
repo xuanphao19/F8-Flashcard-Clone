@@ -75,12 +75,15 @@ let HTML_CSS = {
         {
           Question: "Sử dụng thẻ <code>&lt;a&gt</code>; như nào là đúng?",
           Requirements: "Chọn 1 đáp án đúng:",
-          correctAnswer: ["<code>&lt;a href=&quot;https://fullstack.edu.vn/&quot;&gt;Tới F8&lt;/a&gt;</code>"],
-          answerPlan: [
-            "<code>&lt;a src=&quot;https://fullstack.edu.vn/&quot;&gt;Tới F8&lt;/a&gt;</code>",
-            "<code>&lt;a rel=&quot;https://fullstack.edu.vn/&quot;&gt;Tới F8&lt;/a&gt;</code>",
+          correctAnswer: [
+            '<pre><code class="language-html">&lt;a href=&quot;https://fullstack.edu.vn/&quot;&gt;Tới F8&lt;/a&gt;</code></pre>',
           ],
-          suggestions: "<code>&lt;a href=&quot;https://fullstack.edu.vn/&quot;&gt;Tới F8&lt;/a&gt;</code>",
+          answerPlan: [
+            '<pre><code class="language-html">&lt;a src=&quot;https://fullstack.edu.vn/&quot;&gt;Tới F8&lt;/a&gt;</code></pre>',
+            '<pre><code class="language-html">&lt;a rel=&quot;https://fullstack.edu.vn/&quot;&gt;Tới F8&lt;/a&gt;</code></pre>',
+          ],
+          suggestions:
+            '<code  class="language-html">&lt;a href=&quot;https://fullstack.edu.vn/&quot;&gt;Tới F8&lt;/a&gt;</code>',
         },
         {
           Question:
@@ -1128,7 +1131,7 @@ let HTML_CSS = {
         },
         {
           Question:
-            "Ký tự h1 ở đoạn code dưới đây trong CSS gọi là gì? <br>  <pre>    <code>  h1 {<br>    color: green;<br>  }    </code>  </pre>",
+            "Ký tự h1 ở đoạn code dưới đây trong CSS gọi là gì? <br><pre><code>h1 {<br>color: green;<br>  }    </code>  </pre>",
           Requirements: "Chọn 1 đáp án đúng:",
           correctAnswer: ["CSS selector"],
           answerPlan: ["Tên thẻ HTML", "Heading"],
@@ -1349,7 +1352,7 @@ let HTML_CSS = {
     },
     {
       id: "HTML_Chapter14",
-      name: "Tính kế thừ CSS",
+      name: "Tính kế thừa CSS",
       className: "TrackItem_wrapper",
       image: "",
       minReq: 10,
@@ -1489,85 +1492,129 @@ let HTML_CSS = {
       minReq: 10,
       info: [
         {
-          Question: "",
+          Question:
+            "Chỉ ra CSS selector trong đoạn code dưới đây:<br>\
+          <pre>\
+<code>\
+&lt;style&gt;<br>\
+    .box-1 {<br>\
+        width: 100px;<br>\
+        height: 100px;<br>\
+        background-color: green;<br>\
+    }<br>\
+&lt;/style&gt;<br>\
+&lt;div class=&quot;box-1&quot;&gt;&lt;/div&gt;<br>\
+&lt;div class=&quot;box-2&quot;&gt;&lt;/div&gt;<br>\
+</code>\
+</pre>",
           Requirements: "Chọn 1 đáp án đúng:",
-          correctAnswer: [],
-          answerPlan: ["", "", ""],
-          suggestions: "",
+          correctAnswer: ["<code>.box-1</code>"],
+          answerPlan: ["box-1", "box-2", "box-1,box-2"],
+          suggestions: "<code>.box-1</code>",
           Audio: "",
           Video: "",
           Image: "",
         },
         {
-          Question: "",
+          Question:
+            "Chọn CSS selector để nội dung phần tử <code>&lt;h2&gt;</code> có màu <code>green</code>\
+          <pre>\
+  <code>\
+  &lt;style&gt;<br>\
+        ... {<br>\
+          color: green;<br>\
+      }<br>\
+  &lt;/style&gt;<br>\
+  &lt;h2&gt;Heading 2&lt;/h2&gt;\
+  </code>\
+</pre>",
           Requirements: "Chọn 1 đáp án đúng:",
-          correctAnswer: [],
-          answerPlan: ["", "", ""],
-          suggestions: "",
+          correctAnswer: ["<code>h2</code>"],
+          answerPlan: ["<code>&lt;h2&gt;</code>", "<code>.h2</code>"],
+          suggestions: "<code>h2</code>",
           Audio: "",
           Video: "",
           Image: "",
         },
         {
-          Question: "",
+          Question: "Mỗi phần tử có thể có mấy ID",
           Requirements: "Chọn 1 đáp án đúng:",
-          correctAnswer: [],
-          answerPlan: ["", "", ""],
-          suggestions: "",
+          correctAnswer: ["Mỗi phần tử chỉ có thể có một ID"],
+          answerPlan: ["Mỗi phần tử có thể có vô số ID", "Mỗi phần tử có thể có hai ID", ""],
+          suggestions: "Mỗi phần tử chỉ có thể có một ID",
           Audio: "",
           Video: "",
           Image: "",
         },
         {
-          Question: "",
+          Question: "Trên một trang Web có thể dùng cùng một ID cho nhiều phần tử không?",
           Requirements: "Chọn 1 đáp án đúng:",
-          correctAnswer: [],
-          answerPlan: ["", "", ""],
-          suggestions: "",
+          correctAnswer: ["Mỗi ID là duy nhất trong một trang"],
+          answerPlan: ["Trên một trang Web có thể dùng cùng một ID cho nhiều phần tử"],
+          suggestions: "Mỗi ID là duy nhất trong một trang (không có trường hợp từ 2 phần tử sử dụng chung một ID)",
           Audio: "",
           Video: "",
           Image: "",
         },
         {
-          Question: "",
+          Question:
+            "Trường hợp sử dụng ID dưới đây đúng hay sai?\
+<pre><br>\
+  <code>\
+&lt;h1 id=&quot;primary-heading&quot;&gt;Heading 1&lt;/h1&gt;<br>\
+&lt;h2 id=&quot;sub-heading&quot;&gt;Heading 2&lt;/h2&gt;</code>\
+</pre>",
           Requirements: "Chọn 1 đáp án đúng:",
-          correctAnswer: [],
-          answerPlan: ["", "", ""],
-          suggestions: "",
+          correctAnswer: ["Đúng, hoàn toàn hợp lệ."],
+          answerPlan: ["Sai"],
+          suggestions: "Sử dụng một ID trên mỗi phần tử <br> Các ID trên mỗi phần tử là duy nhất",
           Audio: "",
           Video: "",
           Image: "",
         },
         {
-          Question: "",
+          Question:
+            "Các cách sử dụng ID dưới đây, cách sử dụng ở thẻ &lt;h&gt; mấy đúng?\
+<pre><br>\
+<code>\
+&lt;h1 id=&quot;heading1 primary-heading&quot;&gt; Tiêu đề &lt;/h1&gt;<br>\
+&lt;h2 id=&quot;heading2&quot;&gt; Tiêu đề &lt;/h2&gt;<br>\
+&lt;h3 id=&quot;heading3&quot;&gt; Tiêu đề &lt;/h3&gt;</code><br>\
+</pre>",
           Requirements: "Chọn 1 đáp án đúng:",
-          correctAnswer: [],
-          answerPlan: ["", "", ""],
-          suggestions: "",
+          correctAnswer: ["<code>&lt;h2&gt; , &lt;h3&gt;</code>"],
+          answerPlan: [
+            "<code>&lt;h1&gt; , &lt;h2&gt;</code>",
+            "<code>&lt;h1&gt; , &lt;h3&gt;</code>",
+            "<code>&lt;h1&gt; , &lt;h2&gt; , &lt;h3&gt;</code>",
+          ],
+          suggestions:
+            '<code>&lt;h2&gt;</code>, <code>&lt;h3&gt;</code> là cách sử dụng đúng<br>\
+          Sử dụng nhiều hơn một ID trên mỗi phần tử <code>(id="heading primary-heading")</code>  không đúng, điều này chỉ hợp lệ với <code>class</code>',
           Audio: "",
           Video: "",
           Image: "",
         },
-        {
-          Question: "",
-          Requirements: "Chọn 1 đáp án đúng:",
-          correctAnswer: [],
-          answerPlan: ["", "", ""],
-          suggestions: "",
-          Audio: "",
-          Video: "",
-          Image: "",
-        },
-        {
-          Question: "",
-          Requirements: "Chọn 1 đáp án đúng:",
-          correctAnswer: [],
-          answerPlan: ["", "", ""],
-          suggestions: "",
-          Audio: "",
-          Video: "",
-          Image: "",
-        },
+        // {
+        //   Question: "",
+        //   Requirements: "Chọn 1 đáp án đúng:",
+        //   correctAnswer: [],
+        //   answerPlan: ["", "", ""],
+        //   suggestions: "",
+        //   Audio: "",
+        //   Video: "",
+        //   Image: "",
+        // },
+        // {
+        //   Question: "",
+        //   Requirements: "Chọn 1 đáp án đúng:",
+        //   correctAnswer: [],
+        //   answerPlan: ["", "", ""],
+        //   suggestions: "",
+        //   Audio: "",
+        //   Video: "",
+        //   Image: "",
+        // },
       ],
     },
     {
@@ -2296,7 +2343,7 @@ let HTML_CSS = {
     },
     {
       id: "HTML_Chapter67",
-      name: "Hẹn gặp lại tại khóa JavaScript Pro 💕",
+      name: "Hẹn gặp lại bạn tại khóa JavaScript Pro 💕",
       className: "TrackItem_wrapper",
       image: "",
       minReq: 10,
@@ -2316,7 +2363,7 @@ let HTML_CSS = {
   ],
   renderUnit: function () {
     imagePathNoCheck = this.image;
-    const htmls = this.info.map((unitItem, i) => {
+    const TrackItems = this.info.map((unitItem, i) => {
       i++;
       let classTrackItem = "";
       if (unitItem.info.length == 0) {
@@ -2326,26 +2373,28 @@ let HTML_CSS = {
         classTrackItem = `${unitItem.className} unDisable`;
         // infoQuestionList.push(unitItem);
       }
-      return `
-  <div id="${unitItem.id}" class="${classTrackItem}">
-      <div class="TrackItem_left">
-          <span class="TrackItem_title">${i}. ${unitItem.name}</span>
-          <div class="TrackItem_completed">
-          <span class="sumQuestion">${unitItem.info.length}</span>
-          </div>
-      </div>
-      <div class="TrackItem_right">
-          <img class="unChecked" src="${imagePathNoCheck}" alt="">
-      </div>
-  </div>;
-      `;
+      let TrackItem = document.createElement("div");
+      TrackItem.classList = `${classTrackItem}`;
+      TrackItem.id = `${unitItem.id}`;
+      TrackItem.innerHTML = `\
+                <div class="TrackItem_left">
+                    <span class="TrackItem_title">${i}. ${unitItem.name}</span>
+                    <div class="TrackItem_completed">
+                        <span class="sumQuestion">${unitItem.info.length}</span>
+                    </div>
+                </div>
+                <div class="TrackItem_right">
+                    <img class="unChecked" src="${imagePathNoCheck}" alt="">
+                </div> `;
+      return TrackItem;
     });
-    TrackListContent.innerHTML = htmls.join("");
+    TrackListContent.lastChild.after(...TrackItems);
     trackItemWrapper = TrackListContent.querySelectorAll(".TrackItem_wrapper");
     QuestionList = TrackListContent.querySelectorAll(".unDisable");
     itemsLength = QuestionList.length;
   },
   Start: function () {
+    TrackListContent.innerHTML = `<p>Chọn nội dung luyện tập:</p>`;
     this.renderUnit();
   },
 };
