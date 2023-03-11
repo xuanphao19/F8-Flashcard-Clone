@@ -1,2 +1,2 @@
-# F8-Flashcar-Clone
-https://xuanphao19.github.io/F8-Flashcard-Clone/
+# F8-Flashcar-Clone Demo sản phẩm:
+# https://xuanphao19.github.io/F8-Flashcard-Clone/
